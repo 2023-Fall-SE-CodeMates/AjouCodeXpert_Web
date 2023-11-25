@@ -1,0 +1,18 @@
+.problemExplanation {
+    min-height: 200px;
+}
+
+.reviewPrompt,
+.testcaseList {
+    min-height: 150px;
+}
+
+:is(.problemExplanation, .reviewPrompt)>textarea {
+    resize: none;
+    height: 85%;
+    box-sizing: border-box;
+}
+
+.testcaseList textarea {
+    resize: none;
+}
