@@ -1,10 +1,12 @@
 .problemExplanation {
     min-height: 200px;
+    box-sizing: border-box;
 }
 
 .reviewPrompt,
 .testcaseList {
     min-height: 150px;
+    box-sizing: border-box;
 }
 
 :is(.problemExplanation, .reviewPrompt)>textarea {

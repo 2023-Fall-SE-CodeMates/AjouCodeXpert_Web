@@ -2,12 +2,18 @@
 import React from "react";
 import style from "./ProblemAddModifyPage.module.css";
 import cn from "classnames";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field, FieldArray } from "formik";
 
 function ProblemAddModifyPage(props) {
   return (
     <Formik
-      initialValues={{}}
+      initialValues={{
+        language: undefined,
+        points: undefined,
+        description: "",
+        prompt: "",
+        tc: [{ tcInput: "", tcOutput: "" }],
+      }}
       onSubmit={(data) => {
         console.log(data);
       }}
@@ -30,66 +36,75 @@ function ProblemAddModifyPage(props) {
               <div className="me-3">
                 <label className="form-label">언어</label>
                 <div className="dropdown">
-                  <button
-                    className="btn btn-outline-secondary dropdown-toggle btn-block"
-                    type="button"
-                    id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    언어를 선택하세요
-                  </button>
-                  <ul
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton1"
-                  >
-                    <li className="dropdown-item">C</li>
-                    <li className="dropdown-item">Java</li>
-                    <li className="dropdown-item">Python</li>
-                  </ul>
+                  <Field as="select" className="form-select" name="language">
+                    <option selected>언어를 선택하세요</option>
+                    <option value="c">C</option>
+                    <option value="java">Java</option>
+                    <option value="python">Python</option>
+                  </Field>
                 </div>
               </div>
-              <div>
+              <fieldset className="form-group">
                 <label className="form-label">배점</label>
-                <input className="form-control" type="text" />
-              </div>
+                <Field className="form-control" type="number" name="points" />
+              </fieldset>
             </div>
             <div />
             {/* 문제설명 */}
             <div className={cn("flex-grow-1 my-2", style.problemExplanation)}>
               <label className="form-label">문제 설명</label>
-              <textarea
+              <Field
+                as="textarea"
                 className="form-control overflow-y-scroll"
-                defaultValue={""}
+                name="description"
               />
             </div>
             {/* 리뷰프롶 */}
             <div className={cn("flex-grow-1 my-2", style.reviewPrompt)}>
               <label className="form-label">코드 리뷰 프롬프트</label>
-              <textarea
+              <Field
+                as="textarea"
                 className="form-control overflow-y-scroll"
-                defaultValue={""}
+                name="prompt"
               />
             </div>
             {/* TC 목록*/}
-            <div className={cn("my-5 overflow-y-scroll", style.testcaseList)}>
-              {/* TC */}
-              <div className="d-flex flex-row my-1 justify-content-between">
-                <div className="w-50 me-2">
-                  <label className="form-label">예제 1 입력</label>
-                  <textarea
-                    className="form-control overflow-y-scroll"
-                    defaultValue={""}
-                  />
-                </div>
-                <div className="w-50 ms-2">
-                  <label className="form-label">예제 1 출력</label>
-                  <textarea
-                    className="form-control overflow-y-scroll"
-                    defaultValue={""}
-                  />
-                </div>
-              </div>
+
+            <div className={cn("my-2 overflow-y-scroll", style.testcaseList)}>
+              <FieldArray name="tc">
+                {/* TC */}
+                {() =>
+                  props.values.tc.map((item, index) => {
+                    return (
+                      <div
+                        className="d-flex flex-row my-1 justify-content-between"
+                        key={index}
+                      >
+                        <fieldset className="w-50 me-2">
+                          <label className="form-label">
+                            예제 {index + 1} 입력
+                          </label>
+                          <Field
+                            as="textarea"
+                            className="form-control overflow-y-scroll"
+                            name={`tc.${index + 1}.tcInput`}
+                          />
+                        </fieldset>
+                        <fieldset className="w-50 ms-2">
+                          <label className="form-label">
+                            예제 {index + 1} 출력
+                          </label>
+                          <Field
+                            as="textarea"
+                            className="form-control overflow-y-scroll"
+                            name={`tc.${index + 1}.tcOutput`}
+                          />
+                        </fieldset>
+                      </div>
+                    );
+                  })
+                }
+              </FieldArray>
             </div>
           </div>
         </Form>
