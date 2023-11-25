@@ -3,10 +3,13 @@
     box-sizing: border-box;
 }
 
-.reviewPrompt,
-.testcaseList {
+.reviewPrompt {
     min-height: 150px;
     box-sizing: border-box;
+}
+
+.testcaseList {
+    height: 250px;
 }
 
 :is(.problemExplanation, .reviewPrompt)>textarea {

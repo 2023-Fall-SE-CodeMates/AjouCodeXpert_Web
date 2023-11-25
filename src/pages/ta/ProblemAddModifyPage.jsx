@@ -68,9 +68,41 @@ function ProblemAddModifyPage(props) {
                 name="prompt"
               />
             </div>
-            {/* TC 목록*/}
 
-            <div className={cn("my-2 overflow-y-scroll", style.testcaseList)}>
+            {/* TC 목록*/}
+            <div className="mt-4 mb-2">
+              <button
+                type="button"
+                className={`btn btn-success btn-sm me-2 ${
+                  props.values.tc.length < 5 ? "" : "disabled"
+                }`}
+                onClick={() => {
+                  props.setValues({
+                    ...props.values,
+                    tc: [...props.values.tc, { tcInput: "", tcOutput: "" }],
+                  });
+                }}
+              >
+                테스트케이스 추가
+              </button>
+              <button
+                type="button"
+                className={`btn btn-danger btn-sm ${
+                  props.values.tc.length > 1 ? "" : "disabled"
+                }`}
+                onClick={() => {
+                  props.setValues({
+                    ...props.values,
+                    tc: props.values.tc.slice(0, -1),
+                  });
+                }}
+              >
+                테스트케이스 삭제
+              </button>
+            </div>
+            <div
+              className={cn("mt-2 mb-4 overflow-y-scroll", style.testcaseList)}
+            >
               <FieldArray name="tc">
                 {/* TC */}
                 {() =>
@@ -82,7 +114,7 @@ function ProblemAddModifyPage(props) {
                       >
                         <fieldset className="w-50 me-2">
                           <label className="form-label">
-                            예제 {index + 1} 입력
+                            테스트케이스 {index + 1} 입력
                           </label>
                           <Field
                             as="textarea"
@@ -92,7 +124,7 @@ function ProblemAddModifyPage(props) {
                         </fieldset>
                         <fieldset className="w-50 ms-2">
                           <label className="form-label">
-                            예제 {index + 1} 출력
+                            테스트케이스 {index + 1} 출력
                           </label>
                           <Field
                             as="textarea"
