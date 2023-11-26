@@ -1,7 +1,7 @@
 // 사이드바
 import React from "react";
-import style from "./Sidebar.module.css";
-import { useAuth } from "../AuthContext";
+import style from "../styles/components/Sidebar.module.css";
+import { useAuth } from "../services/AuthContext";
 import cn from "classnames";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";

@@ -1,6 +1,6 @@
 // 반 목록 페이지
 import React from "react";
-import Sidebar from "../../components/layouts/Sidebar";
+import Sidebar from "../../components/Sidebar";
 
 function ClassListPage(props) {
   return (

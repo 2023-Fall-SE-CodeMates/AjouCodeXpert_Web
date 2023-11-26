@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import AuthProvider, { useAuth } from "./components/AuthContext";
+import AuthProvider, { useAuth } from "./services/AuthContext";
 import "./App.css";
 
 import LoginPage from "./pages/common/LoginPage";
@@ -30,10 +30,10 @@ import ClassOpenReqListPage from "./pages/admin/ClassOpenReqListPage";
 import UserListPage from "./pages/admin/UserListPage";
 import OpenedClassListPage from "./pages/admin/OpenedClassListPage";
 
-import Logout from "./components/Logout";
-import ScoreRoute from "./components/ScoreRoute";
-import AssignmentRoute from "./components/AssignmentRoute";
-import ProblemRoute from "./components/ProblemRoute";
+import Logout from "./routes/Logout";
+import ScoreRoute from "./routes/ScoreRoute";
+import AssignmentRoute from "./routes/AssignmentRoute";
+import ProblemRoute from "./routes/ProblemRoute";
 
 // 로그인 안함
 function OnlyForUnauthenticated({ children }) {
