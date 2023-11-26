@@ -1,8 +1,13 @@
 // 반 목록 페이지
 import React from "react";
+import Sidebar from "../../components/layouts/Sidebar";
 
 function ClassListPage(props) {
-  return <div>반 목록 페이지</div>;
+  return (
+    <div className="d-flex flex-row">
+      <Sidebar />
+    </div>
+  );
 }
 
 export default ClassListPage;

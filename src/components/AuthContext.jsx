@@ -20,8 +20,8 @@ export default function AuthProvider({ children }) {
 
   // function logout() {}
 
-  const isAuthenticated = false;
-  const role = "";
+  const isAuthenticated = true;
+  const role = "ta";
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, role }}>
