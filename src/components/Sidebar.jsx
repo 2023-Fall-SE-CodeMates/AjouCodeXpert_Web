@@ -4,7 +4,7 @@ import style from "../styles/components/Sidebar.module.css";
 import { useAuth } from "../services/AuthContext";
 import cn from "classnames";
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 Sidebar.propTypes = {
   classId: PropTypes.string,
@@ -30,66 +30,129 @@ function Sidebar({ classId, className }) {
         <span className="fs-4">AjouCodeXpert</span>
       </div>
       <hr />
-      <div>
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">
-            <NavLink to="/personal" className="nav-link link-dark">
-              개인 페이지
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/classes" className="nav-link">
-              반 페이지
-            </NavLink>
-          </li>
-        </ul>
-        {classId && className && (
-          <ul
-            className={cn("nav nav-pills flex-column mb-auto", style.classMenu)}
-          >
-            <li className="nav-item m-2">반 과목명</li>
+      {(role === "student" || role === "ta") && (
+        <div>
+          <ul className="nav nav-pills flex-column mb-auto">
             <li className="nav-item">
-              <NavLink to="#" className="nav-link link-dark">
-                공지
+              <NavLink
+                to="/personal"
+                className={({ isActive }) =>
+                  isActive ? "active nav-link" : "nav-link link-dark"
+                }
+                end
+              >
+                내 정보
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="#" className="nav-link link-dark">
-                과제
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="#" className="nav-link link-dark">
-                성적
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink to="#" className="nav-link link-dark">
-                구성원 관리
+              <NavLink
+                to="/classes"
+                className={({ isActive }) =>
+                  isActive ? "active nav-link" : "nav-link link-dark"
+                }
+                end
+              >
+                반 목록
               </NavLink>
             </li>
           </ul>
-        )}
-      </div>
-      <div>
-        <ul className="nav nav-pills flex-column mb-auto">
-          <li className="nav-item">
-            <NavLink to="/admin/classreq" className="nav-link link-dark">
-              반 관리
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/admin/userlist" className="nav-link link-dark">
-              전체 사용자 조회
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/admin/classlist" className="nav-link link-dark">
-              전체 개설된 반 조회
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+          {classId && className && (
+            <ul
+              className={cn(
+                "nav nav-pills flex-column mb-auto",
+                style.classMenu
+              )}
+            >
+              <li className="nav-item m-2">{className}</li>
+              <li className="nav-item">
+                <NavLink
+                  to={`/classes/${classId}/announcements`}
+                  className={({ isActive }) =>
+                    isActive ? "active nav-link" : "nav-link link-dark"
+                  }
+                >
+                  공지
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to={`/classes/${classId}/assignments`}
+                  className={({ isActive }) =>
+                    isActive ? "active nav-link" : "nav-link link-dark"
+                  }
+                >
+                  과제
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to={`/classes/${classId}/scores`}
+                  className={({ isActive }) =>
+                    isActive ? "active nav-link" : "nav-link link-dark"
+                  }
+                >
+                  성적
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
+                  to={`/classes/${classId}/members`}
+                  className={({ isActive }) =>
+                    isActive ? "active nav-link" : "nav-link link-dark"
+                  }
+                >
+                  구성원 관리
+                </NavLink>
+              </li>
+            </ul>
+          )}
+        </div>
+      )}
+      {role === "admin" && (
+        <div>
+          <ul className="nav nav-pills flex-column mb-auto">
+            <li className="nav-item">
+              <NavLink
+                to="/admin/classreq"
+                className={({ isActive }) =>
+                  isActive ? "active nav-link" : "nav-link link-dark"
+                }
+              >
+                반 관리
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/admin/userlist"
+                className={({ isActive }) =>
+                  isActive ? "active nav-link" : "nav-link link-dark"
+                }
+              >
+                전체 사용자 조회
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
+                to="/admin/classlist"
+                className={({ isActive }) =>
+                  isActive ? "active nav-link" : "nav-link link-dark"
+                }
+              >
+                전체 개설된 반 조회
+              </NavLink>
+            </li>
+          </ul>
+        </div>
+      )}
+      <div className="flex-grow-1"></div>
+      <hr />
+      <ul className="nav nav-pills flex-column mb-auto">
+        <li className="nav-item">
+          <Link to="/logout" class="nav-link link-dark">
+            Logout
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 }
