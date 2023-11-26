@@ -10,16 +10,16 @@ function LoginPage(props) {
   return (
     <Formik
       initialValues={{
-        userId: "",
-        password: "",
+        id: "",
+        pw: "",
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
-        userId: Yup.string().required("ID를 입력하세요"),
-        password: Yup.string().required("비밀번호를 입력하세요"),
+        id: Yup.string().required("ID를 입력하세요"),
+        pw: Yup.string().required("비밀번호를 입력하세요"),
       })}
     >
       {(props) => (
@@ -36,26 +36,22 @@ function LoginPage(props) {
                 <label className="form-label">ID</label>
                 <Field
                   type="text"
-                  className={`form-control ${
-                    props.errors.userId && "errorField"
-                  }`}
-                  name="userId"
+                  className={`form-control ${props.errors.id && "errorField"}`}
+                  name="id"
                 />
-                {props.errors.userId && (
-                  <div className="errorMessage">{props.errors.userId}</div>
+                {props.errors.id && (
+                  <div className="errorMessage">{props.errors.id}</div>
                 )}
               </fieldset>
               <fieldset className="form-group mb-2">
                 <label className="form-label">PW</label>
                 <Field
-                  type="password"
-                  className={`form-control ${
-                    props.errors.password && "errorField"
-                  }`}
-                  name="password"
+                  type="pw"
+                  className={`form-control ${props.errors.pw && "errorField"}`}
+                  name="pw"
                 />
-                {props.errors.password && (
-                  <div className="errorMessage">{props.errors.password}</div>
+                {props.errors.pw && (
+                  <div className="errorMessage">{props.errors.pw}</div>
                 )}
               </fieldset>
               <div className="d-flex flex-row justify-content-center">

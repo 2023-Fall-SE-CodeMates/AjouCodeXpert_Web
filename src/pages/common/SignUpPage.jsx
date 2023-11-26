@@ -7,29 +7,29 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 // TODO: 학과 리스트 불러오기 전에 백엔드 요청
-
+// TODO: 입력 제약조건 추가
 function SignUpPage(props) {
   return (
     <Formik
       initialValues={{
-        userId: "",
-        password: "",
-        userName: "",
-        studentId: "",
-        department: "",
-        role: "",
+        id: "",
+        pw: "",
+        name: "",
+        studentCode: "",
+        majorCode: "",
+        roleCode: "",
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
-        userId: Yup.string().required("ID를 입력하세요"),
-        password: Yup.string().required("비밀번호를 입력하세요"),
-        userName: Yup.string().required("이름을 입력하세요"),
-        studentId: Yup.string().required("학번을 입력하세요"),
-        department: Yup.string().required("학과를 입력하세요"),
-        role: Yup.string().required("계정 구분을 입력하세요"),
+        id: Yup.string().required("ID를 입력하세요"),
+        pw: Yup.string().required("비밀번호를 입력하세요"),
+        name: Yup.string().required("이름을 입력하세요"),
+        studentCode: Yup.string().required("학번을 입력하세요"),
+        majorCode: Yup.number().required("학과를 입력하세요"),
+        roleCode: Yup.number().required("계정 구분을 입력하세요"),
       })}
     >
       {(props) => (
@@ -46,26 +46,22 @@ function SignUpPage(props) {
                 <label className="form-label">ID</label>
                 <Field
                   type="text"
-                  className={`form-control ${
-                    props.errors.userId && "errorField"
-                  }`}
-                  name="userId"
+                  className={`form-control ${props.errors.id && "errorField"}`}
+                  name="id"
                 />
-                {props.errors.userId && (
-                  <div className="errorMessage">{props.errors.userId}</div>
+                {props.errors.id && (
+                  <div className="errorMessage">{props.errors.id}</div>
                 )}
               </fieldset>
               <fieldset className="form-group mb-2">
                 <label className="form-label">PW</label>
                 <Field
-                  type="password"
-                  className={`form-control ${
-                    props.errors.password && "errorField"
-                  }`}
-                  name="password"
+                  type="pw"
+                  className={`form-control ${props.errors.pw && "errorField"}`}
+                  name="pw"
                 />
-                {props.errors.password && (
-                  <div className="errorMessage">{props.errors.password}</div>
+                {props.errors.pw && (
+                  <div className="errorMessage">{props.errors.pw}</div>
                 )}
               </fieldset>
               <fieldset className="form-group mb-2">
@@ -73,12 +69,12 @@ function SignUpPage(props) {
                 <Field
                   type="text"
                   className={`form-control ${
-                    props.errors.userName && "errorField"
+                    props.errors.name && "errorField"
                   }`}
-                  name="userName"
+                  name="name"
                 />
-                {props.errors.userName && (
-                  <div className="errorMessage">{props.errors.userName}</div>
+                {props.errors.name && (
+                  <div className="errorMessage">{props.errors.name}</div>
                 )}
               </fieldset>
               <fieldset className="form-group mb-2">
@@ -86,12 +82,12 @@ function SignUpPage(props) {
                 <Field
                   type="text"
                   className={`form-control ${
-                    props.errors.studentId && "errorField"
+                    props.errors.studentCode && "errorField"
                   }`}
-                  name="studentId"
+                  name="studentCode"
                 />
-                {props.errors.studentId && (
-                  <div className="errorMessage">{props.errors.studentId}</div>
+                {props.errors.studentCode && (
+                  <div className="errorMessage">{props.errors.studentCode}</div>
                 )}
               </fieldset>
               <fieldset className="form-group mb-2">
@@ -99,15 +95,15 @@ function SignUpPage(props) {
                 <Field
                   as="select"
                   className={`form-select mb-2 ${
-                    props.errors.department && "errorField"
+                    props.errors.majorCode && "errorField"
                   }`}
-                  name="department"
+                  name="majorCode"
                 >
                   <option selected="" />
-                  <option value="소프트웨어학과">소프트웨어학과</option>
+                  <option value="0">소프트웨어학과</option>
                 </Field>
-                {props.errors.department && (
-                  <div className="errorMessage">{props.errors.department}</div>
+                {props.errors.majorCode && (
+                  <div className="errorMessage">{props.errors.majorCode}</div>
                 )}
               </fieldset>
               <fieldset className="form-group mb-2">
@@ -115,16 +111,17 @@ function SignUpPage(props) {
                 <Field
                   as="select"
                   className={`form-select mb-2 ${
-                    props.errors.role && "errorField"
+                    props.errors.roleCode && "errorField"
                   }`}
-                  name="role"
+                  name="roleCode"
                 >
                   <option selected="" />
-                  <option value="student">학생</option>
-                  <option value="ta">TA</option>
+                  <option value="1">교수</option>
+                  <option value="2">TA</option>
+                  <option value="3">학생</option>
                 </Field>
-                {props.errors.role && (
-                  <div className="errorMessage">{props.errors.role}</div>
+                {props.errors.roleCode && (
+                  <div className="errorMessage">{props.errors.roleCode}</div>
                 )}
               </fieldset>
               <div className="d-flex flex-row justify-content-end">

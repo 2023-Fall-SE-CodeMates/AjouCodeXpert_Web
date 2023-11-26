@@ -8,11 +8,6 @@ import AnnouncementListItem from "components/list/AnnouncementListItem";
 
 function AnnouncementPage(props) {
   const { classId } = useParams();
-  const authContext = useAuth();
-  const [isAuthenticated, role] = [
-    authContext.isAuthenticated,
-    authContext.role,
-  ];
 
   return (
     <div className="d-flex flex-row">
