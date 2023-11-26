@@ -1,7 +1,7 @@
 // 사이드바
 import React from "react";
-import style from "../styles/components/Sidebar.module.css";
-import { useAuth } from "../services/AuthContext";
+import style from "styles/components/Sidebar.module.css";
+import { useAuth } from "services/AuthContext";
 import cn from "classnames";
 import PropTypes from "prop-types";
 import { Link, NavLink } from "react-router-dom";
@@ -148,7 +148,7 @@ function Sidebar({ classId, className }) {
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <Link to="/logout" class="nav-link link-dark">
+          <Link to="/logout" className="nav-link link-dark">
             Logout
           </Link>
         </li>

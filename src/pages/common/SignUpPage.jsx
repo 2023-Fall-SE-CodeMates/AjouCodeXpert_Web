@@ -6,6 +6,8 @@ import { Formik, Form, Field, FieldArray } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
+// TODO: 학과 리스트 불러오기 전에 백엔드 요청
+
 function SignUpPage(props) {
   return (
     <Formik
