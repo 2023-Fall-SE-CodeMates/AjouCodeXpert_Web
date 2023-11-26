@@ -3,13 +3,14 @@ import React from "react";
 import style from "./ProblemAddModifyPage.module.css";
 import cn from "classnames";
 import { Formik, Form, Field, FieldArray } from "formik";
+import * as Yup from "yup";
 
 function ProblemAddModifyPage(props) {
   return (
     <Formik
       initialValues={{
-        language: undefined,
-        points: undefined,
+        language: "",
+        points: 0,
         description: "",
         prompt: "",
         tc: [{ tcInput: "", tcOutput: "" }],
@@ -17,6 +18,14 @@ function ProblemAddModifyPage(props) {
       onSubmit={(data) => {
         console.log(data);
       }}
+      validationSchema={Yup.object().shape({
+        language: Yup.string()
+          .matches(/^c|java|python$/, "언어를 선택하세요")
+          .required("언어를 선택하세요"),
+        points: Yup.number()
+          .min(1, "1점 이상의 점수를 입력하세요")
+          .required("문제 배점을 입력하세요"),
+      })}
     >
       {(props) => (
         <Form>
@@ -36,17 +45,35 @@ function ProblemAddModifyPage(props) {
               <div className="me-3">
                 <label className="form-label">언어</label>
                 <div className="dropdown">
-                  <Field as="select" className="form-select" name="language">
-                    <option selected>언어를 선택하세요</option>
+                  <Field
+                    as="select"
+                    className={`form-select ${
+                      props.errors.language && "errorField"
+                    }`}
+                    name="language"
+                  >
+                    <option selected></option>
                     <option value="c">C</option>
                     <option value="java">Java</option>
                     <option value="python">Python</option>
                   </Field>
                 </div>
+                {props.errors.language && (
+                  <div className="errorMessage">{props.errors.language}</div>
+                )}
               </div>
               <fieldset className="form-group">
                 <label className="form-label">배점</label>
-                <Field className="form-control" type="number" name="points" />
+                <Field
+                  className={`form-control ${
+                    props.errors.points && "errorField"
+                  }`}
+                  type="number"
+                  name="points"
+                />
+                {props.errors.points && (
+                  <div className="errorMessage">{props.errors.points}</div>
+                )}
               </fieldset>
             </div>
             <div />
