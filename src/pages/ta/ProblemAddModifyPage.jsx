@@ -15,6 +15,7 @@ function ProblemAddModifyPage(props) {
         prompt: "",
         tc: [{ tcInput: "", tcOutput: "" }],
       }}
+      enableReinitialize={true}
       onSubmit={(data) => {
         console.log(data);
       }}
@@ -42,26 +43,24 @@ function ProblemAddModifyPage(props) {
             </div>
             {/* 언어배점 */}
             <div className="d-flex flex-row my-2">
-              <div className="me-3">
+              <fieldset className="form-group me-3">
                 <label className="form-label">언어</label>
-                <div className="dropdown">
-                  <Field
-                    as="select"
-                    className={`form-select ${
-                      props.errors.language && "errorField"
-                    }`}
-                    name="language"
-                  >
-                    <option selected></option>
-                    <option value="c">C</option>
-                    <option value="java">Java</option>
-                    <option value="python">Python</option>
-                  </Field>
-                </div>
+                <Field
+                  as="select"
+                  className={`form-select ${
+                    props.errors.language && "errorField"
+                  }`}
+                  name="language"
+                >
+                  <option selected></option>
+                  <option value="c">C</option>
+                  <option value="java">Java</option>
+                  <option value="python">Python</option>
+                </Field>
                 {props.errors.language && (
                   <div className="errorMessage">{props.errors.language}</div>
                 )}
-              </div>
+              </fieldset>
               <fieldset className="form-group">
                 <label className="form-label">배점</label>
                 <Field
@@ -78,23 +77,30 @@ function ProblemAddModifyPage(props) {
             </div>
             <div />
             {/* 문제설명 */}
-            <div className={cn("flex-grow-1 my-2", style.problemExplanation)}>
+            <fieldset
+              className={cn(
+                "form-group flex-grow-1 my-2 ",
+                style.problemExplanation
+              )}
+            >
               <label className="form-label">문제 설명</label>
               <Field
                 as="textarea"
                 className="form-control overflow-y-scroll"
                 name="description"
               />
-            </div>
+            </fieldset>
             {/* 리뷰프롶 */}
-            <div className={cn("flex-grow-1 my-2", style.reviewPrompt)}>
+            <fieldset
+              className={cn("form-group flex-grow-1 my-2", style.reviewPrompt)}
+            >
               <label className="form-label">코드 리뷰 프롬프트</label>
               <Field
                 as="textarea"
                 className="form-control overflow-y-scroll"
                 name="prompt"
               />
-            </div>
+            </fieldset>
 
             {/* TC 목록*/}
             <div className="mt-4 mb-2">
@@ -139,7 +145,7 @@ function ProblemAddModifyPage(props) {
                         className="d-flex flex-row my-1 justify-content-between"
                         key={index}
                       >
-                        <fieldset className="w-50 me-2">
+                        <fieldset className="form-group w-50 me-2">
                           <label className="form-label">
                             테스트케이스 {index + 1} 입력
                           </label>
@@ -149,7 +155,7 @@ function ProblemAddModifyPage(props) {
                             name={`tc.${index + 1}.tcInput`}
                           />
                         </fieldset>
-                        <fieldset className="w-50 ms-2">
+                        <fieldset className="form-group w-50 ms-2">
                           <label className="form-label">
                             테스트케이스 {index + 1} 출력
                           </label>
