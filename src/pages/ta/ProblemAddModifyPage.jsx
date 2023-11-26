@@ -1,6 +1,6 @@
 // 문제 추가/수정 페이지
 import React from "react";
-import style from "../../styles/pages/ta/ProblemAddModifyPage.module.css";
+import style from "styles/pages/ta/ProblemAddModifyPage.module.css";
 import cn from "classnames";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";

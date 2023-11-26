@@ -1,9 +1,9 @@
 // 문제별 점수 페이지(학생), 제출 확인 페이지(TA) 라우팅
 import React from "react";
-import AuthProvider, { useAuth } from "../services/AuthContext";
+import AuthProvider, { useAuth } from "services/AuthContext";
 import { Navigate } from "react-router-dom";
-import ScoreByProblemPage from "../pages/student/ScoreByProblemPage";
-import SubmissionCheckPage from "../pages/ta/SubmissionCheckPage";
+import ScoreByProblemPage from "pages/student/ScoreByProblemPage";
+import SubmissionCheckPage from "pages/ta/SubmissionCheckPage";
 
 function ScoreRoute(props) {
   const authContext = useAuth();

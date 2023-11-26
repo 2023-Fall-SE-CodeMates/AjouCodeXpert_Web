@@ -1,6 +1,6 @@
 // 로그인 페이지
 import React from "react";
-import style from "../../styles/pages/common/LoginPage.module.css";
+import style from "styles/pages/common/LoginPage.module.css";
 import cn from "classnames";
 import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
