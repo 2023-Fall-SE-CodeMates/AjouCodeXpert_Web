@@ -1,38 +1,39 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import AuthProvider, { useAuth } from "./components/AuthContext";
+import AuthProvider, { useAuth } from "services/AuthContext";
+import "App.css";
 
-import LoginPage from "./pages/common/LoginPage";
-import SignUpPage from "./pages/common/SignUpPage";
-import PersonalPage from "./pages/common/PersonalPage";
-import ClassListPage from "./pages/common/ClassListPage";
-import AssignmentPage from "./pages/common/AssignmentPage";
-import AnnouncementPage from "./pages/common/AnnouncementPage";
-import ScorePage from "./pages/common/ScorePage";
-import ErrorPage from "./pages/common/ErrorPage";
+import LoginPage from "pages/common/LoginPage";
+import SignUpPage from "pages/common/SignUpPage";
+import PersonalPage from "pages/common/PersonalPage";
+import ClassListPage from "pages/common/ClassListPage";
+import AssignmentPage from "pages/common/AssignmentPage";
+import AnnouncementPage from "pages/common/AnnouncementPage";
+import ScorePage from "pages/common/ScorePage";
+import ErrorPage from "pages/common/ErrorPage";
 
-import SubmissionListPage from "./pages/student/SubmissionListPage";
-import AssignmentDetailPage from "./pages/student/AssignmentDetailPage";
-import ProblemPage from "./pages/student/ProblemPage";
-import ReviewDetailPage from "./pages/student/ReviewDetailPage";
-import ScoreByProblemPage from "./pages/student/ScoreByProblemPage";
+import SubmissionListPage from "pages/student/SubmissionListPage";
+import AssignmentDetailPage from "pages/student/AssignmentDetailPage";
+import ProblemPage from "pages/student/ProblemPage";
+import ReviewDetailPage from "pages/student/ReviewDetailPage";
+import ScoreByProblemPage from "pages/student/ScoreByProblemPage";
 
-import CreateClassPage from "./pages/ta/CreateClassPage";
-import MemberManagementPage from "./pages/ta/MemberManagementPage";
-import AssignmentAddModifyPage from "./pages/ta/AssignmentAddModifyPage";
-import AnnouncementAddModifyPage from "./pages/ta/AnnouncementAddModifyPage";
-import ProblemAddModifyPage from "./pages/ta/ProblemAddModifyPage";
-import ReviewCheckAddPage from "./pages/ta/ReviewCheckAddPage";
-import SubmissionCheckPage from "./pages/ta/SubmissionCheckPage";
+import CreateClassPage from "pages/ta/CreateClassPage";
+import MemberManagementPage from "pages/ta/MemberManagementPage";
+import AssignmentAddModifyPage from "pages/ta/AssignmentAddModifyPage";
+import AnnouncementAddModifyPage from "pages/ta/AnnouncementAddModifyPage";
+import ProblemAddModifyPage from "pages/ta/ProblemAddModifyPage";
+import ReviewCheckAddPage from "pages/ta/ReviewCheckAddPage";
+import SubmissionCheckPage from "pages/ta/SubmissionCheckPage";
 
-import ClassOpenReqListPage from "./pages/admin/ClassOpenReqListPage";
-import UserListPage from "./pages/admin/UserListPage";
-import OpenedClassListPage from "./pages/admin/OpenedClassListPage";
+import ClassOpenReqListPage from "pages/admin/ClassOpenReqListPage";
+import UserListPage from "pages/admin/UserListPage";
+import OpenedClassListPage from "pages/admin/OpenedClassListPage";
 
-import Logout from "./components/Logout";
-import ScoreRoute from "./components/ScoreRoute";
-import AssignmentRoute from "./components/AssignmentRoute";
-import ProblemRoute from "./components/ProblemRoute";
+import Logout from "routes/Logout";
+import ScoreRoute from "routes/ScoreRoute";
+import AssignmentRoute from "routes/AssignmentRoute";
+import ProblemRoute from "routes/ProblemRoute";
 
 // 로그인 안함
 function OnlyForUnauthenticated({ children }) {
