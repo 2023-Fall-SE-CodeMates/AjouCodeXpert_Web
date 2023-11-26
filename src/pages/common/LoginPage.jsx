@@ -28,7 +28,7 @@ function LoginPage(props) {
             {/* 로그인 */}
             <div
               className={cn(
-                "d-flex flex-column justify-content-center p-5 rounded",
+                "d-flex flex-column justify-content-center p-5 rounded-3",
                 style.loginBox
               )}
             >
