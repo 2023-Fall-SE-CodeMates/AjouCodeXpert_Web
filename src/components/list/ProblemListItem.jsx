@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import DeleteListItem from "components/button/DeleteListItem";
 
 ProblemListItem.propTypes = {
-  classId: PropTypes.number.isRequired, // 반 ID
-  assignmentId: PropTypes.number.isRequired, // 과제 ID
+  classId: PropTypes.string.isRequired, // 반 ID (path variable)
+  assignmentId: PropTypes.string.isRequired, // 과제 ID (path variable)
   problemNo: PropTypes.number.isRequired, // 문제 번호
   submittedDate: PropTypes.string, // 제출일
   point: PropTypes.string, // 문제 점수
@@ -25,7 +25,7 @@ function ProblemListItem({
   const authContext = useAuth();
   const [role] = [authContext.role];
   return (
-    <div className="position-relative">
+    <div className="position-relative mb-3">
       <button
         className="btn btn-outline-secondary btn-lg text-start w-100 overflow-hidden listitemButton"
         type="button"

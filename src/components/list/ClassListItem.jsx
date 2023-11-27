@@ -16,7 +16,7 @@ function ClassListItem({ classId, className, subjectCode }) {
   const [role] = [authContext.role];
 
   return (
-    <div className="position-relative">
+    <div className="position-relative mb-3" key={classId}>
       <button
         className="btn btn-outline-secondary btn-lg text-start w-100 overflow-hidden listitemButton"
         type="button"

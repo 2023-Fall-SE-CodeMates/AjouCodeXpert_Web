@@ -5,7 +5,7 @@ import DeleteListItem from "components/button/DeleteListItem";
 import EditListItem from "components/button/EditListItem";
 
 AnnouncementListItem.propTypes = {
-  classId: PropTypes.number.isRequired, // 반 ID
+  classId: PropTypes.string.isRequired, // 반 ID (path variable)
   AnnouncementId: PropTypes.number.isRequired, // 공지사항 ID
   title: PropTypes.string.isRequired, // 공지사항 제목
   content: PropTypes.string.isRequired, // 공지사항 내용
@@ -13,7 +13,6 @@ AnnouncementListItem.propTypes = {
   author: PropTypes.string.isRequired, // 공지사항 작성자
 };
 
-// TODO: 편집버튼 추가
 function AnnouncementListItem({
   classId,
   AnnouncementId,
@@ -26,7 +25,10 @@ function AnnouncementListItem({
   const [role] = [authContext.role];
 
   return (
-    <div className="mx-5 my-4 px-5 pt-4 pb-3 border rounded-3">
+    <div
+      className="mx-5 my-4 px-5 pt-4 pb-3 border rounded-3"
+      key={AnnouncementId}
+    >
       <div className="d-flex flex-row">
         <h3>{title}</h3>
         <p className="flex-grow-1" />

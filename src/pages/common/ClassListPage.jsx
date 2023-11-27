@@ -60,6 +60,7 @@ function ClassListPage(props) {
               반 개설
             </Link>
           )}
+          {/* 반 목록 */}
           <div className="mb-5">
             <ClassListItem
               classId={11}
