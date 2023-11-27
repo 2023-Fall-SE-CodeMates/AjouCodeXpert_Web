@@ -11,6 +11,7 @@ Sidebar.propTypes = {
   className: PropTypes.string,
 };
 
+// TODO: className을 어떤 식으로 불러올건지 생각해 봐야 함
 function Sidebar({ classId, className }) {
   const authContext = useAuth();
   const [isAuthenticated, role] = [

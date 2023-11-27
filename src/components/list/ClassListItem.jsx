@@ -1,7 +1,6 @@
 import React from "react";
-import style from "styles/components/ClassListItem.module.css";
-import cn from "classnames";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "services/AuthContext";
 import PropTypes from "prop-types";
 import DeleteListItem from "components/button/DeleteListItem";
 
@@ -11,17 +10,15 @@ ClassListItem.propTypes = {
   classCode: PropTypes.string.isRequired, // 과목 코드
 };
 
-// TODO: 학생일 경우 삭제버튼 숨기기
 function ClassListItem({ classId, className, classCode }) {
   const navigate = useNavigate();
+  const authContext = useAuth();
+  const [role] = [authContext.role];
 
   return (
     <div className="position-relative">
       <button
-        className={cn(
-          "btn btn-outline-secondary btn-lg text-start w-100 overflow-hidden",
-          style.classlistitemButton
-        )}
+        className="btn btn-outline-secondary btn-lg text-start w-100 overflow-hidden listitemButton"
         type="button"
         onClick={() => {
           navigate(`/classes/${classId}/assignments`);
@@ -30,7 +27,7 @@ function ClassListItem({ classId, className, classCode }) {
         {className}({classCode})
       </button>
       <div className="position-absolute top-50 end-0 translate-middle">
-        <DeleteListItem />
+        {role === "ta" && <DeleteListItem />}
       </div>
     </div>
   );

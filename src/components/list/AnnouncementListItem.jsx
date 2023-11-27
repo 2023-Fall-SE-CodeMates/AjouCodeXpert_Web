@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useAuth } from "services/AuthContext";
 import DeleteListItem from "components/button/DeleteListItem";
 
 AnnouncementListItem.propTypes = {
@@ -10,8 +11,11 @@ AnnouncementListItem.propTypes = {
   author: PropTypes.string.isRequired, // 공지사항 작성자
 };
 
-// TODO: 학생일 경우 삭제버튼 숨기기
+// TODO: 편집버튼 추가
 function AnnouncementListItem({ title, content, createdAt, author }) {
+  const authContext = useAuth();
+  const [role] = [authContext.role];
+
   return (
     <div className="mx-5 my-4 px-5 pt-4 pb-3 border rounded-3">
       <div className="d-flex flex-row">
@@ -19,7 +23,7 @@ function AnnouncementListItem({ title, content, createdAt, author }) {
         <p className="flex-grow-1" />
         <p className="me-2">{author}</p>
         <p className="me-2">{createdAt}</p>
-        <DeleteListItem />
+        {role === "ta" && <DeleteListItem />}
       </div>
       <p className="mt-2">{content}</p>
     </div>
