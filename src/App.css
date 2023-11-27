@@ -15,3 +15,7 @@
 .listitemButton {
     height: 75px;
 }
+
+textarea {
+    resize: none;
+}
