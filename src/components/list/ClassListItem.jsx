@@ -7,10 +7,10 @@ import DeleteListItem from "components/button/DeleteListItem";
 ClassListItem.propTypes = {
   classId: PropTypes.number.isRequired, // 반 ID
   className: PropTypes.string.isRequired, // 반 과목 이름
-  classCode: PropTypes.string.isRequired, // 과목 코드
+  subjectCode: PropTypes.string.isRequired, // 과목 코드
 };
 
-function ClassListItem({ classId, className, classCode }) {
+function ClassListItem({ classId, className, subjectCode }) {
   const navigate = useNavigate();
   const authContext = useAuth();
   const [role] = [authContext.role];
@@ -24,7 +24,7 @@ function ClassListItem({ classId, className, classCode }) {
           navigate(`/classes/${classId}/assignments`);
         }}
       >
-        {className}({classCode})
+        {className}({subjectCode})
       </button>
       <div className="position-absolute top-50 end-0 translate-middle">
         {role === "ta" && <DeleteListItem />}

@@ -31,7 +31,8 @@ function AnnouncementPage(props) {
             semper dalaracc lacus vel facilisis volutpat est velitolm. Lorem
             ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc
             lacus vel facilisis volutpat est velitolm."
-              id={1}
+              AnnouncementId={1}
+              classId={classId}
             />
           </div>
         </div>
