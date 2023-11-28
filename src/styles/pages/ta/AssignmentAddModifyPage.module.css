@@ -1,0 +1,15 @@
+.titleField {
+    font-size: large
+}
+
+.dueLabel {
+    width: 60px;
+}
+
+.dueField {
+    width: 250px
+}
+
+.explanationBox {
+    height: 220px;
+}

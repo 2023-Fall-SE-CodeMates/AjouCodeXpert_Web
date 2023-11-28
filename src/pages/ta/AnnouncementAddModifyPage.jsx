@@ -6,7 +6,6 @@ import { Formik, Form, Field } from "formik";
 import { Link, useParams } from "react-router-dom";
 import * as Yup from "yup";
 
-// TODO: 공지사항 수정인지 추가인지에 따라서 다르게 처리하기
 function AnnouncementAddModifyPage(props) {
   const { classId } = useParams();
 

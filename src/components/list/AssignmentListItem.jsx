@@ -4,6 +4,7 @@ import { useAuth } from "services/AuthContext";
 import PropTypes from "prop-types";
 import DeleteListItem from "components/button/DeleteListItem";
 
+// TODO: API명세를 검토하고 DeleteListItem 보여주는 방식 수정
 AssignmentListItem.propTypes = {
   classId: PropTypes.string.isRequired, // 반 ID (path variable)
   assignmentId: PropTypes.number.isRequired, // 과제 ID
@@ -41,7 +42,7 @@ function AssignmentListItem({
       <div className="position-absolute top-50 end-0 translate-middle">
         {role === "ta" && !fromScorePage && <DeleteListItem />}
         {role === "student" && fromScorePage && (
-          <div className="h4 me-2">{score}</div>
+          <div className="h4">{score}</div>
         )}
       </div>
     </div>

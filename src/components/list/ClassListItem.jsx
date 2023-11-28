@@ -4,6 +4,7 @@ import { useAuth } from "services/AuthContext";
 import PropTypes from "prop-types";
 import DeleteListItem from "components/button/DeleteListItem";
 
+// TODO: API명세를 검토하고 DeleteListItem 보여주는 방식 수정
 ClassListItem.propTypes = {
   classId: PropTypes.number.isRequired, // 반 ID
   className: PropTypes.string.isRequired, // 반 과목 이름

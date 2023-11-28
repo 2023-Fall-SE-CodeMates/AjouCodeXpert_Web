@@ -4,6 +4,7 @@ import { useAuth } from "services/AuthContext";
 import DeleteListItem from "components/button/DeleteListItem";
 import EditListItem from "components/button/EditListItem";
 
+// TODO: API명세를 검토하고 EditListItem, DeleteListItem 보여주는 방식 수정
 AnnouncementListItem.propTypes = {
   classId: PropTypes.string.isRequired, // 반 ID (path variable)
   AnnouncementId: PropTypes.number.isRequired, // 공지사항 ID
