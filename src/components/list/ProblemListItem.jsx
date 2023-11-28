@@ -1,10 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "services/AuthContext";
 import PropTypes from "prop-types";
 import DeleteListItem from "components/button/DeleteListItem";
 
-// TODO: API명세를 검토하고 DeleteListItem 보여주는 방식 수정
 ProblemListItem.propTypes = {
   classId: PropTypes.string.isRequired, // 반 ID (path variable)
   assignmentId: PropTypes.string.isRequired, // 과제 ID (path variable)
@@ -12,6 +10,7 @@ ProblemListItem.propTypes = {
   submittedDate: PropTypes.string, // 제출일
   score: PropTypes.string, // 문제 점수
   fromScoreByProblemPage: PropTypes.bool.isRequired, // 문제별 점수 페이지에서 접속했는지 여부(학생)
+  deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
 };
 
 function ProblemListItem({
@@ -21,10 +20,10 @@ function ProblemListItem({
   submittedDate,
   score,
   fromScoreByProblemPage,
+  deletable,
 }) {
   const navigate = useNavigate();
-  const authContext = useAuth();
-  const [role] = [authContext.role];
+
   return (
     <div className="position-relative mb-3">
       <button
@@ -42,11 +41,9 @@ function ProblemListItem({
         {problemNo}
       </button>
       <div className="position-absolute top-50 end-0 translate-middle">
-        {role === "ta" && <DeleteListItem />}
-        {role === "student" && fromScoreByProblemPage && (
-          <div className="h4">{score}</div>
-        )}
-        {role === "student" && !fromScoreByProblemPage && (
+        {deletable && <DeleteListItem />}
+        {score && fromScoreByProblemPage && <div className="h4">{score}</div>}
+        {submittedDate && !fromScoreByProblemPage && (
           <div>제출일자: {submittedDate}</div>
         )}
       </div>

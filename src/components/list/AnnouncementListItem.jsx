@@ -1,10 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { useAuth } from "services/AuthContext";
 import DeleteListItem from "components/button/DeleteListItem";
 import EditListItem from "components/button/EditListItem";
 
-// TODO: API명세를 검토하고 EditListItem, DeleteListItem 보여주는 방식 수정
 AnnouncementListItem.propTypes = {
   classId: PropTypes.string.isRequired, // 반 ID (path variable)
   AnnouncementId: PropTypes.number.isRequired, // 공지사항 ID
@@ -12,6 +10,8 @@ AnnouncementListItem.propTypes = {
   content: PropTypes.string.isRequired, // 공지사항 내용
   createdAt: PropTypes.string.isRequired, // 공지사항 생성일
   author: PropTypes.string.isRequired, // 공지사항 작성자
+  editable: PropTypes.bool.isRequired, // 수정 가능 여부
+  deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
 };
 
 function AnnouncementListItem({
@@ -21,10 +21,9 @@ function AnnouncementListItem({
   content,
   createdAt,
   author,
+  editable,
+  deletable,
 }) {
-  const authContext = useAuth();
-  const [role] = [authContext.role];
-
   return (
     <div className="mb-4 px-5 pt-4 pb-3 border rounded-3" key={AnnouncementId}>
       <div className="d-flex flex-row">
@@ -32,12 +31,12 @@ function AnnouncementListItem({
         <p className="flex-grow-1" />
         <p className="me-3">{author}</p>
         <p className="me-3">{createdAt}</p>
-        {role === "ta" && (
+        {editable && (
           <EditListItem
             link={`/classes/${classId}/announcements/${AnnouncementId}`}
           />
         )}
-        {role === "ta" && <DeleteListItem />}
+        {deletable && <DeleteListItem />}
       </div>
       <p className="mt-2">{content}</p>
     </div>

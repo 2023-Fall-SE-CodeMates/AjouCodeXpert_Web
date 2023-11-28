@@ -1,20 +1,17 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "services/AuthContext";
 import PropTypes from "prop-types";
 import DeleteListItem from "components/button/DeleteListItem";
 
-// TODO: API명세를 검토하고 DeleteListItem 보여주는 방식 수정
 ClassListItem.propTypes = {
   classId: PropTypes.number.isRequired, // 반 ID
-  className: PropTypes.string.isRequired, // 반 과목 이름
+  subjectName: PropTypes.string.isRequired, // 반 과목 이름
   subjectCode: PropTypes.string.isRequired, // 과목 코드
+  deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
 };
 
-function ClassListItem({ classId, className, subjectCode }) {
+function ClassListItem({ classId, subjectName, subjectCode, deletable }) {
   const navigate = useNavigate();
-  const authContext = useAuth();
-  const [role] = [authContext.role];
 
   return (
     <div className="position-relative mb-3" key={classId}>
@@ -25,10 +22,10 @@ function ClassListItem({ classId, className, subjectCode }) {
           navigate(`/classes/${classId}/assignments`);
         }}
       >
-        {className}({subjectCode})
+        {subjectName}({subjectCode})
       </button>
       <div className="position-absolute top-50 end-0 translate-middle">
-        {role === "ta" && <DeleteListItem />}
+        {deletable && <DeleteListItem />}
       </div>
     </div>
   );
