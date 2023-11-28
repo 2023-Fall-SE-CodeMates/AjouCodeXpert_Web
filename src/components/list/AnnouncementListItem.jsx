@@ -26,10 +26,7 @@ function AnnouncementListItem({
   const [role] = [authContext.role];
 
   return (
-    <div
-      className="mx-5 my-4 px-5 pt-4 pb-3 border rounded-3"
-      key={AnnouncementId}
-    >
+    <div className="mb-4 px-5 pt-4 pb-3 border rounded-3" key={AnnouncementId}>
       <div className="d-flex flex-row">
         <h3>{title}</h3>
         <p className="flex-grow-1" />
