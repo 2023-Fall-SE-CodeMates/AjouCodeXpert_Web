@@ -46,7 +46,7 @@ function LoginPage(props) {
               <fieldset className="form-group mb-2">
                 <label className="form-label">PW</label>
                 <Field
-                  type="pw"
+                  type="password"
                   className={`form-control ${props.errors.pw && "errorField"}`}
                   name="pw"
                 />

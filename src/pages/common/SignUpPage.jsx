@@ -35,7 +35,6 @@ function SignUpPage(props) {
       {(props) => (
         <Form>
           <div className="d-flex px-1 flex-column vh-100 justify-content-center align-items-center">
-            {/* 로그인 */}
             <div
               className={cn(
                 "d-flex flex-column justify-content-center",
@@ -56,7 +55,7 @@ function SignUpPage(props) {
               <fieldset className="form-group mb-2">
                 <label className="form-label">PW</label>
                 <Field
-                  type="pw"
+                  type="password"
                   className={`form-control ${props.errors.pw && "errorField"}`}
                   name="pw"
                 />
