@@ -22,7 +22,7 @@ export default function AuthProvider({ children }) {
 
   // TODO: API명세를 검토하고 role을 어떻게 처리할 지 결정하고, useAuth 사용하는 부분 수정하기
   const isAuthenticated = true;
-  const role = "admin";
+  const role = "student";
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, role }}>

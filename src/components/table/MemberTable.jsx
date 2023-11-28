@@ -1,3 +1,7 @@
+// 구성원 목록 테이블
+// 구성원 관리 페이지(TA) - 구성원 목록, 참여 요청
+// 전체 사용자 조회 페이지(admin)
+// 계정 권한 변경 신청 페이지(admin)
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -6,6 +10,7 @@ MemberTable.propTypes = {
 };
 
 // TODO: 특정 열을 보여줄지 말지 props로 처리하기
+// TODO: tr의 key를 학번이 아닌 학생의 id로 처리해야 할 듯
 // name, studentCode, major, role
 function MemberTable({ rows }) {
   return (

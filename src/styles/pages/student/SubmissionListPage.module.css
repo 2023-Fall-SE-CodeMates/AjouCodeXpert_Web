@@ -1,0 +1,7 @@
+.tableBox {
+    height: calc(100vh - 100px);
+}
+
+.submissionTable {
+    height: 80%;
+}

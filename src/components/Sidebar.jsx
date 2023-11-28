@@ -95,16 +95,30 @@ function Sidebar({ classId, className }) {
                   성적
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  to={`/classes/${classId}/members`}
-                  className={({ isActive }) =>
-                    isActive ? "active nav-link" : "nav-link link-dark"
-                  }
-                >
-                  구성원 관리
-                </NavLink>
-              </li>
+              {role === "ta" && (
+                <li className="nav-item">
+                  <NavLink
+                    to={`/classes/${classId}/members`}
+                    className={({ isActive }) =>
+                      isActive ? "active nav-link" : "nav-link link-dark"
+                    }
+                  >
+                    구성원 관리
+                  </NavLink>
+                </li>
+              )}
+              {role === "student" && (
+                <li className="nav-item">
+                  <NavLink
+                    to={`/classes/${classId}/submissions`}
+                    className={({ isActive }) =>
+                      isActive ? "active nav-link" : "nav-link link-dark"
+                    }
+                  >
+                    제출 관리
+                  </NavLink>
+                </li>
+              )}
             </ul>
           )}
         </div>

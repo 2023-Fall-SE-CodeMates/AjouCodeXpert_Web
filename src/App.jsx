@@ -185,7 +185,7 @@ function App() {
             />
             {/* 제출관리 페이지(학생) */}
             <Route
-              path="/classes/:classId/submits"
+              path="/classes/:classId/submissions"
               element={
                 <OnlyForStudent>
                   <SubmissionListPage />
