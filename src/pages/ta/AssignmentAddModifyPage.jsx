@@ -10,7 +10,7 @@ import { Formik, Form, Field, FieldArray } from "formik";
 import { Link, useParams } from "react-router-dom";
 
 function AssignmentAddModifyPage(props) {
-  const { classId, assignmentsId } = useParams();
+  const { classId, assignmentId } = useParams();
   const authContext = useAuth();
   const [role] = [authContext.role];
 
@@ -81,14 +81,14 @@ function AssignmentAddModifyPage(props) {
             {role === "ta" && (
               <Link
                 className="btn btn-outline-secondary btn-lg mb-3"
-                to={`/classes/${classId}/assignments/${assignmentsId}/2`}
+                to={`/classes/${classId}/assignments/${assignmentId}/2`}
               >
                 문제 추가
               </Link>
             )}
             <ProblemListItem
               classId={classId}
-              assignmentId={assignmentsId}
+              assignmentId={assignmentId}
               problemNo={1}
               fromScoreByProblemPage={false}
             />

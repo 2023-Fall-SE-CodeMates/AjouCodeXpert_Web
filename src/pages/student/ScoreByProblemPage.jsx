@@ -8,7 +8,7 @@ import cn from "classnames";
 import { Link, useParams } from "react-router-dom";
 
 function ScoreByProblemPage(props) {
-  const { classId, assignmentsId } = useParams();
+  const { classId, assignmentId } = useParams();
   return (
     <div className="d-flex flex-row">
       <Sidebar classId={classId} className="컴퓨터프로그래밍" />
@@ -36,7 +36,7 @@ function ScoreByProblemPage(props) {
           <div className="mt-5">
             <ProblemListItem
               classId={classId}
-              assignmentId={assignmentsId}
+              assignmentId={assignmentId}
               problemNo={1}
               score={"5/5"}
               fromScoreByProblemPage={true}

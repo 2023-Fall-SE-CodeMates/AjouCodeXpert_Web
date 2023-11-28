@@ -8,7 +8,7 @@ import cn from "classnames";
 import { Link, useParams } from "react-router-dom";
 
 function AssignmentDetailPage(props) {
-  const { classId, assignmentsId } = useParams();
+  const { classId, assignmentId } = useParams();
   return (
     <div className="d-flex flex-row">
       <Sidebar classId={classId} className="컴퓨터프로그래밍" />
@@ -38,7 +38,7 @@ function AssignmentDetailPage(props) {
             <h3 className="mb-4">문제</h3>
             <ProblemListItem
               classId={classId}
-              assignmentId={assignmentsId}
+              assignmentId={assignmentId}
               problemNo={1}
               submittedDate="2021-09-01"
               fromScoreByProblemPage={false}
