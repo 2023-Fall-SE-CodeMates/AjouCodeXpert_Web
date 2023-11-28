@@ -64,7 +64,7 @@ function ClassListPage(props) {
           <div className="mb-5">
             <ClassListItem
               classId={11}
-              className="컴퓨터 프로그래밍 및 실습"
+              subjectName="컴퓨터 프로그래밍 및 실습"
               subjectCode="F081-1"
             />
           </div>

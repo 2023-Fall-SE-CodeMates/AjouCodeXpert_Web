@@ -11,7 +11,7 @@ function ScoreByProblemPage(props) {
   const { classId, assignmentId } = useParams();
   return (
     <div className="d-flex flex-row">
-      <Sidebar classId={classId} className="컴퓨터프로그래밍" />
+      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="문제별 점수" />
         <div className="container px-5">

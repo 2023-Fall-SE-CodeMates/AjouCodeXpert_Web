@@ -8,11 +8,11 @@ import { Link, NavLink } from "react-router-dom";
 
 Sidebar.propTypes = {
   classId: PropTypes.string,
-  className: PropTypes.string,
+  subjectName: PropTypes.string,
 };
 
 // TODO: className을 어떤 식으로 불러올건지 생각해 봐야 함
-function Sidebar({ classId, className }) {
+function Sidebar({ classId, subjectName }) {
   const authContext = useAuth();
   const [isAuthenticated, role] = [
     authContext.isAuthenticated,
@@ -57,14 +57,14 @@ function Sidebar({ classId, className }) {
               </NavLink>
             </li>
           </ul>
-          {classId && className && (
+          {classId && subjectName && (
             <ul
               className={cn(
                 "nav nav-pills flex-column mb-auto",
                 style.classMenu
               )}
             >
-              <li className="nav-item m-2">{className}</li>
+              <li className="nav-item m-2">{subjectName}</li>
               <li className="nav-item">
                 <NavLink
                   to={`/classes/${classId}/announcements`}
