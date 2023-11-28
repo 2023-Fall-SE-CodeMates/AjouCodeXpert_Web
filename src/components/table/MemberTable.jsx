@@ -5,6 +5,7 @@ MemberTable.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
+// TODO: 특정 열을 보여줄지 말지 props로 처리하기
 // name, studentCode, major, role
 function MemberTable({ rows }) {
   return (
@@ -16,6 +17,7 @@ function MemberTable({ rows }) {
           <th>소속 학과</th>
           <th>권한</th>
           <th>관리</th>
+          <th>승인</th>
         </tr>
       </thead>
       <tbody>
@@ -32,6 +34,12 @@ function MemberTable({ rows }) {
               <button className="btn btn-outline-secondary btn-sm">
                 패스워드 초기화
               </button>
+            </td>
+            <td>
+              <button className="btn btn-outline-secondary btn-sm me-2">
+                승인
+              </button>
+              <button className="btn btn-outline-secondary btn-sm">거부</button>
             </td>
           </tr>
         ))}
