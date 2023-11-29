@@ -33,11 +33,11 @@ function SubmissionListPage(props) {
         <Titlebar title="제출 관리" />
         <div className="container px-5">
           {/* 제출 관리 목록 */}
-          <div className={cn("mt-5", style.tableBox)}>
+          <div className={cn("mt-5", style.fullHeightBox)}>
             <div
               className={cn(
                 "overflow-x-scroll overflow-y-scroll",
-                style.submissionTable
+                style.tableBox
               )}
             >
               <SubmissionTable rows={submissions} />

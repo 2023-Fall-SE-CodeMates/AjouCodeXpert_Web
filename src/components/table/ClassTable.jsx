@@ -10,7 +10,7 @@ ClassTable.propTypes = {
 
 // TODO: 특정 열을 보여줄지 말지 props로 처리하기, 개설 TA 또는 개설 요청 TA
 // TODO: tr의 key를 classId로 처리해야 할 듯
-// subjectName, subjectCode, name
+// subjectName, subjectCode, name, classId(key)
 function ClassTable({ rows }) {
   return (
     <table className="table">
@@ -24,7 +24,7 @@ function ClassTable({ rows }) {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <tr key={row.subjectCode}>
+          <tr key={row.classId}>
             <td>{row.subjectName}</td>
             <td>{row.subjectCode}</td>
             <td>{row.name}</td>

@@ -1,7 +1,7 @@
-.tableBox {
+.fullHeightBox {
     height: calc(100vh - 100px);
 }
 
-.submissionTable {
+.tableBox {
     height: 80%;
 }

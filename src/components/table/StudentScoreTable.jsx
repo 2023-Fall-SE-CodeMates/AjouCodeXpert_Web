@@ -8,7 +8,7 @@ StudentScoreTable.propTypes = {
 };
 
 // TODO: 제출 결과 처리 폼 추가
-// name, studentCode, delayed, problemScores, totalScore, id
+// name, studentCode, delayed, problemScores, totalScore, id(key)
 function StudentScoreTable({ rows, numberOfProblems }) {
   const { classId, assignmentId } = useParams();
   return (

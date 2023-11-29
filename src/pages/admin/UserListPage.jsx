@@ -119,12 +119,12 @@ function UserListPage(props) {
         <Titlebar title="전체 사용자 조회" />
         <div className="container px-5">
           {/* 구성원 목록 */}
-          <div className={cn("mt-5", style.tableBox)}>
+          <div className={cn("mt-5", style.fullHeightBox)}>
             <h5>사용자 조회</h5>
             <div
               className={cn(
                 "overflow-x-scroll overflow-y-scroll",
-                style.memberTable
+                style.tableBox
               )}
             >
               <MemberTable rows={members} />

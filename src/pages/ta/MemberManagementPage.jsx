@@ -93,7 +93,7 @@ function MemberManagementPage(props) {
           <div
             className={cn(
               "overflow-x-scroll overflow-y-scroll",
-              style.memberTable
+              style.tableBox
             )}
           >
             <MemberTable rows={members} />
@@ -103,7 +103,7 @@ function MemberManagementPage(props) {
           <div
             className={cn(
               "overflow-x-scroll overflow-y-scroll",
-              style.memberTable
+              style.tableBox
             )}
           >
             <MemberTable rows={members} />

@@ -4,9 +4,8 @@ import { useAuth } from "services/AuthContext";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import ClassListItem from "components/list/ClassListItem";
-import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
-import * as Yup from "yup";
+import ClassJoinRequestForm from "components/form/ClassJoinRequestForm";
 
 function ClassListPage(props) {
   const authContext = useAuth();
@@ -18,40 +17,9 @@ function ClassListPage(props) {
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="반 목록" />
         <div className="container px-5">
-          <Formik
-            initialValues={{
-              classCode: "",
-            }}
-            enableReinitialize={true}
-            onSubmit={(data) => {
-              console.log(data);
-            }}
-            validationSchema={Yup.object().shape({
-              classCode: Yup.string(),
-            })}
-          >
-            {(props) => (
-              <Form className="mb-5">
-                <div className="mt-4">반 참여요청</div>
-                <div className="d-flex flex-row ">
-                  <fieldset className="form-group">
-                    <Field
-                      className="form-control"
-                      type="text"
-                      name="classCode"
-                      placeholder="반 코드"
-                    />
-                  </fieldset>
-                  <button
-                    type="submit"
-                    className="btn btn-outline-primary ms-2"
-                  >
-                    요청하기
-                  </button>
-                </div>
-              </Form>
-            )}
-          </Formik>
+          {/* 반 참여요청 */}
+          <ClassJoinRequestForm />
+          {/* 반 개설 버튼(TA) */}
           {role === "ta" && (
             <Link
               className="btn btn-outline-secondary btn-lg mb-3"

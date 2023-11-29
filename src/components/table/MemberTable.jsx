@@ -11,7 +11,7 @@ MemberTable.propTypes = {
 
 // TODO: 특정 열을 보여줄지 말지 props로 처리하기
 // TODO: tr의 key를 학번이 아닌 학생의 id로 처리해야 할 듯
-// name, studentCode, major, role
+// name, studentCode, major, role, id(key)
 function MemberTable({ rows }) {
   return (
     <table className="table">
@@ -27,7 +27,7 @@ function MemberTable({ rows }) {
       </thead>
       <tbody>
         {rows.map((row) => (
-          <tr key={row.studentCode}>
+          <tr key={row.id}>
             <td>{row.name}</td>
             <td>{row.studentCode}</td>
             <td>{row.major}</td>

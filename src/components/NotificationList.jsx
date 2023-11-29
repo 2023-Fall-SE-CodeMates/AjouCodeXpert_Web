@@ -1,3 +1,4 @@
+// 개인 페이지의 알림 리스트 컴포넌트
 import React from "react";
 import DeleteListItem from "./button/DeleteListItem";
 

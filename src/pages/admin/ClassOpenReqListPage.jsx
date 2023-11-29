@@ -31,7 +31,7 @@ function ClassOpenReqListPage(props) {
           <div
             className={cn(
               "overflow-x-scroll overflow-y-scroll",
-              style.classTable
+              style.tableBox
             )}
           >
             <ClassTable rows={requests} />
@@ -41,7 +41,7 @@ function ClassOpenReqListPage(props) {
           <div
             className={cn(
               "overflow-x-scroll overflow-y-scroll",
-              style.classTable
+              style.tableBox
             )}
           >
             <ClassTable rows={requests} />
