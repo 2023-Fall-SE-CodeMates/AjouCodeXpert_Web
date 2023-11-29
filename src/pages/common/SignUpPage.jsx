@@ -10,31 +10,31 @@ import * as Yup from "yup";
 // TODO: 입력 제약조건 추가
 function SignUpPage(props) {
   return (
-    <Formik
-      initialValues={{
-        id: "",
-        pw: "",
-        name: "",
-        studentCode: "",
-        majorCode: "",
-        roleCode: "",
-      }}
-      enableReinitialize={true}
-      onSubmit={(data) => {
-        console.log(data);
-      }}
-      validationSchema={Yup.object().shape({
-        id: Yup.string().required("ID를 입력하세요"),
-        pw: Yup.string().required("비밀번호를 입력하세요"),
-        name: Yup.string().required("이름을 입력하세요"),
-        studentCode: Yup.string().required("학번을 입력하세요"),
-        majorCode: Yup.number().required("학과를 입력하세요"),
-        roleCode: Yup.number().required("계정 구분을 입력하세요"),
-      })}
-    >
-      {(props) => (
-        <Form>
-          <div className="d-flex px-1 flex-column vh-100 justify-content-center align-items-center">
+    <div className="d-flex px-1 flex-column vh-100 justify-content-center align-items-center">
+      <Formik
+        initialValues={{
+          id: "",
+          pw: "",
+          name: "",
+          studentCode: "",
+          majorCode: "",
+          roleCode: "",
+        }}
+        enableReinitialize={true}
+        onSubmit={(data) => {
+          console.log(data);
+        }}
+        validationSchema={Yup.object().shape({
+          id: Yup.string().required("ID를 입력하세요"),
+          pw: Yup.string().required("비밀번호를 입력하세요"),
+          name: Yup.string().required("이름을 입력하세요"),
+          studentCode: Yup.string().required("학번을 입력하세요"),
+          majorCode: Yup.number().required("학과를 입력하세요"),
+          roleCode: Yup.number().required("계정 구분을 입력하세요"),
+        })}
+      >
+        {(props) => (
+          <Form>
             <div
               className={cn(
                 "d-flex flex-column justify-content-center",
@@ -132,10 +132,10 @@ function SignUpPage(props) {
                 </button>
               </div>
             </div>
-          </div>
-        </Form>
-      )}
-    </Formik>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 }
 

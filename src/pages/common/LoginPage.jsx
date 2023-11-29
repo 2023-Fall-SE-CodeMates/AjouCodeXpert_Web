@@ -8,23 +8,23 @@ import * as Yup from "yup";
 
 function LoginPage(props) {
   return (
-    <Formik
-      initialValues={{
-        id: "",
-        pw: "",
-      }}
-      enableReinitialize={true}
-      onSubmit={(data) => {
-        console.log(data);
-      }}
-      validationSchema={Yup.object().shape({
-        id: Yup.string().required("ID를 입력하세요"),
-        pw: Yup.string().required("비밀번호를 입력하세요"),
-      })}
-    >
-      {(props) => (
-        <Form>
-          <div className="d-flex px-1 flex-column vh-100 justify-content-center align-items-center">
+    <div className="d-flex px-1 flex-column vh-100 justify-content-center align-items-center">
+      <Formik
+        initialValues={{
+          id: "",
+          pw: "",
+        }}
+        enableReinitialize={true}
+        onSubmit={(data) => {
+          console.log(data);
+        }}
+        validationSchema={Yup.object().shape({
+          id: Yup.string().required("ID를 입력하세요"),
+          pw: Yup.string().required("비밀번호를 입력하세요"),
+        })}
+      >
+        {(props) => (
+          <Form>
             {/* 로그인 */}
             <div
               className={cn(
@@ -69,10 +69,10 @@ function LoginPage(props) {
             <Link className="nav-link mt-4" to="/signup">
               회원이 아니십니까?
             </Link>
-          </div>
-        </Form>
-      )}
-    </Formik>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 }
 
