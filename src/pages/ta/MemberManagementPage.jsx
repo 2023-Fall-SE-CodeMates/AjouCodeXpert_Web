@@ -96,7 +96,11 @@ function MemberManagementPage(props) {
               style.tableBox
             )}
           >
-            <MemberTable rows={members} />
+            <MemberTable
+              rows={members}
+              showAdminButton={false}
+              showAcceptRequestButton={false}
+            />
           </div>
           {/* 참여 요청 */}
           <h5 className="mt-4">참여 요청</h5>
@@ -106,7 +110,11 @@ function MemberManagementPage(props) {
               style.tableBox
             )}
           >
-            <MemberTable rows={members} />
+            <MemberTable
+              rows={members}
+              showAdminButton={false}
+              showAcceptRequestButton={true}
+            />
           </div>
         </div>
       </div>

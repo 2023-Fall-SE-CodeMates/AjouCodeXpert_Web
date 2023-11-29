@@ -4,7 +4,7 @@ import style from "styles/pages/ta/SubmissionCheckPage.module.css";
 import cn from "classnames";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import StudentScoreTable from "components/table/StudentScoreTable";
 
 function SubmissionCheckPage(props) {
@@ -32,10 +32,20 @@ function SubmissionCheckPage(props) {
     <div className="d-flex flex-row">
       <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
       <div className="flex-fill d-flex flex-column">
-        <Titlebar title="구성원 관리" />
+        <Titlebar title="제출 확인" />
         <div className="container px-5">
           {/* 구성원 목록 */}
-          <h5 className="mt-5">1주차 과제</h5>
+          <div className="mt-5 mb-3">
+            <div className="d-flex flex-row justify-content-between align-items-center">
+              <h4>1주차 과제</h4>
+              <Link
+                to={`/classes/${classId}/scores`}
+                className="btn btn-outline-secondary me-2"
+              >
+                성적 페이지로 돌아가기
+              </Link>
+            </div>
+          </div>
           <div
             className={cn(
               "overflow-x-scroll overflow-y-scroll",

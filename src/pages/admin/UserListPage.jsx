@@ -127,7 +127,11 @@ function UserListPage(props) {
                 style.tableBox
               )}
             >
-              <MemberTable rows={members} />
+              <MemberTable
+                rows={members}
+                showAdminButton={true}
+                showAcceptRequestButton={false}
+              />
             </div>
           </div>
         </div>

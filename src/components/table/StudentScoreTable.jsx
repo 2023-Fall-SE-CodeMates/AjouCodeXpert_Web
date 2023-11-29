@@ -1,3 +1,5 @@
+// 학생 점수 테이블
+// 제출 확인 페이지(TA)
 import React from "react";
 import PropTypes from "prop-types";
 import { useParams, Link } from "react-router-dom";
