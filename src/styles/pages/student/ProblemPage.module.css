@@ -1,0 +1,18 @@
+.problemInfoBox {
+    height: 45%;
+}
+
+.problemExplanation {
+    min-height: 150px;
+}
+
+.codeWritingResultBox {
+    height: 55%;
+    min-height: 300px;
+}
+
+.resultBox {
+    height: 100%;
+    width: 300px;
+    border: 1px solid #d4d2e3;
+}

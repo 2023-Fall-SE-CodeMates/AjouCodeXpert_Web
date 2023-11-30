@@ -7,6 +7,7 @@ import style from "styles/pages/student/AssignmentDetailPage.module.css";
 import cn from "classnames";
 import { Link, useParams } from "react-router-dom";
 
+// TODO: 총점 보여주기
 function ScoreByProblemPage(props) {
   const { classId, assignmentId } = useParams();
   return (
