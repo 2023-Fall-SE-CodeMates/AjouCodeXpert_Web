@@ -98,7 +98,7 @@ function ProblemPage(props) {
           }}
         >
           {(props) => (
-            <Form className="flex-fill me-4">
+            <Form className="d-flex flex-column flex-grow-1 me-4">
               <div className="d-flex flex-row justify-content-end mb-2">
                 <button
                   type="button"
@@ -116,26 +116,28 @@ function ProblemPage(props) {
                   제출
                 </button>
               </div>
-              <Field name="code">
-                {({ field, form }) => (
-                  <CodeMirror
-                    style={{ height: "95%" }}
-                    value={field.value}
-                    height="95%"
-                    extensions={
-                      language === "c"
-                        ? [cpp()]
-                        : language === "java"
-                        ? [java()]
-                        : [python()]
-                    }
-                    onChange={(data) => {
-                      console.log(data);
-                      form.setValues({ code: data });
-                    }}
-                  />
-                )}
-              </Field>
+              <div className="flex-grow-1">
+                <Field name="code">
+                  {({ field, form }) => (
+                    <CodeMirror
+                      style={{ height: "100%" }}
+                      value={field.value}
+                      height="100%"
+                      extensions={
+                        language === "c"
+                          ? [cpp()]
+                          : language === "java"
+                          ? [java()]
+                          : [python()]
+                      }
+                      onChange={(data) => {
+                        console.log(data);
+                        form.setValues({ code: data });
+                      }}
+                    />
+                  )}
+                </Field>
+              </div>
             </Form>
           )}
         </Formik>
