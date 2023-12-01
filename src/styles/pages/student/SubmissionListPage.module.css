@@ -1,0 +1,7 @@
+.fullHeightBox {
+    height: calc(100vh - 100px);
+}
+
+.tableBox {
+    height: 80%;
+}

@@ -13,11 +13,6 @@
 }
 
 :is(.problemExplanation, .reviewPrompt)>textarea {
-    resize: none;
     height: 85%;
     box-sizing: border-box;
-}
-
-.testcaseList textarea {
-    resize: none;
 }

@@ -185,7 +185,7 @@ function App() {
             />
             {/* 제출관리 페이지(학생) */}
             <Route
-              path="/classes/:classId/submits"
+              path="/classes/:classId/submissions"
               element={
                 <OnlyForStudent>
                   <SubmissionListPage />
@@ -212,22 +212,22 @@ function App() {
             />
             {/* 과제 상세 페이지(학생), 과제 추가/수정 페이지(TA) */}
             <Route
-              path="/classes/:classId/assignments/:assignmentsId"
+              path="/classes/:classId/assignments/:assignmentId"
               element={<AssignmentRoute />}
             />
             {/* 문제별 점수 페이지(학생), 제출 확인 페이지(TA) */}
             <Route
-              path="/classes/:classId/scores/:assignmentsId"
+              path="/classes/:classId/scores/:assignmentId"
               element={<ScoreRoute />}
             />
             {/* 문제 페이지(학생), 문제 추가/수정 페이지(TA) */}
             <Route
-              path="/classes/:classId/assignments/:assignmentsId/:problemId"
+              path="/classes/:classId/assignments/:assignmentId/:problemId"
               element={<ProblemRoute />}
             />
             {/* 리뷰 상세 페이지(학생) */}
             <Route
-              path="/classes/:classId/scores/:assignmentsId/:problemId"
+              path="/classes/:classId/scores/:assignmentId/:problemId"
               element={
                 <OnlyForStudent>
                   <ReviewDetailPage />
@@ -236,7 +236,7 @@ function App() {
             />
             {/* 리뷰 확인,추가 페이지(TA) */}
             <Route
-              path="/classes/:classId/scores/:assignmentsId/:problemId/:studentId"
+              path="/classes/:classId/scores/:assignmentId/:problemId/:id"
               element={
                 <OnlyForTA>
                   <ReviewCheckAddPage />

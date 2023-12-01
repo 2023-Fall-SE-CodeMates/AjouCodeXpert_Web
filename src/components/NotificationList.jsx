@@ -1,0 +1,40 @@
+// 개인 페이지의 알림 리스트 컴포넌트
+import React from "react";
+import DeleteListItem from "./button/DeleteListItem";
+
+// TODO: 삭제 버튼에 전달할 함수 구현
+// Context에서 id 받아서 알림 리스트 불러오는 API 호출
+function NotificationList(props) {
+  const notifications = [
+    {
+      id: 1,
+      content:
+        "컴퓨터프로그래밍 및 실습 (F081-1) A반 1주차 과제 성적이 등록되었습니다",
+      read: 0,
+    },
+    {
+      id: 2,
+      content:
+        "컴퓨터프로그래밍 및 실습 (F043-1) A반 2주차 과제가 등록되었습니다",
+      read: 0,
+    },
+  ];
+
+  return (
+    <div className="border rounded-3 h-50 overflow-y-scroll">
+      <ul className="list-group list-group-flush pt-2">
+        {notifications.map((notification) => (
+          <li
+            className="list-group-item h5 d-flex flex-row pb-3 justify-content-between align-items-center"
+            key={notification.key}
+          >
+            {notification.content}
+            <DeleteListItem />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default NotificationList;

@@ -1,17 +1,18 @@
 // 사이드바
 import React from "react";
-import style from "styles/components/Sidebar.module.css";
 import { useAuth } from "services/AuthContext";
+import style from "styles/components/Sidebar.module.css";
 import cn from "classnames";
 import PropTypes from "prop-types";
 import { Link, NavLink } from "react-router-dom";
 
 Sidebar.propTypes = {
   classId: PropTypes.string,
-  className: PropTypes.string,
+  subjectName: PropTypes.string,
 };
 
-function Sidebar({ classId, className }) {
+// TODO: className을 어떤 식으로 불러올건지 생각해 봐야 함
+function Sidebar({ classId, subjectName }) {
   const authContext = useAuth();
   const [isAuthenticated, role] = [
     authContext.isAuthenticated,
@@ -56,14 +57,14 @@ function Sidebar({ classId, className }) {
               </NavLink>
             </li>
           </ul>
-          {classId && className && (
+          {classId && subjectName && (
             <ul
               className={cn(
                 "nav nav-pills flex-column mb-auto",
                 style.classMenu
               )}
             >
-              <li className="nav-item m-2">{className}</li>
+              <li className="nav-item m-2">{subjectName}</li>
               <li className="nav-item">
                 <NavLink
                   to={`/classes/${classId}/announcements`}
@@ -94,16 +95,30 @@ function Sidebar({ classId, className }) {
                   성적
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink
-                  to={`/classes/${classId}/members`}
-                  className={({ isActive }) =>
-                    isActive ? "active nav-link" : "nav-link link-dark"
-                  }
-                >
-                  구성원 관리
-                </NavLink>
-              </li>
+              {role === "ta" && (
+                <li className="nav-item">
+                  <NavLink
+                    to={`/classes/${classId}/members`}
+                    className={({ isActive }) =>
+                      isActive ? "active nav-link" : "nav-link link-dark"
+                    }
+                  >
+                    구성원 관리
+                  </NavLink>
+                </li>
+              )}
+              {role === "student" && (
+                <li className="nav-item">
+                  <NavLink
+                    to={`/classes/${classId}/submissions`}
+                    className={({ isActive }) =>
+                      isActive ? "active nav-link" : "nav-link link-dark"
+                    }
+                  >
+                    제출 관리
+                  </NavLink>
+                </li>
+              )}
             </ul>
           )}
         </div>

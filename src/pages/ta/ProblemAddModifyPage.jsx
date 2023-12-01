@@ -4,8 +4,12 @@ import style from "styles/pages/ta/ProblemAddModifyPage.module.css";
 import cn from "classnames";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
+import { useParams } from "react-router-dom";
 
+// TODO: 과제 이름을 어떻게 가져올 건지(prop로 넘기거나, assignmentId를 사용해 API호출?)
 function ProblemAddModifyPage(props) {
+  const { classId, assignmentId, problemId } = useParams();
+
   return (
     <Formik
       initialValues={{
@@ -33,7 +37,7 @@ function ProblemAddModifyPage(props) {
           <div className="container px-1 d-flex flex-column vh-100">
             {/* 문제명, 버튼 */}
             <div className="d-flex flex-row mt-4 mb-2">
-              <h3 className="flex-grow-1">1주차 과제 &gt; 문제 1</h3>
+              <h3 className="flex-grow-1">1주차 과제 &gt; 문제 {problemId}</h3>
               <button type="button" className="btn btn-outline-secondary me-2">
                 과제 상세 페이지로 돌아가기
               </button>

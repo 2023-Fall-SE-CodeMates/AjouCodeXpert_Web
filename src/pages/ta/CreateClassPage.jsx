@@ -1,8 +1,23 @@
 // 반 개설 페이지
 import React from "react";
+import Sidebar from "components/Sidebar";
+import Titlebar from "components/Titlebar";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import CreateClassForm from "components/form/CreateClassForm";
 
 function CreateClassPage(props) {
-  return <div>반 개설 페이지</div>;
+  return (
+    <div className="d-flex flex-row">
+      <Sidebar />
+      <div className="flex-fill d-flex flex-column">
+        <Titlebar title="반 개설" />
+        <div className="container px-5">
+          <CreateClassForm />
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default CreateClassPage;
