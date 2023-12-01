@@ -1,5 +1,5 @@
 // 반 목록 페이지
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "services/AuthContext";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
@@ -10,6 +10,27 @@ import ClassJoinRequestForm from "components/form/ClassJoinRequestForm";
 function ClassListPage(props) {
   const authContext = useAuth();
   const [role] = [authContext.role];
+
+  // 반 목록 리스트
+  // { id: 반 코드, name: 과목 명, code: 과목 코드, removable: 삭제 가능 여부}
+  // TODO: API 명세에는 과목 코드에 대한 내용이 없음, removable의 경우 개설 TA id와 현재 id 비교해서 확인하도록 수정
+  const [classList, setClassList] = useState([]);
+  useEffect(() => {
+    setClassList([
+      {
+        id: 11,
+        name: "컴퓨터 프로그래밍 및 실습",
+        code: "F081-1",
+        removable: true,
+      },
+      {
+        id: 12,
+        name: "객체지향 프로그래밍 및 실습",
+        code: "F082-1",
+        removable: true,
+      },
+    ]);
+  }, []);
 
   return (
     <div className="d-flex flex-row">
@@ -30,11 +51,15 @@ function ClassListPage(props) {
           )}
           {/* 반 목록 */}
           <div className="mb-5">
-            <ClassListItem
-              classId={11}
-              subjectName="컴퓨터 프로그래밍 및 실습"
-              subjectCode="F081-1"
-            />
+            {classList.map((classInfo) => (
+              <ClassListItem
+                key={classInfo.id}
+                classId={classInfo.id}
+                subjectName={classInfo.name}
+                subjectCode={classInfo.code}
+                deletable={role === "ta" ? classInfo.removable : false}
+              />
+            ))}
           </div>
         </div>
       </div>

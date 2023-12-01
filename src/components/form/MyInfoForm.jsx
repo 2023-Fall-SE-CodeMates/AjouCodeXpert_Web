@@ -1,27 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { PropTypes } from "prop-types";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-function MyInfoForm(props) {
+MyInfoForm.propTypes = {
+  majorList: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
+function MyInfoForm({ majorList }) {
+  // 개인 정보
+  // {id, pw, name, studentCode, majorCode, majorName, roleCode, roleName}
+  const [myInfo, setMyInfo] = useState({});
+  useEffect(() => {
+    setMyInfo({
+      id: "james",
+      pw: "",
+      name: "김재민",
+      studentCode: "20151111",
+      majorCode: 2,
+      roleCode: 3,
+    });
+  }, []);
+
   return (
     <Formik
       initialValues={{
-        id: "",
+        id: myInfo.id,
         pw: "",
-        name: "",
-        studentCode: "",
-        majorCode: "",
-        roleCode: "",
+        name: myInfo.name,
+        studentCode: myInfo.studentCode,
+        majorCode: myInfo.majorCode,
+        roleCode: myInfo.roleCode,
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
+        data = { ...data, majorCode: parseInt(data.majorCode, 10) };
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
         pw: Yup.string(),
         name: Yup.string(),
         studentCode: Yup.string(),
-        major: Yup.number(),
+        majorCode: Yup.number(),
       })}
     >
       {(props) => (
@@ -85,9 +105,13 @@ function MyInfoForm(props) {
                   props.errors.majorCode && "errorField"
                 }`}
                 name="majorCode"
+                value={props.values.majorCode}
               >
-                <option selected="" />
-                <option value="0">소프트웨어학과</option>
+                {majorList.map((major) => (
+                  <option key={major.code} value={major.code}>
+                    {major.name}
+                  </option>
+                ))}
               </Field>
               {props.errors.majorCode && (
                 <div className="errorMessage">{props.errors.majorCode}</div>
@@ -101,14 +125,11 @@ function MyInfoForm(props) {
                   props.errors.roleCode && "errorField"
                 }`}
                 name="roleCode"
+                value={props.values.roleCode}
               >
-                {props.values.roleCode == 1 && (
-                  <option selected="1">교수</option>
-                )}
-                {props.values.roleCode == 2 && <option selected="2">TA</option>}
-                {props.values.roleCode == 3 && (
-                  <option selected="3">학생</option>
-                )}
+                {props.values.roleCode == 1 && <option value="1">교수</option>}
+                {props.values.roleCode == 2 && <option value="2">TA</option>}
+                {props.values.roleCode == 3 && <option value="3">학생</option>}
               </Field>
             </fieldset>
           </div>

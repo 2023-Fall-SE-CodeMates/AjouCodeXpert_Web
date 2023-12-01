@@ -1,5 +1,5 @@
 // 개인 페이지
-import React from "react";
+import React, { useState, useEffect } from "react";
 import style from "styles/pages/common/PersonalPage.module.css";
 import cn from "classnames";
 import Sidebar from "components/Sidebar";
@@ -8,6 +8,16 @@ import NotificationList from "components/NotificationList";
 import MyInfoForm from "components/form/MyInfoForm";
 
 function PersonalPage(props) {
+  const [majorList, setMajorList] = useState([]);
+
+  useEffect(() => {
+    setMajorList([
+      { code: 0, name: "기계공학과" },
+      { code: 1, name: "금융공학과" },
+      { code: 2, name: "산업공학과" },
+    ]);
+  }, []);
+
   return (
     <div className="d-flex flex-row">
       <Sidebar />
@@ -17,7 +27,7 @@ function PersonalPage(props) {
           <div className={cn("d-flex flex-row", style.contentsBox)}>
             {/* 개인정보 수정 폼 */}
             <div className="w-50 mx-5 d-flex flex-column justify-content-center overflow-y-hidden">
-              <MyInfoForm />
+              <MyInfoForm majorList={majorList} />
             </div>
             {/* 알림 리스트 */}
             <div className="w-50 mx-5 d-flex flex-column justify-content-center">
