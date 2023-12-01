@@ -236,7 +236,7 @@ function App() {
             />
             {/* 리뷰 확인,추가 페이지(TA) */}
             <Route
-              path="/classes/:classId/scores/:assignmentId/:problemId/:studentId"
+              path="/classes/:classId/scores/:assignmentId/:problemId/:id"
               element={
                 <OnlyForTA>
                   <ReviewCheckAddPage />
