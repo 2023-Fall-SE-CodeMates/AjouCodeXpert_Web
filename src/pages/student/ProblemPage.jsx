@@ -1,5 +1,5 @@
 // 문제 페이지
-import React from "react";
+import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import style from "styles/pages/student/ProblemPage.module.css";
 import CodeMirror from "@uiw/react-codemirror";
@@ -11,10 +11,24 @@ import { useParams, Link } from "react-router-dom";
 
 function ProblemPage(props) {
   const { classId, assignmentId, problemId } = useParams();
-  const tc = [{ tcInput: "1 2", tcOutput: "3" }];
-  const language = "java";
 
-  return (
+  // 문제 정보
+  // {language: 언어, points: 배점, explanation: 문제설명, tc: 테스트케이스}
+  const [problemInfo, setProblemInfo] = useState({});
+  useEffect(() => {
+    setProblemInfo({
+      language: "c",
+      points: 10,
+      explanation:
+        "두 정수를 입력받아 더한 값을 출력하는 프로그램을 작성하시오.",
+      tc: [
+        { tcInput: "1 1", tcOutput: "2" },
+        { tcInput: "10 20", tcOutput: "30" },
+      ],
+    });
+  }, []);
+
+  return JSON.stringify(problemInfo) === "{}" ? null : (
     <div className="container px-1 d-flex flex-column vh-100">
       {/* 문제명, 버튼 */}
       <div className="d-flex flex-row mt-4 mb-2">
@@ -33,9 +47,13 @@ function ProblemPage(props) {
           <fieldset className="form-group me-3">
             <label className="form-label">언어</label>
             <select className="form-select" name="language">
-              {language === "c" && <option selected="c">C</option>}
-              {language === "java" && <option value="java">Java</option>}
-              {language === "python" && <option value="python">Python</option>}
+              {problemInfo.language === "c" && <option selected="c">C</option>}
+              {problemInfo.language === "java" && (
+                <option value="java">Java</option>
+              )}
+              {problemInfo.language === "python" && (
+                <option value="python">Python</option>
+              )}
             </select>
           </fieldset>
           <fieldset className="form-group">
@@ -44,7 +62,7 @@ function ProblemPage(props) {
               className="form-control"
               type="number"
               name="points"
-              placeholder="5"
+              placeholder={problemInfo.points}
               readOnly
             />
           </fieldset>
@@ -53,12 +71,12 @@ function ProblemPage(props) {
         <fieldset className="form-group flex-grow-1 my-2 ">
           <label className="form-label">문제 설명</label>
           <div className={cn("form-control", style.problemExplanation)}>
-            문제 내용
+            {problemInfo.explanation}
           </div>
         </fieldset>
         {/* TC 목록*/}
         <div>
-          {tc.map((item, index) => (
+          {problemInfo.tc.map((item, index) => (
             <div
               className="d-flex flex-row my-1 justify-content-between"
               key={index}
@@ -86,9 +104,9 @@ function ProblemPage(props) {
         <Formik
           initialValues={{
             code:
-              language === "c"
+              problemInfo.language === "c"
                 ? "#include <stdio.h>\nint main() {\n\n}"
-                : language === "java"
+                : problemInfo.language === "java"
                 ? "public class Main {\n\tpublic static void main(String[] args) {\n\n\t}\n}"
                 : "def main():\n\t\n\nif __name__ == '__main__':\n\tmain()",
           }}
@@ -124,9 +142,9 @@ function ProblemPage(props) {
                       value={field.value}
                       height="100%"
                       extensions={
-                        language === "c"
+                        problemInfo.language === "c"
                           ? [cpp()]
-                          : language === "java"
+                          : problemInfo.language === "java"
                           ? [java()]
                           : [python()]
                       }

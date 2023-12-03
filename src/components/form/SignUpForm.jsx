@@ -1,12 +1,17 @@
 import React from "react";
 import style from "styles/components/form/SignUpForm.module.css";
 import cn from "classnames";
+import { PropTypes } from "prop-types";
 import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
+SignUpForm.propTypes = {
+  majorList: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
+
 // TODO: 입력 제약조건 추가
-function SignUpForm(props) {
+function SignUpForm({ majorList }) {
   return (
     <Formik
       initialValues={{
@@ -14,11 +19,16 @@ function SignUpForm(props) {
         pw: "",
         name: "",
         studentCode: "",
-        majorCode: "",
-        roleCode: "",
+        majorCode: 0,
+        roleCode: 3,
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
+        data = {
+          ...data,
+          majorCode: parseInt(data.majorCode, 10),
+          roleCode: parseInt(data.roleCode, 10),
+        };
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
@@ -93,8 +103,11 @@ function SignUpForm(props) {
                 }`}
                 name="majorCode"
               >
-                <option selected="" />
-                <option value="0">소프트웨어학과</option>
+                {majorList.map((major) => (
+                  <option key={major.code} value={major.code}>
+                    {major.name}
+                  </option>
+                ))}
               </Field>
               {props.errors.majorCode && (
                 <div className="errorMessage">{props.errors.majorCode}</div>
@@ -109,10 +122,9 @@ function SignUpForm(props) {
                 }`}
                 name="roleCode"
               >
-                <option selected="" />
-                <option value="1">교수</option>
-                <option value="2">TA</option>
-                <option value="3">학생</option>
+                <option value={1}>교수</option>
+                <option value={2}>TA</option>
+                <option value={3}>학생</option>
               </Field>
               {props.errors.roleCode && (
                 <div className="errorMessage">{props.errors.roleCode}</div>

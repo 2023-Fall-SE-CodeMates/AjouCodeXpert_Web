@@ -128,6 +128,16 @@ function Sidebar({ classId, subjectName }) {
           <ul className="nav nav-pills flex-column mb-auto">
             <li className="nav-item">
               <NavLink
+                to="/admin/rolechange"
+                className={({ isActive }) =>
+                  isActive ? "active nav-link" : "nav-link link-dark"
+                }
+              >
+                계정 권한 변경
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink
                 to="/admin/classreq"
                 className={({ isActive }) =>
                   isActive ? "active nav-link" : "nav-link link-dark"

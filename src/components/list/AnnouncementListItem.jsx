@@ -9,7 +9,7 @@ AnnouncementListItem.propTypes = {
   title: PropTypes.string.isRequired, // 공지사항 제목
   content: PropTypes.string.isRequired, // 공지사항 내용
   createdAt: PropTypes.string.isRequired, // 공지사항 생성일
-  author: PropTypes.string.isRequired, // 공지사항 작성자
+  // author: PropTypes.string.isRequired, // 공지사항 작성자
   editable: PropTypes.bool.isRequired, // 수정 가능 여부
   deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
 };
@@ -20,7 +20,6 @@ function AnnouncementListItem({
   title,
   content,
   createdAt,
-  author,
   editable,
   deletable,
 }) {
@@ -29,7 +28,7 @@ function AnnouncementListItem({
       <div className="d-flex flex-row">
         <h3>{title}</h3>
         <p className="flex-grow-1" />
-        <p className="me-3">{author}</p>
+        {/* <p className="me-3">{author}</p> */}
         <p className="me-3">{createdAt}</p>
         {editable && (
           <EditListItem

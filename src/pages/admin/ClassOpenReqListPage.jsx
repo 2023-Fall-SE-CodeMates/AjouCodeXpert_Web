@@ -34,7 +34,7 @@ function ClassOpenReqListPage(props) {
               style.tableBox
             )}
           >
-            <ClassTable rows={requests} />
+            <ClassTable rows={requests} showAcceptRequestButton={false} />
           </div>
           {/* 반 삭제 신청 */}
           <h5 className="mt-4">반 삭제 신청 내역</h5>
@@ -44,7 +44,7 @@ function ClassOpenReqListPage(props) {
               style.tableBox
             )}
           >
-            <ClassTable rows={requests} />
+            <ClassTable rows={requests} showAcceptRequestButton={true} />
           </div>
         </div>
       </div>

@@ -131,6 +131,7 @@ function UserListPage(props) {
                 rows={members}
                 showAdminButton={true}
                 showAcceptRequestButton={false}
+                showAcceptRoleChangeButton={false}
               />
             </div>
           </div>

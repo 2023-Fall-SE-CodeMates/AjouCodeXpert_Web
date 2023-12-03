@@ -2,26 +2,47 @@
 import React from "react";
 import style from "styles/pages/ta/ProblemAddModifyPage.module.css";
 import cn from "classnames";
+import PropTypes from "prop-types";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
 import { useParams } from "react-router-dom";
+import ProblemListItem from "../../components/list/ProblemListItem";
+
+// 등록 시, 문제 리스트에 문제 내용 추가, setProblemNo 0으로 변경해서 과제 수정/추가 페이지 보여줌
+ProblemAddModifyPage.propTypes = {
+  problemNo: PropTypes.number.isRequired, // 문제 번호
+  problemObj: PropTypes.object.isRequired, // 문제 내용
+  problemObjList: PropTypes.arrayOf(PropTypes.object).isRequired, // 문제 내용들을 담고 있는 객체들
+  setProblemObjList: PropTypes.func.isRequired, // 문제 내용들을 담고 있는 객체들
+  setProblemNo: PropTypes.func.isRequired, // 등록 후 0으로 변경
+};
 
 // TODO: 과제 이름을 어떻게 가져올 건지(prop로 넘기거나, assignmentId를 사용해 API호출?)
-function ProblemAddModifyPage(props) {
-  const { classId, assignmentId, problemId } = useParams();
-
+function ProblemAddModifyPage({
+  problemNo,
+  problemObj,
+  problemObjList,
+  setProblemObjList,
+  setProblemNo,
+}) {
   return (
     <Formik
       initialValues={{
-        language: "",
-        points: 0,
-        description: "",
-        prompt: "",
-        tc: [{ tcInput: "", tcOutput: "" }],
+        language: problemObj.language,
+        points: problemObj.points,
+        description: problemObj.description,
+        prompt: problemObj.prompt,
+        tc: problemObj.tc,
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
         console.log(data);
+        setProblemObjList(
+          problemObjList
+            .filter((obj) => obj.problemNo !== problemNo)
+            .concat({ ...data, problemNo: problemNo })
+        );
+        setProblemNo(0);
       }}
       validationSchema={Yup.object().shape({
         language: Yup.string()
@@ -37,8 +58,14 @@ function ProblemAddModifyPage(props) {
           <div className="container px-1 d-flex flex-column vh-100">
             {/* 문제명, 버튼 */}
             <div className="d-flex flex-row mt-4 mb-2">
-              <h3 className="flex-grow-1">1주차 과제 &gt; 문제 {problemId}</h3>
-              <button type="button" className="btn btn-outline-secondary me-2">
+              <h3 className="flex-grow-1">1주차 과제 &gt; 문제 {problemNo}</h3>
+              <button
+                type="button"
+                className="btn btn-outline-secondary me-2"
+                onClick={() => {
+                  setProblemNo(0);
+                }}
+              >
                 과제 상세 페이지로 돌아가기
               </button>
               <button type="submit" className="btn btn-outline-primary">
@@ -156,7 +183,7 @@ function ProblemAddModifyPage(props) {
                           <Field
                             as="textarea"
                             className="form-control overflow-y-scroll"
-                            name={`tc.${index + 1}.tcInput`}
+                            name={`tc[${index}].tcInput`}
                           />
                         </fieldset>
                         <fieldset className="form-group w-50 ms-2">
@@ -166,7 +193,7 @@ function ProblemAddModifyPage(props) {
                           <Field
                             as="textarea"
                             className="form-control overflow-y-scroll"
-                            name={`tc.${index + 1}.tcOutput`}
+                            name={`tc[${index}]tcOutput`}
                           />
                         </fieldset>
                       </div>
