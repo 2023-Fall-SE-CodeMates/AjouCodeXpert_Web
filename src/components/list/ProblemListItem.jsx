@@ -10,6 +10,7 @@ ProblemListItem.propTypes = {
   submittedDate: PropTypes.string, // 제출일
   score: PropTypes.string, // 문제 점수
   fromScoreByProblemPage: PropTypes.bool.isRequired, // 문제별 점수 페이지에서 접속했는지 여부(학생)
+  setProblemNo: PropTypes.func, // 문제 번호로 변경해서 문제 수정/추가 페이지 보여줌
   deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
 };
 
@@ -20,6 +21,7 @@ function ProblemListItem({
   submittedDate,
   score,
   fromScoreByProblemPage,
+  setProblemNo,
   deletable,
 }) {
   const navigate = useNavigate();
@@ -32,6 +34,7 @@ function ProblemListItem({
         onClick={() => {
           if (fromScoreByProblemPage)
             navigate(`/classes/${classId}/scores/${assignmentId}/${problemNo}`);
+          else if (setProblemNo) setProblemNo(problemNo);
           else
             navigate(
               `/classes/${classId}/assignments/${assignmentId}/${problemNo}`

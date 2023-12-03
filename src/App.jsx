@@ -33,7 +33,6 @@ import OpenedClassListPage from "pages/admin/OpenedClassListPage";
 import Logout from "routes/Logout";
 import ScoreRoute from "routes/ScoreRoute";
 import AssignmentRoute from "routes/AssignmentRoute";
-import ProblemRoute from "routes/ProblemRoute";
 
 // 로그인 안함
 function OnlyForUnauthenticated({ children }) {
@@ -220,10 +219,14 @@ function App() {
               path="/classes/:classId/scores/:assignmentId"
               element={<ScoreRoute />}
             />
-            {/* 문제 페이지(학생), 문제 추가/수정 페이지(TA) */}
+            {/* 문제 페이지(학생) */}
             <Route
               path="/classes/:classId/assignments/:assignmentId/:problemId"
-              element={<ProblemRoute />}
+              element={
+                <OnlyForStudent>
+                  <ProblemPage />
+                </OnlyForStudent>
+              }
             />
             {/* 리뷰 상세 페이지(학생) */}
             <Route
