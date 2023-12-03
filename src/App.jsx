@@ -29,6 +29,7 @@ import SubmissionCheckPage from "pages/ta/SubmissionCheckPage";
 import ClassOpenReqListPage from "pages/admin/ClassOpenReqListPage";
 import UserListPage from "pages/admin/UserListPage";
 import OpenedClassListPage from "pages/admin/OpenedClassListPage";
+import RoleChangePage from "pages/admin/RoleChangePage";
 
 import Logout from "routes/Logout";
 import ScoreRoute from "routes/ScoreRoute";
@@ -244,6 +245,15 @@ function App() {
                 <OnlyForTA>
                   <ReviewCheckAddPage />
                 </OnlyForTA>
+              }
+            />
+            {/* 계정 권한 변경 페이지(관리자) */}
+            <Route
+              path="/admin/rolechange"
+              element={
+                <OnlyForAdmin>
+                  <RoleChangePage />
+                </OnlyForAdmin>
               }
             />
             {/* 반 개설 및 삭제 요청 관리(관리자) */}

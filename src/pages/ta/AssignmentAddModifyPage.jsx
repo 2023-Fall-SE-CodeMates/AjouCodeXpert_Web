@@ -51,7 +51,7 @@ function AssignmentAddModifyPage(props) {
     );
   }, []);
 
-  // TODO: 문제 추가 버튼 url의 path variable을 (존재하는 문제개수+1)로 수정, 문제 추가 여부를 알려주는 별도의 prop가 필요할수도
+  // TODO: 문제 삭제 시 문제 번호가 1부터 순차적으로 재정렬되어야 함
   return problemNo === 0 ? (
     <div className="d-flex flex-row">
       <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
@@ -83,6 +83,14 @@ function AssignmentAddModifyPage(props) {
                   problemNo={problemObj.problemNo}
                   fromScoreByProblemPage={false}
                   setProblemNo={setProblemNo}
+                  deletable={true}
+                  onClickDelete={() => {
+                    setProblemObjList(
+                      problemObjList.filter(
+                        (obj) => obj.problemNo !== problemObj.problemNo
+                      )
+                    );
+                  }}
                 />
               ))}
           </div>

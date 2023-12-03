@@ -19,7 +19,7 @@ function ClassTable({ rows, showAcceptRequestButton, deleteRequest }) {
           <th>과목명</th>
           <th>과목 코드</th>
           <th>{showAcceptRequestButton ? "개설 요청 TA" : "개설 TA"}</th>
-          <th>요청 승인/거부</th>
+          {showAcceptRequestButton && <th>요청 승인/거부</th>}
         </tr>
       </thead>
       <tbody>

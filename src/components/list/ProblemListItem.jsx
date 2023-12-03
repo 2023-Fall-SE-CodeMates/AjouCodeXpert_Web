@@ -12,6 +12,7 @@ ProblemListItem.propTypes = {
   fromScoreByProblemPage: PropTypes.bool.isRequired, // 문제별 점수 페이지에서 접속했는지 여부(학생)
   setProblemNo: PropTypes.func, // 문제 번호로 변경해서 문제 수정/추가 페이지 보여줌
   deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
+  onClickDelete: PropTypes.func, // 삭제 버튼 클릭 시 호출되는 함수
 };
 
 function ProblemListItem({
@@ -23,6 +24,7 @@ function ProblemListItem({
   fromScoreByProblemPage,
   setProblemNo,
   deletable,
+  onClickDelete,
 }) {
   const navigate = useNavigate();
 
@@ -44,7 +46,7 @@ function ProblemListItem({
         {problemNo}
       </button>
       <div className="position-absolute top-50 end-0 translate-middle">
-        {deletable && <DeleteListItem />}
+        {deletable && <DeleteListItem onClick={onClickDelete} />}
         {score && fromScoreByProblemPage && <div className="h4">{score}</div>}
         {submittedDate && !fromScoreByProblemPage && (
           <div>제출일자: {submittedDate}</div>
