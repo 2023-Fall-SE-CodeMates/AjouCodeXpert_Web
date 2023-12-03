@@ -1,11 +1,9 @@
 // 제출 확인 페이지
 import React from "react";
-import style from "styles/pages/ta/SubmissionCheckPage.module.css";
-import cn from "classnames";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
-import { Link, useParams } from "react-router-dom";
-import StudentScoreTable from "components/table/StudentScoreTable";
+import { useParams } from "react-router-dom";
+import StudentScoreTableForm from "components/form/StudentScoreTableForm";
 
 function SubmissionCheckPage(props) {
   const { classId, assignmentId } = useParams();
@@ -34,26 +32,7 @@ function SubmissionCheckPage(props) {
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="제출 확인" />
         <div className="container px-5">
-          {/* 구성원 목록 */}
-          <div className="mt-5 mb-3">
-            <div className="d-flex flex-row justify-content-between align-items-center">
-              <h4>1주차 과제</h4>
-              <Link
-                to={`/classes/${classId}/scores`}
-                className="btn btn-outline-secondary me-2"
-              >
-                성적 페이지로 돌아가기
-              </Link>
-            </div>
-          </div>
-          <div
-            className={cn(
-              "overflow-x-scroll overflow-y-scroll",
-              style.tableBox
-            )}
-          >
-            <StudentScoreTable rows={scores} numberOfProblems={3} />
-          </div>
+          <StudentScoreTableForm rows={scores} numberOfProblems={3} />
         </div>
       </div>
     </div>
