@@ -15,7 +15,7 @@ function AssignmentAddModifyPage(props) {
 
   // 문제 내용을 담고 있는 리스트들
   // 배열은 problemNo 기준으로 정렬되어야 함
-  // {problemNo, language, points, description, prompt, tc}
+  // {index, language, points, description, prompt, tc}
   // 테스트케이스 배열 tc는 테스트케이스 index 기준으로 정렬되어야 함
   const [problemObjList, setProblemObjList] = useState([]);
 
@@ -23,7 +23,7 @@ function AssignmentAddModifyPage(props) {
     setProblemObjList(
       [
         {
-          problemNo: 1,
+          index: 1,
           language: "c",
           points: 10,
           description: "문제 설명",
@@ -31,7 +31,7 @@ function AssignmentAddModifyPage(props) {
           tc: [{ tcInput: "1", tcOutput: "2" }],
         },
         {
-          problemNo: 2,
+          index: 2,
           language: "java",
           points: 20,
           description: "문제 설명",
@@ -39,7 +39,7 @@ function AssignmentAddModifyPage(props) {
           tc: [{ tcInput: "10", tcOutput: "20" }],
         },
         {
-          problemNo: 3,
+          index: 3,
           language: "python",
           points: 30,
           description: "문제 설명",
@@ -73,21 +73,21 @@ function AssignmentAddModifyPage(props) {
             </button>
             {problemObjList
               .sort((a, b) => {
-                return a.problemNo - b.problemNo;
+                return a.index - b.index;
               })
               .map((problemObj) => (
                 <ProblemListItem
-                  key={problemObj.problemNo}
+                  key={problemObj.index}
                   classId={classId}
                   assignmentId={assignmentId}
-                  problemNo={problemObj.problemNo}
+                  problemNo={problemObj.index}
                   fromScoreByProblemPage={false}
                   setProblemNo={setProblemNo}
                   deletable={true}
                   onClickDelete={() => {
                     setProblemObjList(
                       problemObjList.filter(
-                        (obj) => obj.problemNo !== problemObj.problemNo
+                        (obj) => obj.index !== problemObj.index
                       )
                     );
                   }}
@@ -109,7 +109,7 @@ function AssignmentAddModifyPage(props) {
               prompt: "",
               tc: [{ tcInput: "", tcOutput: "" }],
             }
-          : problemObjList.filter((obj) => obj.problemNo === problemNo)[0]
+          : problemObjList.filter((obj) => obj.index === problemNo)[0]
       }
       problemObjList={problemObjList}
       setProblemObjList={setProblemObjList}

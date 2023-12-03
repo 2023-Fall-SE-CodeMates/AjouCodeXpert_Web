@@ -8,9 +8,12 @@ ProblemListItem.propTypes = {
   assignmentId: PropTypes.string.isRequired, // 과제 ID (path variable)
   problemNo: PropTypes.number.isRequired, // 문제 번호
   submittedDate: PropTypes.string, // 제출일
+
   score: PropTypes.string, // 문제 점수
   fromScoreByProblemPage: PropTypes.bool.isRequired, // 문제별 점수 페이지에서 접속했는지 여부(학생)
-  setProblemNo: PropTypes.func, // 문제 번호로 변경해서 문제 수정/추가 페이지 보여줌
+
+  setProblemNo: PropTypes.func, // 문제 번호로 변경해서 문제 수정/추가 페이지 보여줌(TA)
+
   deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
   onClickDelete: PropTypes.func, // 삭제 버튼 클릭 시 호출되는 함수
 };

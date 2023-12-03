@@ -1,5 +1,5 @@
 // 성적 페이지
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import AssignmentListItem from "components/list/AssignmentListItem";
@@ -7,6 +7,30 @@ import { useParams } from "react-router-dom";
 
 function ScorePage(props) {
   const { classId } = useParams();
+
+  // 과제 목록 리스트(성적)
+  // { id: 과제id, title: 과제 제목, createdAt: 생성시각, closedAt: 마감시간, removable: 삭제 가능 여부}
+  const [assignmentList, setAssignmentList] = useState([]);
+  useEffect(() => {
+    setAssignmentList([
+      {
+        id: 1,
+        title: "1주차 과제",
+        createdAt: "2021-09-01",
+        closedAt: "2021-09-08",
+        removable: false,
+        score: "15/15",
+      },
+      {
+        id: 2,
+        title: "2주차 과제",
+        createdAt: "2021-09-15",
+        closedAt: "2021-09-22",
+        removable: false,
+        score: "-",
+      },
+    ]);
+  }, []);
 
   return (
     <div className="d-flex flex-row">
@@ -16,22 +40,18 @@ function ScorePage(props) {
         <div className="container px-5">
           {/* 과제 목록 */}
           <div className="mt-5">
-            <AssignmentListItem
-              classId={classId}
-              assignmentId={1}
-              assignmentName="1주차 과제"
-              dueDate="2021-09-01"
-              score="15/15"
-              fromScorePage={true}
-            />
-            <AssignmentListItem
-              classId={classId}
-              assignmentId={2}
-              assignmentName="2주차 과제"
-              dueDate="2021-09-15"
-              score="-"
-              fromScorePage={true}
-            />
+            {assignmentList.map((assignmentInfo) => (
+              <AssignmentListItem
+                key={assignmentInfo.id}
+                classId={classId}
+                assignmentId={assignmentInfo.id}
+                assignmentName={assignmentInfo.title}
+                dueDate={assignmentInfo.closedAt}
+                deletable={assignmentInfo.removable}
+                score={assignmentInfo.score}
+                fromScorePage={true}
+              />
+            ))}
           </div>
         </div>
       </div>

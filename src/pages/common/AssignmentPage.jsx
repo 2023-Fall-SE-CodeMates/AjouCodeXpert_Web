@@ -1,5 +1,5 @@
 // 과제 페이지
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "services/AuthContext";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
@@ -10,6 +10,28 @@ function AssignmentPage(props) {
   const { classId } = useParams();
   const authContext = useAuth();
   const [role] = [authContext.role];
+
+  // 과제 목록 리스트
+  // { id: 과제id, title: 과제 제목, createdAt: 생성시각, closedAt: 마감시간, removable: 삭제 가능 여부}
+  const [assignmentList, setAssignmentList] = useState([]);
+  useEffect(() => {
+    setAssignmentList([
+      {
+        id: 1,
+        title: "1주차 과제",
+        createdAt: "2021-09-01",
+        closedAt: "2021-09-08",
+        removable: false,
+      },
+      {
+        id: 2,
+        title: "2주차 과제",
+        createdAt: "2021-09-15",
+        closedAt: "2021-09-22",
+        removable: false,
+      },
+    ]);
+  }, []);
 
   return (
     <div className="d-flex flex-row">
@@ -27,20 +49,17 @@ function AssignmentPage(props) {
                 과제 추가
               </Link>
             )}
-            <AssignmentListItem
-              classId={classId}
-              assignmentId={1}
-              assignmentName="1주차 과제"
-              dueDate="2021-09-01"
-              fromScorePage={false}
-            />
-            <AssignmentListItem
-              classId={classId}
-              assignmentId={2}
-              assignmentName="2주차 과제"
-              dueDate="2021-09-15"
-              fromScorePage={false}
-            />
+            {assignmentList.map((assignmentInfo) => (
+              <AssignmentListItem
+                key={assignmentInfo.id}
+                classId={classId}
+                assignmentId={assignmentInfo.id}
+                assignmentName={assignmentInfo.title}
+                dueDate={assignmentInfo.closedAt}
+                deletable={assignmentInfo.removable}
+                fromScorePage={false}
+              />
+            ))}
           </div>
         </div>
       </div>

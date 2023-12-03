@@ -1,5 +1,5 @@
 // 리뷰 상세 페이지
-import React from "react";
+import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import style from "styles/pages/student/ReviewDetailPage.module.css";
 import CodeMirror from "@uiw/react-codemirror";
@@ -13,6 +13,20 @@ function ReviewDetailPage(props) {
 
   const code = "";
   const language = "";
+
+  // 문제 정보, 리뷰
+  // {explanation: 문제설명, code: 작성한 코드, gpt_rvw: GPT 리뷰, ta_rvw: TA 리뷰}
+  const [reviewInfo, setReviewInfo] = useState({});
+  useEffect(() => {
+    setReviewInfo({
+      explanation:
+        "두 정수를 입력받아 더한 값을 출력하는 프로그램을 작성하시오.",
+      code: "int main()\n{\n  return 0;\n}",
+      gpt_rvw:
+        "당신이 제공한 코드는 실제로 두 정수의 합을 계산하는 것이 아니라 단순히 0을 반환한다. 합을 계산하려면 코드를 수정해야 한다.",
+      ta_rvw: "틀렸습니다.",
+    });
+  });
 
   return (
     <div className="container px-1 d-flex flex-column vh-100">
@@ -32,7 +46,7 @@ function ReviewDetailPage(props) {
           <div
             className={cn("form-control overflow-y", style.problemExplanation)}
           >
-            문제 내용
+            {reviewInfo.explanation}
           </div>
         </fieldset>
       </div>
@@ -46,7 +60,7 @@ function ReviewDetailPage(props) {
         <div className="w-50">
           <CodeMirror
             style={{ height: "100%" }}
-            value={code}
+            value={reviewInfo.code}
             height="100%"
             extensions={
               language === "c"
@@ -62,16 +76,16 @@ function ReviewDetailPage(props) {
           {/* GPT 리뷰 */}
           <div className="d-flex flex-column h-50 mb-2">
             <h5>GPT 리뷰</h5>
-            <div
-              className={cn("rounded-3 flex-grow-1 p-3", style.reviewBox)}
-            ></div>
+            <div className={cn("rounded-3 flex-grow-1 p-3", style.reviewBox)}>
+              {reviewInfo.gpt_rvw}
+            </div>
           </div>
           {/* TA 리뷰 */}
           <div className="d-flex flex-column h-50 mt-2">
             <h5>TA 리뷰</h5>
-            <div
-              className={cn("rounded-3 flex-grow-1 p-3", style.reviewBox)}
-            ></div>
+            <div className={cn("rounded-3 flex-grow-1 p-3", style.reviewBox)}>
+              {reviewInfo.ta_rvw}
+            </div>
           </div>
         </div>
       </div>
