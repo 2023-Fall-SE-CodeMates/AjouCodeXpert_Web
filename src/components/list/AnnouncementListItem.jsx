@@ -12,7 +12,7 @@ AnnouncementListItem.propTypes = {
   // author: PropTypes.string.isRequired, // 공지사항 작성자
   editable: PropTypes.bool.isRequired, // 수정 가능 여부
   deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
-  handleDeleteAnnouncement: PropTypes.func, // 삭제 버튼 클릭 시 호출되는 함수
+  onClickDelete: PropTypes.func, // 삭제 버튼 클릭 시 호출되는 함수
 };
 
 function AnnouncementListItem({
@@ -23,7 +23,7 @@ function AnnouncementListItem({
   createdAt,
   editable,
   deletable,
-  handleDeleteAnnouncement,
+  onClickDelete,
 }) {
   return (
     <div className="mb-4 px-5 pt-4 pb-3 border rounded-3" key={announcementId}>
@@ -37,7 +37,7 @@ function AnnouncementListItem({
             link={`/classes/${classId}/announcements/${announcementId}`}
           />
         )}
-        {deletable && <DeleteListItem onClick={handleDeleteAnnouncement} />}
+        {deletable && <DeleteListItem onClick={onClickDelete} />}
       </div>
       <p className="mt-2">{content}</p>
     </div>

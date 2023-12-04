@@ -6,22 +6,29 @@ import { Formik, Form, Field, FieldArray } from "formik";
 import { Link, useParams } from "react-router-dom";
 
 AssignmentInfoForm.propTypes = {
+  assignmentInfo: PropTypes.object.isRequired, // 초기값
   problemObjList: PropTypes.arrayOf(Object).isRequired, // 문제 내용 리스트, 과제 정보 등록 시 같이 등록됨
 };
 
-function AssignmentInfoForm({ problemObjList }) {
+function AssignmentInfoForm({ assignmentInfo, problemObjList }) {
   const { classId, assignmentId } = useParams();
   return (
     <Formik
       initialValues={{
-        title: "",
-        dueDate: "",
-        description: "",
+        title: assignmentInfo.title,
+        dueDate: assignmentInfo.closedAt,
+        description: assignmentInfo.content,
         problemObjList: problemObjList,
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
-        console.log(data);
+        if (assignmentId === "create") {
+          // POST
+          console.log(data);
+        } else {
+          // PUT
+          console.log(data);
+        }
       }}
     >
       {(props) => (

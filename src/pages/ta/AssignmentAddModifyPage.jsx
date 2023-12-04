@@ -19,9 +19,20 @@ function AssignmentAddModifyPage(props) {
   // 테스트케이스 배열 tc는 테스트케이스 index 기준으로 정렬되어야 함
   const [problemObjList, setProblemObjList] = useState([]);
 
+  // 과제 정보
+  // { id: 과제id, title: 과제 제목, content: 과제 내용,  closedAt: 마감시간}
+  const [assignmentInfo, setAssignmentInfo] = useState({});
+
   useEffect(() => {
-    setProblemObjList(
-      [
+    if (assignmentId !== "create") {
+      // API 호출
+      setAssignmentInfo({
+        id: assignmentId,
+        title: "1주차 과제",
+        content: "1주차 과제입니다.",
+        closedAt: "2021-09-08 23:59:59",
+      });
+      setProblemObjList([
         {
           index: 1,
           language: "c",
@@ -46,9 +57,14 @@ function AssignmentAddModifyPage(props) {
           prompt: "문제",
           tc: [{ tcInput: "1", tcOutput: "3" }],
         },
-      ],
-      []
-    );
+      ]);
+    } else {
+      setAssignmentInfo({
+        title: "",
+        content: "",
+        closedAt: "",
+      });
+    }
   }, []);
 
   // TODO: 문제 삭제 시 문제 번호가 1부터 순차적으로 재정렬되어야 함
@@ -59,7 +75,10 @@ function AssignmentAddModifyPage(props) {
         <Titlebar title="과제 추가/수정" />
         <div className="container px-5">
           {/* 과제 설명 */}
-          <AssignmentInfoForm problemObjList={problemObjList} />
+          <AssignmentInfoForm
+            assignmentInfo={assignmentInfo}
+            problemObjList={problemObjList}
+          />
 
           {/* 문제 목록 */}
           <div className="mt-5">
@@ -67,6 +86,17 @@ function AssignmentAddModifyPage(props) {
               className="btn btn-outline-secondary btn-lg mb-3"
               onClick={() => {
                 setProblemNo(problemObjList.length + 1);
+                setProblemObjList([
+                  ...problemObjList,
+                  {
+                    index: problemObjList.length + 1,
+                    language: "",
+                    points: "",
+                    description: "",
+                    prompt: "",
+                    tc: [{ tcInput: "", tcOutput: "" }],
+                  },
+                ]);
               }}
             >
               문제 추가
@@ -89,6 +119,7 @@ function AssignmentAddModifyPage(props) {
                       problemObjList.filter(
                         (obj) => obj.index !== problemObj.index
                       )
+                      // TODO: 문제 삭제 시 문제 번호가 1부터 순차적으로 재정렬되어야 함
                     );
                   }}
                 />

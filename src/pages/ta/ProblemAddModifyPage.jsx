@@ -39,8 +39,8 @@ function ProblemAddModifyPage({
         console.log(data);
         setProblemObjList(
           problemObjList
-            .filter((obj) => obj.problemNo !== problemNo)
-            .concat({ ...data, problemNo: problemNo })
+            .filter((obj) => obj.index !== problemNo)
+            .concat({ ...data, index: problemNo })
         );
         setProblemNo(0);
       }}

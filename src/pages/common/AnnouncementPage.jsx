@@ -69,7 +69,7 @@ function AnnouncementPage(props) {
                 createdAt={announcementInfo.createdAt}
                 editable={announcementInfo.editable}
                 deletable={announcementInfo.removable}
-                handleDeleteAnnouncement={() =>
+                onClickDelete={() =>
                   handleDeleteAnnouncement(announcementInfo.id)
                 }
               />
