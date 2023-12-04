@@ -1,19 +1,33 @@
 import React from "react";
+import style from "styles/components/form/AnnouncementForm.module.css";
+import cn from "classnames";
+import { PropTypes } from "prop-types";
 import { Formik, Form, Field } from "formik";
 import { Link, useParams } from "react-router-dom";
 import * as Yup from "yup";
 
-function AnnouncementForm(props) {
-  const { classId } = useParams();
+AnnouncementForm.propTypes = {
+  announcement: PropTypes.object.isRequired, // 초기값
+};
+
+function AnnouncementForm({ announcement }) {
+  const { classId, announcementId } = useParams();
+
   return (
     <Formik
       initialValues={{
-        title: "",
-        content: "",
+        title: announcement.title,
+        content: announcement.content,
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
-        console.log(data);
+        if (announcementId === "create") {
+          // POST
+          console.log(data);
+        } else {
+          // PUT
+          console.log(data);
+        }
       }}
       validationSchema={Yup.object().shape({
         title: Yup.string(),
@@ -38,11 +52,14 @@ function AnnouncementForm(props) {
               <label className="form-label">제목</label>
               <Field className="form-control" type="text" name="title" />
             </fieldset>
-            <fieldset className={"form-group flex-grow-1 my-2"}>
+            <fieldset className="form-group my-2">
               <label className="form-label">내용</label>
               <Field
                 as="textarea"
-                className="form-control overflow-y-scroll"
+                className={cn(
+                  "form-control overflow-y-scroll",
+                  style.contentBox
+                )}
                 name="content"
               />
             </fieldset>

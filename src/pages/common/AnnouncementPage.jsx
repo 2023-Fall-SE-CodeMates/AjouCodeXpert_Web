@@ -37,6 +37,13 @@ function AnnouncementPage(props) {
     ]);
   }, []);
 
+  // 공지사항 삭제했을 때 호출되는 함수
+  async function handleDeleteAnnouncement(announcementId) {
+    // 삭제 API 호출
+    // 삭제 후 공지사항 목록 가져오는 API 호출, announcementList 업데이트
+    console.log("공지사항 삭제");
+  }
+
   return (
     <div className="d-flex flex-row">
       <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
@@ -62,6 +69,9 @@ function AnnouncementPage(props) {
                 createdAt={announcementInfo.createdAt}
                 editable={announcementInfo.editable}
                 deletable={announcementInfo.removable}
+                handleDeleteAnnouncement={() =>
+                  handleDeleteAnnouncement(announcementInfo.id)
+                }
               />
             ))}
           </div>

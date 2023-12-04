@@ -59,7 +59,7 @@ function AssignmentDetailPage(props) {
                 과제 목록 페이지로 돌아가기
               </Link>
             </div>
-            <h5 className="mt-2">{assignmentInfo.closedAt}</h5>
+            <h5 className="mt-2">마감일: {assignmentInfo.closedAt}</h5>
             <textarea
               readOnly
               className={cn("form-control mt-5", style.explanationBox)}
