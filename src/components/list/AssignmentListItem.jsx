@@ -11,6 +11,7 @@ AssignmentListItem.propTypes = {
   score: PropTypes.string, // 과제 점수
   fromScorePage: PropTypes.bool.isRequired, // 성적 페이지에서 접속했는지 여부
   deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
+  onClickDelete: PropTypes.func, // 삭제 버튼 클릭 시 호출되는 함수
 };
 
 function AssignmentListItem({
@@ -21,6 +22,7 @@ function AssignmentListItem({
   score,
   fromScorePage,
   deletable,
+  onClickDelete,
 }) {
   const navigate = useNavigate();
 
@@ -39,7 +41,9 @@ function AssignmentListItem({
         <p className="small">마감일: {dueDate}</p>
       </button>
       <div className="position-absolute top-50 end-0 translate-middle">
-        {deletable && !fromScorePage && <DeleteListItem />}
+        {deletable && !fromScorePage && (
+          <DeleteListItem onClick={onClickDelete} />
+        )}
         {score && fromScorePage && <div className="h4">{score}</div>}
       </div>
     </div>

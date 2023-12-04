@@ -8,9 +8,16 @@ ClassListItem.propTypes = {
   subjectName: PropTypes.string.isRequired, // 반 과목 이름
   subjectCode: PropTypes.string.isRequired, // 과목 코드
   deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
+  onClickDelete: PropTypes.func, // 삭제 버튼 클릭 시 호출되는 함수
 };
 
-function ClassListItem({ classId, subjectName, subjectCode, deletable }) {
+function ClassListItem({
+  classId,
+  subjectName,
+  subjectCode,
+  deletable,
+  onClickDelete,
+}) {
   const navigate = useNavigate();
 
   return (
@@ -25,7 +32,7 @@ function ClassListItem({ classId, subjectName, subjectCode, deletable }) {
         {subjectName}({subjectCode})
       </button>
       <div className="position-absolute top-50 end-0 translate-middle">
-        {deletable && <DeleteListItem />}
+        {deletable && <DeleteListItem onClick={onClickDelete} />}
       </div>
     </div>
   );

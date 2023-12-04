@@ -32,6 +32,13 @@ function ClassListPage(props) {
     ]);
   }, []);
 
+  // 반 삭제했을 때 호출되는 함수
+  async function handleDeleteClass(classId) {
+    // 삭제 API 호출
+    // admin이 확인 후 삭제하므로 반 리스트를 다시 불러올 필요 없음
+    console.log("반 삭제 요청함");
+  }
+
   return (
     <div className="d-flex flex-row">
       <Sidebar />
@@ -58,6 +65,9 @@ function ClassListPage(props) {
                 subjectName={classInfo.name}
                 subjectCode={classInfo.code}
                 deletable={role === "ta" ? classInfo.removable : false}
+                onClickDelete={() => {
+                  handleDeleteClass(classInfo.id);
+                }}
               />
             ))}
           </div>

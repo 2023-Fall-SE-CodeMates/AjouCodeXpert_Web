@@ -28,10 +28,17 @@ function AssignmentPage(props) {
         title: "2주차 과제",
         createdAt: "2021-09-15",
         closedAt: "2021-09-22",
-        removable: false,
+        removable: true,
       },
     ]);
   }, []);
+
+  // 과제 삭제했을 때 호출되는 함수
+  async function handleDeleteAssignment(assignmentId) {
+    // 삭제 API 호출
+    // 삭제 후 과제 목록 가져오는 API 호출, assignmentList 업데이트
+    console.log("과제 삭제");
+  }
 
   return (
     <div className="d-flex flex-row">
@@ -58,6 +65,9 @@ function AssignmentPage(props) {
                 dueDate={assignmentInfo.closedAt}
                 deletable={assignmentInfo.removable}
                 fromScorePage={false}
+                onClickDelete={() => {
+                  handleDeleteAssignment(assignmentInfo.id);
+                }}
               />
             ))}
           </div>
