@@ -12,7 +12,7 @@ StudentScoreTableForm.propTypes = {
   numberOfProblems: PropTypes.number.isRequired,
 };
 
-// TODO: 제출 결과 처리 폼 추가
+// TODO: 현재 API로 감점된 점수를 보내도록 구현됨, 필요 시 다른 정보를 보내도록 수정
 // name, studentCode, delayed, deductedPoints, problemScores, totalScore, id(key)
 function StudentScoreTableForm({ rows, numberOfProblems }) {
   const { classId, assignmentId } = useParams();
@@ -98,7 +98,7 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
                             </Link>
                           </td>
                         ))}
-                        <td></td>
+                        <td>{row.totalScore}</td>
                       </tr>
                     ))}
                   </tbody>

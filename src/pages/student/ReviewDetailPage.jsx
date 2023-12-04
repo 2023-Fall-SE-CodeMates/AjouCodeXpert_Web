@@ -8,27 +8,41 @@ import { java } from "@codemirror/lang-java";
 import { python } from "@codemirror/lang-python";
 import { useParams, Link } from "react-router-dom";
 
+// 리뷰 확인/추가 페이지(TA)와 동일한 API 사용
 function ReviewDetailPage(props) {
   const { classId, assignmentId, problemId } = useParams();
 
-  const code = "";
-  const language = "";
+  // 문제 정보
+  // {language: 언어, points: 배점, explanation: 문제설명, tc: 테스트케이스}
+  const [problemInfo, setProblemInfo] = useState({});
 
-  // 문제 정보, 리뷰
-  // {explanation: 문제설명, code: 작성한 코드, gpt_rvw: GPT 리뷰, ta_rvw: TA 리뷰}
+  // 학생이 문제에 대해 제출한 코드, 점수, 리뷰 정보
+  // {code: 학생이 제출한 코드, score: 학생이 받은 점수, similarity: 유사도, gptReview: GPT 리뷰, taReview: TA 리뷰}
   const [reviewInfo, setReviewInfo] = useState({});
+
   useEffect(() => {
-    setReviewInfo({
+    setProblemInfo({
+      language: "c",
+      points: 10,
       explanation:
         "두 정수를 입력받아 더한 값을 출력하는 프로그램을 작성하시오.",
+      tc: [
+        { tcInput: "1 1", tcOutput: "2" },
+        { tcInput: "10 20", tcOutput: "30" },
+      ],
+    });
+    setReviewInfo({
       code: "int main()\n{\n  return 0;\n}",
-      gpt_rvw:
+      score: 0,
+      similarity: 36,
+      gptReview:
         "당신이 제공한 코드는 실제로 두 정수의 합을 계산하는 것이 아니라 단순히 0을 반환한다. 합을 계산하려면 코드를 수정해야 한다.",
-      ta_rvw: "틀렸습니다.",
+      taReview: "틀렸습니다.",
     });
   });
 
-  return (
+  return JSON.stringify(problemInfo) === "{}" &&
+    JSON.stringify(reviewInfo) === "{}" ? null : (
     <div className="container px-1 d-flex flex-column vh-100">
       {/* 문제명, 버튼 */}
       <div className="d-flex flex-row mt-4 mb-2">
@@ -46,7 +60,7 @@ function ReviewDetailPage(props) {
           <div
             className={cn("form-control overflow-y", style.problemExplanation)}
           >
-            {reviewInfo.explanation}
+            {problemInfo.explanation}
           </div>
         </fieldset>
       </div>
@@ -63,9 +77,9 @@ function ReviewDetailPage(props) {
             value={reviewInfo.code}
             height="100%"
             extensions={
-              language === "c"
+              problemInfo.language === "c"
                 ? [cpp()]
-                : language === "java"
+                : problemInfo.language === "java"
                 ? [java()]
                 : [python()]
             }
@@ -77,14 +91,14 @@ function ReviewDetailPage(props) {
           <div className="d-flex flex-column h-50 mb-2">
             <h5>GPT 리뷰</h5>
             <div className={cn("rounded-3 flex-grow-1 p-3", style.reviewBox)}>
-              {reviewInfo.gpt_rvw}
+              {reviewInfo.gptReview}
             </div>
           </div>
           {/* TA 리뷰 */}
           <div className="d-flex flex-column h-50 mt-2">
             <h5>TA 리뷰</h5>
             <div className={cn("rounded-3 flex-grow-1 p-3", style.reviewBox)}>
-              {reviewInfo.ta_rvw}
+              {reviewInfo.taReview}
             </div>
           </div>
         </div>
