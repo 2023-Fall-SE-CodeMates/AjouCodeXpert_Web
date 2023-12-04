@@ -1,5 +1,5 @@
 // 구성원 관리 페이지
-import React from "react";
+import React, { useState, useEffect } from "react";
 import style from "styles/pages/ta/MemberManagementPage.module.css";
 import cn from "classnames";
 import Sidebar from "components/Sidebar";
@@ -7,76 +7,52 @@ import Titlebar from "components/Titlebar";
 import MemberTable from "components/table/MemberTable";
 import { useParams } from "react-router-dom";
 
+// TODO: 학과 리스트 API로 받아와야 할 듯
 function MemberManagementPage(props) {
   const { classId } = useParams();
-  const members = [
-    {
-      name: "김태훈",
-      studentCode: "2018101234",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "이재현",
-      studentCode: "2018101235",
-      major: "컴퓨터공학과",
-      role: "학생",
-    },
-    {
-      name: "조성빈",
-      studentCode: "2012101010",
-      major: "ICT융합학과",
-      role: "TA",
-    },
-  ];
+
+  // 반에 소속된 모든 학생 리스트
+  // {id: 학생 id, name: 학생 이름, major: 학과, studentCode: 학번, role: 역할}
+  const [members, setMembers] = useState([]);
+
+  // 반에 참여 요청을 보낸 학생 리스트
+  // {id: 학생 id, name: 학생 이름, major: 학과, studentCode: 학번, role: 역할}
+  const [requesters, setRequesters] = useState([]);
+
+  useEffect(() => {
+    setMembers([
+      {
+        id: "thkim123",
+        name: "김태훈",
+        studentCode: "2018101234",
+        major: "소프트웨어학과",
+        role: "학생",
+      },
+      {
+        id: "sbinpark",
+        name: "박승빈",
+        studentCode: "2018101235",
+        major: "소프트웨어학과",
+        role: "학생",
+      },
+      {
+        id: "lhjhjhj",
+        name: "이재현",
+        studentCode: "2018101236",
+        major: "소프트웨어학과",
+        role: "학생",
+      },
+    ]);
+    setRequesters([
+      {
+        id: "asannn",
+        name: "정아산",
+        studentCode: "2018101111",
+        major: "소프트웨어학과",
+        role: "학생",
+      },
+    ]);
+  }, []);
 
   return (
     <div className="d-flex flex-row">
@@ -112,7 +88,7 @@ function MemberManagementPage(props) {
             )}
           >
             <MemberTable
-              rows={members}
+              rows={requesters}
               showAdminButton={false}
               showAcceptJoinButton={true}
               showAcceptRoleChangeButton={false}

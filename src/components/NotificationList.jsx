@@ -25,6 +25,13 @@ function NotificationList(props) {
     ]);
   }, []);
 
+  // 알림 삭제했을 때 호출되는 함수
+  async function handleDeleteNotification(notificationId) {
+    // 삭제 API 호출
+    // 삭제 후 알림 리스트 가져오는 API 호출, notifications 업데이트
+    console.log("알림 삭제");
+  }
+
   return (
     <div className="border rounded-3 h-50 overflow-y-scroll">
       <ul className="list-group list-group-flush pt-2">
@@ -34,7 +41,11 @@ function NotificationList(props) {
             key={notification.id}
           >
             {notification.content}
-            <DeleteListItem />
+            <DeleteListItem
+              onClick={() => {
+                handleDeleteNotification(notification.id);
+              }}
+            />
           </li>
         ))}
       </ul>

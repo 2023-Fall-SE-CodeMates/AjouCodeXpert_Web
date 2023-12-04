@@ -26,7 +26,7 @@ function PersonalPage(props) {
         <div className="container px-5">
           <div className={cn("d-flex flex-row", style.contentsBox)}>
             {/* 개인정보 수정 폼 */}
-            <div className="w-50 mx-5 d-flex flex-column justify-content-center overflow-y-hidden">
+            <div className="w-50 mx-5 d-flex flex-column justify-content-center overflow-y-scroll">
               <MyInfoForm majorList={majorList} />
             </div>
             {/* 알림 리스트 */}
