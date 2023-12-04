@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import style from "styles/components/form/MyInfoForm.module.css";
+import cn from "classnames";
 import { PropTypes } from "prop-types";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -58,12 +60,12 @@ function MyInfoForm({ majorList }) {
                 회원 탈퇴
               </button>
             </div>
-            <fieldset className="form-group mb-2">
-              <label className="form-label">ID</label>
+            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+              <label className="form-label text-nowrap">ID</label>
               <Field type="text" className="form-control" name="id" readOnly />
             </fieldset>
-            <fieldset className="form-group mb-2">
-              <label className="form-label">PW</label>
+            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+              <label className="form-label text-nowrap">PW</label>
               <Field
                 type="password"
                 className={`form-control ${props.errors.pw && "errorField"}`}
@@ -73,8 +75,8 @@ function MyInfoForm({ majorList }) {
                 <div className="errorMessage">{props.errors.pw}</div>
               )}
             </fieldset>
-            <fieldset className="form-group mb-2">
-              <label className="form-label">이름</label>
+            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+              <label className="form-label text-nowrap">이름</label>
               <Field
                 type="text"
                 className={`form-control ${props.errors.name && "errorField"}`}
@@ -84,8 +86,8 @@ function MyInfoForm({ majorList }) {
                 <div className="errorMessage">{props.errors.name}</div>
               )}
             </fieldset>
-            <fieldset className="form-group mb-2">
-              <label className="form-label">학번</label>
+            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+              <label className="form-label text-nowrap">학번</label>
               <Field
                 type="text"
                 className={`form-control ${
@@ -97,8 +99,8 @@ function MyInfoForm({ majorList }) {
                 <div className="errorMessage">{props.errors.studentCode}</div>
               )}
             </fieldset>
-            <fieldset className="form-group mb-2">
-              <label className="form-label">학과</label>
+            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+              <label className="form-label text-nowrap">학과</label>
               <Field
                 as="select"
                 className={`form-select mb-2 ${
@@ -117,8 +119,8 @@ function MyInfoForm({ majorList }) {
                 <div className="errorMessage">{props.errors.majorCode}</div>
               )}
             </fieldset>
-            <fieldset className="form-group mb-2">
-              <label className="form-label">계정 구분</label>
+            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+              <label className="form-label text-nowrap">계정 구분</label>
               <Field
                 as="select"
                 className={`form-select mb-2 ${

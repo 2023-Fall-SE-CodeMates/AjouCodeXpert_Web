@@ -1,4 +1,7 @@
 .signUpBox {
     width: 440px;
-    height: 640px;
+}
+
+label {
+    width: 100px;
 }
