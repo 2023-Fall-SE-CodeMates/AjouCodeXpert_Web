@@ -32,10 +32,21 @@ function SignUpForm({ majorList }) {
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
-        id: Yup.string().required(),
-        pw: Yup.string().required(),
-        name: Yup.string().required(),
-        studentCode: Yup.string().required(),
+        id: Yup.string()
+          .matches(/^[a-zA-Z0-9]+$/, "영문 소문자 및 숫자만 입력 가능합니다.")
+          .required(),
+        pw: Yup.string()
+          .matches(
+            /^[a-zA-Z0-9]*[@!?][a-zA-Z0-9]*$/,
+            "영문 및 숫자, 또는 특수기호(! ? @)만 입력 가능합니다."
+          )
+          .required(),
+        name: Yup.string()
+          .matches(/^[a-zA-Zㄱ-ㅎ가-힣]+$/, "영문 및 한글만 입력 가능합니다.")
+          .required(),
+        studentCode: Yup.string()
+          .matches(/^[0-9]+$/, "영문 및 숫자만 입력 가능합니다.")
+          .required(),
         majorCode: Yup.number().required(),
         roleCode: Yup.number().required(),
       })}
@@ -48,7 +59,7 @@ function SignUpForm({ majorList }) {
               style.signUpBox
             )}
           >
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
               <label className="form-label text-nowrap">ID</label>
               <Field
                 type="text"
@@ -56,7 +67,12 @@ function SignUpForm({ majorList }) {
                 name="id"
               />
             </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+            <div className={cn(style.errorBox)}>
+              {props.errors.id && (
+                <div className="errorMessage">{props.errors.id}</div>
+              )}
+            </div>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
               <label className="form-label text-nowrap">PW</label>
               <Field
                 type="password"
@@ -64,7 +80,12 @@ function SignUpForm({ majorList }) {
                 name="pw"
               />
             </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+            <div className={cn(style.errorBox)}>
+              {props.errors.pw && (
+                <div className="errorMessage">{props.errors.pw}</div>
+              )}
+            </div>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
               <label className="form-label text-nowrap">이름</label>
               <Field
                 type="text"
@@ -72,7 +93,12 @@ function SignUpForm({ majorList }) {
                 name="name"
               />
             </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+            <div className={cn(style.errorBox)}>
+              {props.errors.name && (
+                <div className="errorMessage">{props.errors.name}</div>
+              )}
+            </div>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
               <label className="form-label text-nowrap">학번</label>
               <Field
                 type="text"
@@ -82,7 +108,12 @@ function SignUpForm({ majorList }) {
                 name="studentCode"
               />
             </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+            <div className={cn(style.errorBox)}>
+              {props.errors.studentCode && (
+                <div className="errorMessage">{props.errors.studentCode}</div>
+              )}
+            </div>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
               <label className="form-label text-nowrap">학과</label>
               <Field
                 as="select"
@@ -98,7 +129,7 @@ function SignUpForm({ majorList }) {
                 ))}
               </Field>
             </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
               <label className="form-label text-nowrap">계정 구분</label>
               <Field
                 as="select"

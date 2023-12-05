@@ -17,8 +17,12 @@ function LoginForm(props) {
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
-        id: Yup.string().required("ID를 입력하세요"),
-        pw: Yup.string().required("비밀번호를 입력하세요"),
+        id: Yup.string()
+          .matches(/^[a-zA-Z0-9]+$/)
+          .required(),
+        pw: Yup.string()
+          .matches(/^[a-zA-Z0-9@!?]+$/)
+          .required(),
       })}
     >
       {(props) => (
@@ -37,9 +41,6 @@ function LoginForm(props) {
                 className={`form-control ${props.errors.id && "errorField"}`}
                 name="id"
               />
-              {props.errors.id && (
-                <div className="errorMessage">{props.errors.id}</div>
-              )}
             </fieldset>
             <fieldset className="form-group mb-2">
               <label className="form-label">PW</label>
@@ -48,9 +49,6 @@ function LoginForm(props) {
                 className={`form-control ${props.errors.pw && "errorField"}`}
                 name="pw"
               />
-              {props.errors.pw && (
-                <div className="errorMessage">{props.errors.pw}</div>
-              )}
             </fieldset>
             <div className="d-flex flex-row justify-content-center">
               <button

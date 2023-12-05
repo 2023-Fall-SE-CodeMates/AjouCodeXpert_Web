@@ -2,6 +2,6 @@
     width: 440px;
 }
 
-label {
-    width: 100px;
+.errorBox {
+    margin-left: 80px;
 }
