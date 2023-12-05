@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import style from "styles/components/form/StudentScoreTableForm.module.css";
 import cn from "classnames";
 import { Formik, Form, Field, FieldArray } from "formik";
+import * as Yup from "yup";
 import { useParams, Link } from "react-router-dom";
 
 StudentScoreTableForm.propTypes = {
@@ -84,6 +85,7 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
                               style.deductedPointsField
                             )}
                             name={`deductedPoints[${index}].points`}
+                            min="0"
                           />
                         </td>
                         {Array.from(

@@ -11,6 +11,14 @@ function CreateClassForm(props) {
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
+        if (data.subjectName === "") {
+          alert("과목명을 입력해 주세요.");
+          return;
+        }
+        if (data.subjectCode === "") {
+          alert("과목 코드를 입력해 주세요.");
+          return;
+        }
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
@@ -21,11 +29,21 @@ function CreateClassForm(props) {
       {(props) => (
         <Form className="mt-5 w-50">
           <fieldset className="d-flex flex-row d-flex align-items-baseline form-group my-3">
-            <label className="form-label text-nowrap me-2">과목명</label>
+            <label
+              className="form-label text-nowrap"
+              style={{ width: "100px" }}
+            >
+              과목명
+            </label>
             <Field className="form-control" type="text" name="subjectName" />
           </fieldset>
           <fieldset className="d-flex flex-row d-flex align-items-baseline form-group my-3">
-            <label className="form-label text-nowrap me-2">과목 코드</label>
+            <label
+              className="form-label text-nowrap"
+              style={{ width: "100px" }}
+            >
+              과목 코드
+            </label>
             <Field className="form-control" type="text" name="subjectCode" />
           </fieldset>
           <div className="d-flex flex-row justify-content-end">

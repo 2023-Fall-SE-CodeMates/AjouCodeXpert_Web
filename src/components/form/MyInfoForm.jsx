@@ -40,9 +40,16 @@ function MyInfoForm({ majorList }) {
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
-        pw: Yup.string(),
-        name: Yup.string(),
-        studentCode: Yup.string(),
+        pw: Yup.string().matches(
+          /^[a-zA-Z0-9]*[@!?][a-zA-Z0-9]*$/,
+          "알파벳 및 숫자, 그리고 한 개 이상의 특수기호(! ? @)를 입력해 주세요."
+        ),
+        name: Yup.string()
+          .matches(/^[a-zA-Zㄱ-ㅎ가-힣]+$/, "영문 및 한글만 입력 가능합니다.")
+          .required(),
+        studentCode: Yup.string()
+          .matches(/^[0-9]+$/, "영문 및 숫자만 입력 가능합니다.")
+          .required(),
         majorCode: Yup.number(),
       })}
     >
@@ -60,34 +67,58 @@ function MyInfoForm({ majorList }) {
                 회원 탈퇴
               </button>
             </div>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">ID</label>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                ID
+              </label>
               <Field type="text" className="form-control" name="id" readOnly />
             </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">PW</label>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                PW
+              </label>
               <Field
                 type="password"
                 className={`form-control ${props.errors.pw && "errorField"}`}
                 name="pw"
               />
+            </fieldset>
+            <div className={cn(style.errorBox)}>
               {props.errors.pw && (
                 <div className="errorMessage">{props.errors.pw}</div>
               )}
-            </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">이름</label>
+            </div>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                이름
+              </label>
               <Field
                 type="text"
                 className={`form-control ${props.errors.name && "errorField"}`}
                 name="name"
               />
+            </fieldset>
+            <div className={cn(style.errorBox)}>
               {props.errors.name && (
                 <div className="errorMessage">{props.errors.name}</div>
               )}
-            </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">학번</label>
+            </div>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                학번
+              </label>
               <Field
                 type="text"
                 className={`form-control ${
@@ -95,12 +126,19 @@ function MyInfoForm({ majorList }) {
                 }`}
                 name="studentCode"
               />
+            </fieldset>
+            <div className={cn(style.errorBox)}>
               {props.errors.studentCode && (
                 <div className="errorMessage">{props.errors.studentCode}</div>
               )}
-            </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">학과</label>
+            </div>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                학과
+              </label>
               <Field
                 as="select"
                 className={`form-select mb-2 ${
@@ -119,8 +157,13 @@ function MyInfoForm({ majorList }) {
                 <div className="errorMessage">{props.errors.majorCode}</div>
               )}
             </fieldset>
-            <fieldset className="form-group mb-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">계정 구분</label>
+            <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                계정 구분
+              </label>
               <Field
                 as="select"
                 className={`form-select mb-2 ${

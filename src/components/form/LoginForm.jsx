@@ -18,10 +18,13 @@ function LoginForm(props) {
       }}
       validationSchema={Yup.object().shape({
         id: Yup.string()
-          .matches(/^[a-zA-Z0-9]+$/)
+          .matches(/^[a-zA-Z0-9]+$/, "알파벳 및 숫자만 입력 가능합니다.")
           .required(),
         pw: Yup.string()
-          .matches(/^[a-zA-Z0-9@!?]+$/)
+          .matches(
+            /^[a-zA-Z0-9@!?]+$/,
+            "알파벳 및 숫자, 특수기호(! ? @)만 입력 가능합니다."
+          )
           .required(),
       })}
     >
@@ -34,7 +37,7 @@ function LoginForm(props) {
               style.loginBox
             )}
           >
-            <fieldset className="form-group mb-2">
+            <fieldset className="form-group mt-2">
               <label className="form-label">ID</label>
               <Field
                 type="text"
@@ -42,7 +45,12 @@ function LoginForm(props) {
                 name="id"
               />
             </fieldset>
-            <fieldset className="form-group mb-2">
+            <div>
+              {props.errors.id && (
+                <div className="errorMessage">{props.errors.id}</div>
+              )}
+            </div>
+            <fieldset className="form-group mt-2">
               <label className="form-label">PW</label>
               <Field
                 type="password"
@@ -50,6 +58,11 @@ function LoginForm(props) {
                 name="pw"
               />
             </fieldset>
+            <div>
+              {props.errors.pw && (
+                <div className="errorMessage">{props.errors.pw}</div>
+              )}
+            </div>
             <div className="d-flex flex-row justify-content-center">
               <button
                 type="submit"

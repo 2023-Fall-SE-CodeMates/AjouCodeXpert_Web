@@ -33,12 +33,12 @@ function SignUpForm({ majorList }) {
       }}
       validationSchema={Yup.object().shape({
         id: Yup.string()
-          .matches(/^[a-zA-Z0-9]+$/, "영문 소문자 및 숫자만 입력 가능합니다.")
+          .matches(/^[a-zA-Z0-9]+$/, "알파벳 및 숫자만 입력 가능합니다.")
           .required(),
         pw: Yup.string()
           .matches(
             /^[a-zA-Z0-9]*[@!?][a-zA-Z0-9]*$/,
-            "영문 및 숫자, 또는 특수기호(! ? @)만 입력 가능합니다."
+            "알파벳 및 숫자, 그리고 한 개 이상의 특수기호(! ? @)를 입력해 주세요."
           )
           .required(),
         name: Yup.string()
@@ -60,7 +60,12 @@ function SignUpForm({ majorList }) {
             )}
           >
             <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">ID</label>
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                ID
+              </label>
               <Field
                 type="text"
                 className={`form-control ${props.errors.id && "errorField"}`}
@@ -73,7 +78,12 @@ function SignUpForm({ majorList }) {
               )}
             </div>
             <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">PW</label>
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                PW
+              </label>
               <Field
                 type="password"
                 className={`form-control ${props.errors.pw && "errorField"}`}
@@ -86,7 +96,12 @@ function SignUpForm({ majorList }) {
               )}
             </div>
             <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">이름</label>
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                이름
+              </label>
               <Field
                 type="text"
                 className={`form-control ${props.errors.name && "errorField"}`}
@@ -99,7 +114,12 @@ function SignUpForm({ majorList }) {
               )}
             </div>
             <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">학번</label>
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                학번
+              </label>
               <Field
                 type="text"
                 className={`form-control ${
@@ -114,7 +134,12 @@ function SignUpForm({ majorList }) {
               )}
             </div>
             <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">학과</label>
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                학과
+              </label>
               <Field
                 as="select"
                 className={`form-select mb-2 ${
@@ -130,7 +155,12 @@ function SignUpForm({ majorList }) {
               </Field>
             </fieldset>
             <fieldset className="form-group mt-2 d-flex flex-row align-items-baseline">
-              <label className="form-label text-nowrap">계정 구분</label>
+              <label
+                className="form-label text-nowrap"
+                style={{ width: "100px" }}
+              >
+                계정 구분
+              </label>
               <Field
                 as="select"
                 className={`form-select mb-2 ${

@@ -121,7 +121,12 @@ function ReviewCheckAddPage(props) {
               </fieldset>
               <fieldset className="form-group w-50 ms-2">
                 <label className="form-label">점수 입력</label>
-                <Field className="form-control" type="number" name="score" />
+                <Field
+                  className="form-control"
+                  type="number"
+                  name="score"
+                  min="0"
+                />
               </fieldset>
             </div>
             {/* 리뷰 */}

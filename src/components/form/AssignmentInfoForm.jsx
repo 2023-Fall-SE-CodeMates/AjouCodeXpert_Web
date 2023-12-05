@@ -3,6 +3,7 @@ import style from "styles/components/form/AssignmentInfoForm.module.css";
 import cn from "classnames";
 import PropTypes from "prop-types";
 import { Formik, Form, Field, FieldArray } from "formik";
+import * as Yup from "yup";
 import { Link, useParams } from "react-router-dom";
 
 AssignmentInfoForm.propTypes = {
@@ -30,6 +31,11 @@ function AssignmentInfoForm({ assignmentInfo, problemObjList }) {
           console.log(data);
         }
       }}
+      validationSchema={Yup.object().shape({
+        title: Yup.string().required(),
+        dueDate: Yup.date().required(),
+        description: Yup.string(),
+      })}
     >
       {(props) => (
         <Form>
@@ -46,18 +52,34 @@ function AssignmentInfoForm({ assignmentInfo, problemObjList }) {
           </div>
           <Field
             type="text"
-            className={cn("form-control", style.titleField)}
+            className={cn(
+              `form-control ${props.errors.title && "errorField"}`,
+              style.titleField
+            )}
             name="title"
           />
+          <div>
+            {props.errors.title && (
+              <div className="errorMessage">{props.errors.title}</div>
+            )}
+          </div>
           <div className="d-flex flex-row mt-3 align-items-baseline">
             <label className={cn("form-label me-2", style.dueLabel)}>
               마감일:
             </label>
             <Field
               type="datetime-local"
-              className={cn("form-control", style.dueField)}
+              className={cn(
+                `form-control ${props.errors.dueDate && "errorField"}`,
+                style.dueField
+              )}
               name="dueDate"
             />
+          </div>
+          <div style={{ marginLeft: "70px" }}>
+            {props.errors.dueDate && (
+              <div className="errorMessage">{props.errors.dueDate}</div>
+            )}
           </div>
           <Field
             as="textarea"

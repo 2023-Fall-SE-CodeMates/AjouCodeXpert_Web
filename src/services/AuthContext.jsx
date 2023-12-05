@@ -21,9 +21,9 @@ export default function AuthProvider({ children }) {
   // function logout() {}
 
   // TODO: API명세를 검토하고 role을 어떻게 처리할 지 결정하고, useAuth 사용하는 부분 수정하기
-  const isAuthenticated = false;
-  const role = "";
-  const id = "";
+  const isAuthenticated = true;
+  const role = "ta";
+  const id = "james001";
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, role, id }}>

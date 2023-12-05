@@ -10,6 +10,10 @@ function ClassJoinRequestForm(props) {
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
+        if (data.classCode === "") {
+          alert("참여하실 반의 반 코드를 입력해 주세요.");
+          return;
+        }
         console.log(data);
       }}
       validationSchema={Yup.object().shape({
