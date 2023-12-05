@@ -6,6 +6,16 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import { Link, NavLink } from "react-router-dom";
 
+import { BsFillPersonFill } from "react-icons/bs";
+import { BsGridFill } from "react-icons/bs";
+import { BsFillChatTextFill } from "react-icons/bs";
+import { BsFillTerminalFill } from "react-icons/bs";
+import { BsPencilFill } from "react-icons/bs";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { BsFillArchiveFill } from "react-icons/bs";
+import { BsPersonFillGear } from "react-icons/bs";
+import { BsFillSlashSquareFill } from "react-icons/bs";
+
 Sidebar.propTypes = {
   classId: PropTypes.string,
   subjectName: PropTypes.string,
@@ -42,7 +52,8 @@ function Sidebar({ classId, subjectName }) {
                 }
                 end
               >
-                내 정보
+                <BsFillPersonFill />
+                &nbsp;&nbsp;&nbsp;내 정보
               </NavLink>
             </li>
             <li className="nav-item">
@@ -53,7 +64,8 @@ function Sidebar({ classId, subjectName }) {
                 }
                 end
               >
-                반 목록
+                <BsGridFill />
+                &nbsp;&nbsp;&nbsp;반 목록
               </NavLink>
             </li>
           </ul>
@@ -72,7 +84,8 @@ function Sidebar({ classId, subjectName }) {
                     isActive ? "active nav-link" : "nav-link link-dark"
                   }
                 >
-                  공지
+                  <BsFillChatTextFill />
+                  &nbsp;&nbsp;&nbsp;공지
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -82,7 +95,8 @@ function Sidebar({ classId, subjectName }) {
                     isActive ? "active nav-link" : "nav-link link-dark"
                   }
                 >
-                  과제
+                  <BsFillTerminalFill />
+                  &nbsp;&nbsp;&nbsp;과제
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -92,7 +106,8 @@ function Sidebar({ classId, subjectName }) {
                     isActive ? "active nav-link" : "nav-link link-dark"
                   }
                 >
-                  성적
+                  <BsPencilFill />
+                  &nbsp;&nbsp;&nbsp;성적
                 </NavLink>
               </li>
               {role === "ta" && (
@@ -103,7 +118,8 @@ function Sidebar({ classId, subjectName }) {
                       isActive ? "active nav-link" : "nav-link link-dark"
                     }
                   >
-                    구성원 관리
+                    <BsFillPeopleFill />
+                    &nbsp;&nbsp;&nbsp;구성원 관리
                   </NavLink>
                 </li>
               )}
@@ -115,7 +131,8 @@ function Sidebar({ classId, subjectName }) {
                       isActive ? "active nav-link" : "nav-link link-dark"
                     }
                   >
-                    제출 관리
+                    <BsFillArchiveFill />
+                    &nbsp;&nbsp;&nbsp;제출 관리
                   </NavLink>
                 </li>
               )}
@@ -133,7 +150,8 @@ function Sidebar({ classId, subjectName }) {
                   isActive ? "active nav-link" : "nav-link link-dark"
                 }
               >
-                계정 권한 변경
+                <BsPersonFillGear />
+                &nbsp;&nbsp;&nbsp;계정 권한 변경
               </NavLink>
             </li>
             <li className="nav-item">
@@ -143,7 +161,8 @@ function Sidebar({ classId, subjectName }) {
                   isActive ? "active nav-link" : "nav-link link-dark"
                 }
               >
-                반 관리
+                <BsFillSlashSquareFill />
+                &nbsp;&nbsp;&nbsp;반 관리
               </NavLink>
             </li>
             <li className="nav-item">
@@ -153,7 +172,8 @@ function Sidebar({ classId, subjectName }) {
                   isActive ? "active nav-link" : "nav-link link-dark"
                 }
               >
-                전체 사용자 조회
+                <BsFillPeopleFill />
+                &nbsp;&nbsp;&nbsp;전체 사용자 조회
               </NavLink>
             </li>
             <li className="nav-item">
@@ -163,7 +183,8 @@ function Sidebar({ classId, subjectName }) {
                   isActive ? "active nav-link" : "nav-link link-dark"
                 }
               >
-                전체 개설된 반 조회
+                <BsGridFill />
+                &nbsp;&nbsp;&nbsp;전체 개설된 반 조회
               </NavLink>
             </li>
           </ul>
