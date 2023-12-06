@@ -15,9 +15,9 @@ function AssignmentAddModifyPage(props) {
 
   // 문제 내용을 담고 있는 리스트들
   // 배열은 problemNo 기준으로 정렬되어야 함
-  // {index, language, points, description, prompt, tc}
+  // {index, language: 언어, points: 배점, explanation: 문제설명, prompt: 프롬프트 tc: 테스트케이스}
   // 테스트케이스 배열 tc는 테스트케이스 index 기준으로 정렬되어야 함
-  const [problemObjList, setProblemObjList] = useState([]);
+  const [problemInfoList, setProblemInfoList] = useState([]);
 
   // 과제 정보
   // { id: 과제id, title: 과제 제목, content: 과제 내용,  closedAt: 마감시간}
@@ -32,7 +32,7 @@ function AssignmentAddModifyPage(props) {
         content: "1주차 과제입니다.",
         closedAt: "2021-09-08 23:59:59",
       });
-      setProblemObjList([
+      setProblemInfoList([
         {
           index: 1,
           language: "c",
@@ -77,7 +77,7 @@ function AssignmentAddModifyPage(props) {
           {/* 과제 설명 */}
           <AssignmentInfoForm
             assignmentInfo={assignmentInfo}
-            problemObjList={problemObjList}
+            problemInfoList={problemInfoList}
           />
 
           {/* 문제 목록 */}
@@ -85,11 +85,11 @@ function AssignmentAddModifyPage(props) {
             <button
               className="btn btn-outline-secondary btn-lg mb-3"
               onClick={() => {
-                setProblemNo(problemObjList.length + 1);
-                setProblemObjList([
-                  ...problemObjList,
+                setProblemNo(problemInfoList.length + 1);
+                setProblemInfoList([
+                  ...problemInfoList,
                   {
-                    index: problemObjList.length + 1,
+                    index: problemInfoList.length + 1,
                     language: "",
                     points: "",
                     description: "",
@@ -101,23 +101,23 @@ function AssignmentAddModifyPage(props) {
             >
               문제 추가
             </button>
-            {problemObjList
+            {problemInfoList
               .sort((a, b) => {
                 return a.index - b.index;
               })
-              .map((problemObj) => (
+              .map((problemInfo) => (
                 <ProblemListItem
-                  key={problemObj.index}
+                  key={problemInfo.index}
                   classId={classId}
                   assignmentId={assignmentId}
-                  problemNo={problemObj.index}
+                  problemNo={problemInfo.index}
                   fromScoreByProblemPage={false}
                   setProblemNo={setProblemNo}
                   deletable={true}
                   onClickDelete={() => {
-                    setProblemObjList(
-                      problemObjList.filter(
-                        (obj) => obj.index !== problemObj.index
+                    setProblemInfoList(
+                      problemInfoList.filter(
+                        (obj) => obj.index !== problemInfo.index
                       )
                       // TODO: 문제 삭제 시 문제 번호가 1부터 순차적으로 재정렬되어야 함
                     );
@@ -131,19 +131,19 @@ function AssignmentAddModifyPage(props) {
   ) : (
     <ProblemAddModifyPage
       problemNo={problemNo}
-      problemObj={
-        problemObjList.length < problemNo
+      problemInfo={
+        problemInfoList.length < problemNo
           ? {
               language: "",
               points: 0,
-              description: "",
+              explanation: "",
               prompt: "",
               tc: [{ tcInput: "", tcOutput: "" }],
             }
-          : problemObjList.filter((obj) => obj.index === problemNo)[0]
+          : problemInfoList.filter((obj) => obj.index === problemNo)[0]
       }
-      problemObjList={problemObjList}
-      setProblemObjList={setProblemObjList}
+      problemInfoList={problemInfoList}
+      setProblemInfoList={setProblemInfoList}
       setProblemNo={setProblemNo}
     />
   );

@@ -11,36 +11,39 @@ import ProblemListItem from "../../components/list/ProblemListItem";
 // 등록 시, 문제 리스트에 문제 내용 추가, setProblemNo 0으로 변경해서 과제 수정/추가 페이지 보여줌
 ProblemAddModifyPage.propTypes = {
   problemNo: PropTypes.number.isRequired, // 문제 번호
-  problemObj: PropTypes.object.isRequired, // 문제 내용
-  problemObjList: PropTypes.arrayOf(PropTypes.object).isRequired, // 문제 내용들을 담고 있는 객체들
-  setProblemObjList: PropTypes.func.isRequired, // 문제 내용들을 담고 있는 객체들
+  problemInfo: PropTypes.object.isRequired, // 문제 내용
+  problemInfoList: PropTypes.arrayOf(PropTypes.object).isRequired, // 문제 내용들을 담고 있는 객체들
+  setProblemInfoList: PropTypes.func.isRequired, // 문제 내용들을 담고 있는 객체들
   setProblemNo: PropTypes.func.isRequired, // 등록 후 0으로 변경
 };
 
 // TODO: 과제 이름을 어떻게 가져올 건지(prop로 넘기거나, assignmentId를 사용해 API호출?)
 function ProblemAddModifyPage({
   problemNo,
-  problemObj,
-  problemObjList,
-  setProblemObjList,
+  problemInfo,
+  problemInfoList,
+  setProblemInfoList,
   setProblemNo,
 }) {
   return (
     <Formik
       initialValues={{
-        language: problemObj.language,
-        points: problemObj.points,
-        description: problemObj.description,
-        prompt: problemObj.prompt,
-        tc: problemObj.tc,
+        language: problemInfo.language,
+        points: problemInfo.points,
+        explanation: problemInfo.explanation,
+        prompt: problemInfo.prompt,
+        tc: problemInfo.tc,
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
         console.log(data);
-        setProblemObjList(
-          problemObjList
+        setProblemInfoList(
+          problemInfoList
             .filter((obj) => obj.index !== problemNo)
-            .concat({ ...data, index: problemNo })
+            .concat({
+              ...data,
+              index: problemNo,
+            })
         );
         setProblemNo(0);
       }}
@@ -118,7 +121,7 @@ function ProblemAddModifyPage({
               <Field
                 as="textarea"
                 className="form-control overflow-y-scroll"
-                name="description"
+                name="explanation"
               />
             </fieldset>
             {/* 리뷰프롶 */}

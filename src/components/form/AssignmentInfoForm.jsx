@@ -8,10 +8,10 @@ import { Link, useParams } from "react-router-dom";
 
 AssignmentInfoForm.propTypes = {
   assignmentInfo: PropTypes.object.isRequired, // 초기값
-  problemObjList: PropTypes.arrayOf(Object).isRequired, // 문제 내용 리스트, 과제 정보 등록 시 같이 등록됨
+  problemInfoList: PropTypes.arrayOf(Object).isRequired, // 문제 내용 리스트, 과제 정보 등록 시 같이 등록됨
 };
 
-function AssignmentInfoForm({ assignmentInfo, problemObjList }) {
+function AssignmentInfoForm({ assignmentInfo, problemInfoList }) {
   const { classId, assignmentId } = useParams();
   return (
     <Formik
@@ -19,7 +19,7 @@ function AssignmentInfoForm({ assignmentInfo, problemObjList }) {
         title: assignmentInfo.title,
         dueDate: assignmentInfo.closedAt,
         description: assignmentInfo.content,
-        problemObjList: problemObjList,
+        problemInfoList: problemInfoList,
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
