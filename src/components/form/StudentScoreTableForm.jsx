@@ -14,15 +14,15 @@ StudentScoreTableForm.propTypes = {
 };
 
 // TODO: 현재 API로 감점된 점수를 보내도록 구현됨, 필요 시 다른 정보를 보내도록 수정
-// name, studentCode, delayed, deductedPoints, problemScores, totalScore, id(key)
+// name, studentCode, delayed, deductedScores, problemScores, totalScore, id(key)
 function StudentScoreTableForm({ rows, numberOfProblems }) {
   const { classId, assignmentId } = useParams();
   return (
     <Formik
       initialValues={{
-        deductedPoints: rows.map((row) => ({
+        deductedScores: rows.map((row) => ({
           id: row.id,
-          points: row.deductedPoints ? row.deductedPoints : 0,
+          points: row.deductedScores ? row.deductedScores : 0,
         })),
       }}
       enableReinitialize={true}
@@ -32,7 +32,7 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
     >
       {(props) => (
         <Form>
-          <FieldArray name="deductedPoints">
+          <FieldArray name="deductedScores">
             <div>
               <div className="mt-5 mb-3">
                 <div className="d-flex flex-row justify-content-between align-items-center">
@@ -82,9 +82,9 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
                             type="number"
                             className={cn(
                               "form-control",
-                              style.deductedPointsField
+                              style.deductedScoresField
                             )}
-                            name={`deductedPoints[${index}].points`}
+                            name={`deductedScores[${index}].points`}
                             min="0"
                           />
                         </td>
