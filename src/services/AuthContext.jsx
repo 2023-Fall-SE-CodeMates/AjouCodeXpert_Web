@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
+import { apiClient, authenticateApi } from "./api";
 
 AuthProvider.propsTypes = {
   children: PropTypes.node.isRequired,
@@ -10,23 +11,79 @@ export const AuthContext = createContext();
 
 // Share the created context with other components
 export default function AuthProvider({ children }) {
-  // Put some state in the context
-  // const [isAuthenticated, setAuthenticated] = useState(false);
-  // const [userId, setUserId] = useState(null);
-  // const [role, setRole] = useState(null); // ["student", "ta", "admin"]
-  // const [token, setToken] = useState(null);
+  // sessionStorage에 정보 있으면 가져오기
+  const [id, setId] = useState(
+    window.sessionStorage.getItem("id")
+      ? window.sessionStorage.getItem("id")
+      : null
+  );
+  // ["student", "ta", "admin"]
+  const [role, setRole] = useState(
+    window.sessionStorage.getItem("role")
+      ? window.sessionStorage.getItem("role")
+      : null
+  );
+  const [token, setToken] = useState(
+    window.sessionStorage.getItem("token")
+      ? window.sessionStorage.getItem("token")
+      : null
+  );
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    id && role && token ? true : false
+  );
 
-  // async function login(username, password) {}
+  if (isAuthenticated) {
+    apiClient.interceptors.request.use((config) => {
+      config.headers.Authorization = token;
+      return config;
+    });
+  }
 
-  // function logout() {}
+  async function login(id, pw) {
+    const response = await authenticateApi(id, pw);
+    if (response.status === 200) {
+      const jwtToken = `Bearer ${response.headers["Authorization"]}}`;
+      setIsAuthenticated(true);
+      setId(id);
+      const role = "";
+      // response.data.role
+      setToken(jwtToken);
 
-  // TODO: API명세를 검토하고 role을 어떻게 처리할 지 결정하고, useAuth 사용하는 부분 수정하기
-  const isAuthenticated = true;
-  const role = "admin";
-  const id = "james001";
+      // sessionStorage에 로그인 정보 저장
+      window.sessionStorage.setItem("id", id);
+      window.sessionStorage.setItem("role", role);
+      window.sessionStorage.setItem("token", jwtToken);
+
+      apiClient.interceptors.request.use((config) => {
+        config.headers.Authorization = jwtToken;
+        return config;
+      });
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function logout() {
+    setIsAuthenticated(false);
+    setToken("");
+
+    window.sessionStorage.removeItem("id");
+    window.sessionStorage.removeItem("role");
+    window.sessionStorage.removeItem("token");
+
+    apiClient.interceptors.request.use((config) => {
+      delete config.headers.Authorization;
+      return config;
+    });
+  }
+
+  // const isAuthenticated = true;
+  // const role = "admin";
+  // const id = "james001";
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, role, id }}>
+    <AuthContext.Provider value={{ isAuthenticated, role, id, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

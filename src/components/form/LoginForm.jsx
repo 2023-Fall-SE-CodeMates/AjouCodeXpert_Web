@@ -2,10 +2,16 @@ import React from "react";
 import style from "styles/components/form/LoginForm.module.css";
 import cn from "classnames";
 import { Formik, Form, Field } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useAuth } from "services/AuthContext";
 
 function LoginForm(props) {
+  const authContext = useAuth();
+  const [role] = [authContext.role];
+
+  const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{
@@ -13,8 +19,12 @@ function LoginForm(props) {
         pw: "",
       }}
       enableReinitialize={true}
-      onSubmit={(data) => {
-        console.log(data);
+      onSubmit={async (data) => {
+        if (await authContext.login(data.id, data.pw)) {
+          navigate("/");
+        } else {
+          alert("로그인에 실패했습니다.");
+        }
       }}
       validationSchema={Yup.object().shape({
         id: Yup.string()
