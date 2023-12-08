@@ -44,6 +44,9 @@ function ProblemAddModifyPage({
               ...data,
               index: problemNo,
             })
+            .sort((a, b) => {
+              return a.index - b.index;
+            })
         );
         setProblemNo(0);
       }}
