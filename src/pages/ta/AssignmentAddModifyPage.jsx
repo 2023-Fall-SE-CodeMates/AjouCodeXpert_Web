@@ -69,6 +69,20 @@ function AssignmentAddModifyPage(props) {
         closedAt: "",
       });
     }
+
+    // 페이지 이동 시 경고창 띄우기
+    function handleBeforeUnload(e) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload, {
+      capture: true,
+    });
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload, {
+        capture: true,
+      });
+    };
   }, []);
 
   return problemNo === 0 ? (

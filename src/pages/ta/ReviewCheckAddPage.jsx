@@ -41,6 +41,20 @@ function ReviewCheckAddPage(props) {
         "당신이 제공한 코드는 실제로 두 정수의 합을 계산하는 것이 아니라 단순히 0을 반환한다. 합을 계산하려면 코드를 수정해야 한다.",
       taReview: "틀렸습니다.",
     });
+
+    // 페이지 이동 시 경고창 띄우기
+    function handleBeforeUnload(e) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload, {
+      capture: true,
+    });
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload, {
+        capture: true,
+      });
+    };
   }, []);
 
   return JSON.stringify(problemInfo) === "{}" &&
