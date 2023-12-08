@@ -14,6 +14,10 @@ function ClassJoinRequestForm(props) {
           alert("참여하실 반의 반 코드를 입력해 주세요.");
           return;
         }
+
+        // TODO: 존재하지 않는 반 초대 코드 입력될 경우 오류창 띄우기
+
+        alert("반 참여 요청을 보냈습니다.");
         console.log(data);
       }}
       validationSchema={Yup.object().shape({

@@ -29,6 +29,20 @@ function ProblemPage(props) {
         { tcInput: "10 20", tcOutput: "30" },
       ],
     });
+
+    // 페이지 이동 시 경고창 띄우기
+    function handleBeforeUnload(e) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload, {
+      capture: true,
+    });
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload, {
+        capture: true,
+      });
+    };
   }, []);
 
   // 학생이 작성하는 코드
@@ -138,6 +152,7 @@ function ProblemPage(props) {
             if (isSubmit) {
               await new Promise((resolve) => setTimeout(resolve, 2000));
               setResult("제출 완료!");
+              alert("제출되었습니다.");
               console.log(data);
             } else {
               await new Promise((resolve) => setTimeout(resolve, 2000));

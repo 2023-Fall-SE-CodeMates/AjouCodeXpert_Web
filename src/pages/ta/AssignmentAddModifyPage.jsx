@@ -32,32 +32,36 @@ function AssignmentAddModifyPage(props) {
         content: "1주차 과제입니다.",
         closedAt: "2021-09-08 23:59:59",
       });
-      setProblemInfoList([
-        {
-          index: 1,
-          language: "c",
-          points: 10,
-          description: "문제 설명",
-          prompt: "문제",
-          tc: [{ tcInput: "1", tcOutput: "2" }],
-        },
-        {
-          index: 2,
-          language: "java",
-          points: 20,
-          description: "문제 설명",
-          prompt: "문제",
-          tc: [{ tcInput: "10", tcOutput: "20" }],
-        },
-        {
-          index: 3,
-          language: "python",
-          points: 30,
-          description: "문제 설명",
-          prompt: "문제",
-          tc: [{ tcInput: "1", tcOutput: "3" }],
-        },
-      ]);
+      setProblemInfoList(
+        [
+          {
+            index: 1,
+            language: "c",
+            points: 10,
+            description: "문제 설명",
+            prompt: "문제",
+            tc: [{ tcInput: "1", tcOutput: "2" }],
+          },
+          {
+            index: 2,
+            language: "java",
+            points: 20,
+            description: "문제 설명",
+            prompt: "문제",
+            tc: [{ tcInput: "10", tcOutput: "20" }],
+          },
+          {
+            index: 3,
+            language: "python",
+            points: 30,
+            description: "문제 설명",
+            prompt: "문제",
+            tc: [{ tcInput: "1", tcOutput: "3" }],
+          },
+        ].sort((a, b) => {
+          return a.index - b.index;
+        })
+      );
     } else {
       setAssignmentInfo({
         title: "",
@@ -65,9 +69,22 @@ function AssignmentAddModifyPage(props) {
         closedAt: "",
       });
     }
+
+    // 페이지 이동 시 경고창 띄우기
+    function handleBeforeUnload(e) {
+      e.preventDefault();
+      e.returnValue = "";
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload, {
+      capture: true,
+    });
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload, {
+        capture: true,
+      });
+    };
   }, []);
 
-  // TODO: 문제 삭제 시 문제 번호가 1부터 순차적으로 재정렬되어야 함
   return problemNo === 0 ? (
     <div className="d-flex flex-row">
       <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
@@ -86,44 +103,31 @@ function AssignmentAddModifyPage(props) {
               className="btn btn-outline-secondary btn-lg mb-3"
               onClick={() => {
                 setProblemNo(problemInfoList.length + 1);
-                setProblemInfoList([
-                  ...problemInfoList,
-                  {
-                    index: problemInfoList.length + 1,
-                    language: "",
-                    points: "",
-                    description: "",
-                    prompt: "",
-                    tc: [{ tcInput: "", tcOutput: "" }],
-                  },
-                ]);
               }}
             >
               문제 추가
             </button>
-            {problemInfoList
-              .sort((a, b) => {
-                return a.index - b.index;
-              })
-              .map((problemInfo) => (
-                <ProblemListItem
-                  key={problemInfo.index}
-                  classId={classId}
-                  assignmentId={assignmentId}
-                  problemNo={problemInfo.index}
-                  fromScoreByProblemPage={false}
-                  setProblemNo={setProblemNo}
-                  deletable={true}
-                  onClickDelete={() => {
-                    setProblemInfoList(
-                      problemInfoList.filter(
-                        (obj) => obj.index !== problemInfo.index
-                      )
-                      // TODO: 문제 삭제 시 문제 번호가 1부터 순차적으로 재정렬되어야 함
-                    );
-                  }}
-                />
-              ))}
+            {problemInfoList.map((problemInfo) => (
+              <ProblemListItem
+                key={problemInfo.index}
+                classId={classId}
+                assignmentId={assignmentId}
+                problemNo={problemInfo.index}
+                fromScoreByProblemPage={false}
+                setProblemNo={setProblemNo}
+                deletable={true}
+                onClickDelete={() => {
+                  let newList = problemInfoList.filter(
+                    (obj) => obj.index !== problemInfo.index
+                  );
+                  for (let i = 1; i < newList.length + 1; i++) {
+                    if (newList[i - 1].index === i + 1)
+                      newList[i - 1].index = i;
+                  }
+                  setProblemInfoList(newList);
+                }}
+              />
+            ))}
           </div>
         </div>
       </div>

@@ -63,7 +63,17 @@ function MyInfoForm({ majorList }) {
               >
                 수정
               </button>
-              <button type="button" className="btn btn-outline-warning mt-4">
+              <button
+                type="button"
+                onClick={() => {
+                  const result = window.confirm("정말로 탈퇴하시겠습니까?");
+                  if (result) {
+                    // 탈퇴 처리
+                    alert("탈퇴되었습니다.");
+                  }
+                }}
+                className="btn btn-outline-warning mt-4"
+              >
                 회원 탈퇴
               </button>
             </div>
