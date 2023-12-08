@@ -4,7 +4,7 @@ import { useAuth } from "services/AuthContext";
 import style from "styles/components/Sidebar.module.css";
 import cn from "classnames";
 import PropTypes from "prop-types";
-import { Link, NavLink } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 import { BsFillPersonFill } from "react-icons/bs";
 import { BsGridFill } from "react-icons/bs";
@@ -24,10 +24,13 @@ Sidebar.propTypes = {
 // TODO: className을 어떤 식으로 불러올건지 생각해 봐야 함
 function Sidebar({ classId, subjectName }) {
   const authContext = useAuth();
-  const [isAuthenticated, role] = [
+  const [isAuthenticated, role, logout] = [
     authContext.isAuthenticated,
     authContext.role,
+    authContext.logout,
   ];
+
+  const navigate = useNavigate();
 
   if (!isAuthenticated) return null;
   return (
@@ -194,9 +197,16 @@ function Sidebar({ classId, subjectName }) {
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <Link to="/logout" className="nav-link link-dark">
+          <button
+            onClick={() => {
+              logout();
+              alert("로그아웃 되었습니다.");
+              navigate("/");
+            }}
+            className="nav-link link-dark"
+          >
             Logout
-          </Link>
+          </button>
         </li>
       </ul>
     </div>

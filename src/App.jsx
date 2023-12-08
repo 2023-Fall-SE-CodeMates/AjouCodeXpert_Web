@@ -31,7 +31,6 @@ import UserListPage from "pages/admin/UserListPage";
 import OpenedClassListPage from "pages/admin/OpenedClassListPage";
 import RoleChangePage from "pages/admin/RoleChangePage";
 
-import Logout from "routes/Logout";
 import ScoreRoute from "routes/ScoreRoute";
 import AssignmentRoute from "routes/AssignmentRoute";
 
@@ -127,8 +126,6 @@ function App() {
                 </OnlyForUnauthenticated>
               }
             />
-            {/* 로그아웃 */}
-            <Route path="/logout" element={<Logout />} />
             {/* 개인페이지 */}
             <Route
               path="/personal"

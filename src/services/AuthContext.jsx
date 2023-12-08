@@ -15,18 +15,18 @@ export default function AuthProvider({ children }) {
   const [id, setId] = useState(
     window.sessionStorage.getItem("id")
       ? window.sessionStorage.getItem("id")
-      : null
+      : "james"
   );
   // ["student", "ta", "admin"]
   const [role, setRole] = useState(
     window.sessionStorage.getItem("role")
       ? window.sessionStorage.getItem("role")
-      : null
+      : "ta"
   );
   const [token, setToken] = useState(
     window.sessionStorage.getItem("token")
       ? window.sessionStorage.getItem("token")
-      : null
+      : "token"
   );
   const [isAuthenticated, setIsAuthenticated] = useState(
     id && role && token ? true : false
