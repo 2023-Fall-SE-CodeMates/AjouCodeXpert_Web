@@ -56,7 +56,7 @@ function AssignmentDetailPage(props) {
                 to={`/classes/${classId}/assignments`}
                 className="btn btn-outline-secondary me-2"
               >
-                과제 목록 페이지로 돌아가기
+                과제 페이지로 돌아가기
               </Link>
             </div>
             <h5 className="mt-2">마감일: {assignmentInfo.closedAt}</h5>

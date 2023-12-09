@@ -72,7 +72,7 @@ function ProblemAddModifyPage({
                   setProblemNo(0);
                 }}
               >
-                과제 상세 페이지로 돌아가기
+                과제 추가/수정 페이지로 돌아가기
               </button>
               <button type="submit" className="btn btn-outline-primary">
                 저장
