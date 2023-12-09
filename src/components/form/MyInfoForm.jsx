@@ -46,11 +46,11 @@ function MyInfoForm({ majorList }) {
         ),
         name: Yup.string()
           .matches(/^[a-zA-Zㄱ-ㅎ가-힣]+$/, "영문 및 한글만 입력 가능합니다.")
-          .required(),
+          .required("이름을 입력해 주세요."),
         studentCode: Yup.string()
-          .matches(/^[0-9]+$/, "영문 및 숫자만 입력 가능합니다.")
-          .required(),
-        majorCode: Yup.number(),
+          .matches(/^[0-9]+$/, "숫자만 입력 가능합니다.")
+          .required("학번을 입력해 주세요."),
+        majorCode: Yup.number().required(),
       })}
     >
       {(props) => (

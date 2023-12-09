@@ -57,6 +57,8 @@ function ProblemAddModifyPage({
         points: Yup.number()
           .min(1, "1점 이상의 점수를 입력하세요")
           .required("문제 배점을 입력하세요"),
+        explanation: Yup.string().required("문제 설명을 입력하세요"),
+        prompt: Yup.string().required("코드 리뷰 프롬프트를 입력하세요"),
       })}
     >
       {(props) => (
@@ -106,6 +108,7 @@ function ProblemAddModifyPage({
                   }`}
                   type="number"
                   name="points"
+                  min="1"
                 />
                 {props.errors.points && (
                   <div className="errorMessage">{props.errors.points}</div>
@@ -116,27 +119,37 @@ function ProblemAddModifyPage({
             {/* 문제설명 */}
             <fieldset
               className={cn(
-                "form-group flex-grow-1 my-2 ",
+                "form-group flex-grow-1 my-3 ",
                 style.problemExplanation
               )}
             >
               <label className="form-label">문제 설명</label>
               <Field
                 as="textarea"
-                className="form-control overflow-y-scroll"
+                className={`form-control overflow-y-scroll ${
+                  props.errors.explanation && "errorField"
+                }`}
                 name="explanation"
               />
+              {props.errors.explanation && (
+                <div className="errorMessage">{props.errors.explanation}</div>
+              )}
             </fieldset>
             {/* 리뷰프롶 */}
             <fieldset
-              className={cn("form-group flex-grow-1 my-2", style.reviewPrompt)}
+              className={cn("form-group flex-grow-1 my-3", style.reviewPrompt)}
             >
               <label className="form-label">코드 리뷰 프롬프트</label>
               <Field
                 as="textarea"
-                className="form-control overflow-y-scroll"
+                className={`form-control overflow-y-scroll ${
+                  props.errors.prompt && "errorField"
+                }`}
                 name="prompt"
               />
+              {props.errors.prompt && (
+                <div className="errorMessage">{props.errors.prompt}</div>
+              )}
             </fieldset>
 
             {/* TC 목록*/}

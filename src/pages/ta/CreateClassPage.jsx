@@ -13,7 +13,9 @@ function CreateClassPage(props) {
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="반 개설" />
         <div className="container px-5">
-          <CreateClassForm />
+          <div className="d-flex flex-row justify-content-center">
+            <CreateClassForm />
+          </div>
         </div>
       </div>
     </div>

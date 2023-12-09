@@ -34,19 +34,19 @@ function SignUpForm({ majorList }) {
       validationSchema={Yup.object().shape({
         id: Yup.string()
           .matches(/^[a-zA-Z0-9]+$/, "알파벳 및 숫자만 입력 가능합니다.")
-          .required(),
+          .required("id를 입력해 주세요."),
         pw: Yup.string()
           .matches(
             /^[a-zA-Z0-9]*[@!?][a-zA-Z0-9]*$/,
             "알파벳 및 숫자, 그리고 한 개 이상의 특수기호(! ? @)를 입력해 주세요."
           )
-          .required(),
+          .required("패스워드를 입력해 주세요."),
         name: Yup.string()
           .matches(/^[a-zA-Zㄱ-ㅎ가-힣]+$/, "영문 및 한글만 입력 가능합니다.")
-          .required(),
+          .required("이름을 입력해 주세요."),
         studentCode: Yup.string()
-          .matches(/^[0-9]+$/, "영문 및 숫자만 입력 가능합니다.")
-          .required(),
+          .matches(/^[0-9]+$/, "숫자만 입력 가능합니다.")
+          .required("학번을 입력해 주세요."),
         majorCode: Yup.number().required(),
         roleCode: Yup.number().required(),
       })}

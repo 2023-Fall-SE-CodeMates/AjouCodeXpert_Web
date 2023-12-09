@@ -32,8 +32,8 @@ function AssignmentInfoForm({ assignmentInfo, problemInfoList }) {
         }
       }}
       validationSchema={Yup.object().shape({
-        title: Yup.string().required(),
-        dueDate: Yup.date().required(),
+        title: Yup.string().required("과제 제목을 입력하세요."),
+        dueDate: Yup.date().required("마감일을 입력하세요."),
         description: Yup.string(),
       })}
     >
