@@ -80,7 +80,7 @@ function ReviewCheckAddPage(props) {
                 to={`/classes/${classId}/scores/${assignmentId}`}
                 className="btn btn-outline-secondary me-2"
               >
-                과제 상세 페이지로 돌아가기
+                제출 확인 페이지로 돌아가기
               </Link>
               <button type="submit" className="btn btn-outline-primary">
                 등록
