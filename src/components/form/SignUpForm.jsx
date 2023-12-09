@@ -10,7 +10,6 @@ SignUpForm.propTypes = {
   majorList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-// TODO: 입력 제약조건 추가(패스워드, 학번)
 function SignUpForm({ majorList }) {
   return (
     <Formik
@@ -168,9 +167,8 @@ function SignUpForm({ majorList }) {
                 }`}
                 name="roleCode"
               >
-                <option value={1}>교수</option>
-                <option value={2}>TA</option>
-                <option value={3}>학생</option>
+                <option value={0}>학생</option>
+                <option value={1}>TA</option>
               </Field>
             </fieldset>
             <div className="d-flex flex-row justify-content-end">

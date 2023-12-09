@@ -21,7 +21,7 @@ Sidebar.propTypes = {
   subjectName: PropTypes.string,
 };
 
-// TODO: className을 어떤 식으로 불러올건지 생각해 봐야 함
+// TODO: className을 불러오는 API 호출
 function Sidebar({ classId, subjectName }) {
   const authContext = useAuth();
   const [isAuthenticated, role, logout] = [

@@ -13,7 +13,7 @@ function SubmissionCheckPage(props) {
   const { classId, assignmentId } = useParams();
 
   // 과제에 대한 모든 학생들의 점수
-  // {id: 학생 id, name: 학생 이름, studentCode: 학번, delayed: 제출 지연 여부, problemScores: [문제별 점수]}
+  // {id: 학생 id, name: 학생 이름, studentCode: 학번, submittedDate: 제출 일자, problemScores: [문제별 점수]}
   const [scores, setScores] = useState([]);
 
   // 과제에 딸린 문제 수
@@ -25,7 +25,7 @@ function SubmissionCheckPage(props) {
         id: "th1234",
         name: "김태훈",
         studentCode: "2018101234",
-        delayed: false,
+        submittedDate: "2021-09-01 21:00:00",
         problemScores: [5, 5, 5],
         totalScore: null,
       },
@@ -33,7 +33,7 @@ function SubmissionCheckPage(props) {
         id: "lhjhjhj",
         name: "이재현",
         studentCode: "2018101235",
-        delayed: true,
+        submittedDate: "2021-09-01 21:00:00",
         problemScores: [5, 5, 5],
         totalScore: null,
       },

@@ -14,7 +14,7 @@ StudentScoreTableForm.propTypes = {
 };
 
 // TODO: 현재 API로 감점된 점수를 보내도록 구현됨, 필요 시 다른 정보를 보내도록 수정
-// name, studentCode, delayed, deductedScores, problemScores, totalScore, id(key)
+// name, studentCode, submittedDate, deductedScores, problemScores, totalScore, id(key)
 function StudentScoreTableForm({ rows, numberOfProblems }) {
   const { classId, assignmentId } = useParams();
   return (
@@ -60,7 +60,7 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
                     <tr>
                       <th>이름</th>
                       <th>학번</th>
-                      <th>지연 제출</th>
+                      <th>제출일</th>
                       <th>감점</th>
                       {Array.from(
                         { length: numberOfProblems },
@@ -76,7 +76,7 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
                       <tr key={row.id}>
                         <td>{row.name}</td>
                         <td>{row.studentCode}</td>
-                        <td>{row.delayed && "지연 제출"}</td>
+                        <td>{row.submittedDate}</td>
                         <td>
                           <Field
                             type="number"
@@ -85,7 +85,7 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
                               style.deductedScoresField
                             )}
                             name={`deductedScores[${index}].points`}
-                            min="0"
+                            max="0"
                           />
                         </td>
                         {Array.from(

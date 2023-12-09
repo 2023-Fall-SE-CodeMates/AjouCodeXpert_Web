@@ -23,6 +23,10 @@ function AssignmentInfoForm({ assignmentInfo, problemInfoList }) {
       }}
       enableReinitialize={true}
       onSubmit={(data) => {
+        if (data.problemInfoList.length === 0) {
+          alert("문제를 하나 이상 등록해야 합니다.");
+          return;
+        }
         if (assignmentId === "create") {
           // POST
           console.log(data);
