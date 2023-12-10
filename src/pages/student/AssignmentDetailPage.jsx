@@ -24,7 +24,7 @@ function AssignmentDetailPage(props) {
       id: assignmentId,
       title: "1주차 과제",
       content: "1주차 과제입니다.",
-      closedAt: "2021-09-08 23:59:59",
+      closedAt: "2021-09-01 23:59:59",
     });
     setProblemList([
       {
@@ -33,18 +33,18 @@ function AssignmentDetailPage(props) {
       },
       {
         index: 2,
-        submittedDate: "2021-09-02",
+        submittedDate: "2021-09-01",
       },
       {
         index: 3,
-        submittedDate: "2021-09-03",
+        submittedDate: "2021-09-01",
       },
     ]);
   }, []);
 
   return (
     <div className="d-flex flex-row">
-      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
+      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍 및 실습" />
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="과제 상세" />
         <div className="container px-5">

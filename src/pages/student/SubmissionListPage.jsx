@@ -31,6 +31,20 @@ function SubmissionListPage(props) {
         submitDate: "2023-09-01",
         result: "성공",
       },
+      {
+        submissionId: 3,
+        assignmentName: "과제1",
+        problemNo: 2,
+        submitDate: "2023-09-01",
+        result: "성공",
+      },
+      {
+        submissionId: 4,
+        assignmentName: "과제1",
+        problemNo: 3,
+        submitDate: "2023-09-01",
+        result: "성공",
+      },
     ]);
   }, []);
 

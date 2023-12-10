@@ -21,7 +21,7 @@ export default function AuthProvider({ children }) {
   const [role, setRole] = useState(
     window.sessionStorage.getItem("role")
       ? window.sessionStorage.getItem("role")
-      : "student"
+      : "ta"
   );
   const [token, setToken] = useState(
     window.sessionStorage.getItem("token")

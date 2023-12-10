@@ -21,7 +21,7 @@ function ProblemPage(props) {
   useEffect(() => {
     setProblemInfo({
       language: "c",
-      points: 10,
+      points: 5,
       explanation:
         "두 정수를 입력받아 더한 값을 출력하는 프로그램을 작성하시오.",
       tc: [
@@ -132,7 +132,7 @@ function ProblemPage(props) {
                 <label className="form-label">
                   테스트케이스 {index + 1} 출력
                 </label>
-                <div className="form-control">{item.tcInput} </div>
+                <div className="form-control">{item.tcOutput} </div>
               </fieldset>
             </div>
           ))}

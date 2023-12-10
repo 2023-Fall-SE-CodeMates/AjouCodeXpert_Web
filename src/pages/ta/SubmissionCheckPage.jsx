@@ -24,7 +24,7 @@ function SubmissionCheckPage(props) {
       {
         id: "th1234",
         name: "김태훈",
-        studentCode: "2018101234",
+        studentCode: "201810123",
         submittedDate: "2021-09-01 21:00:00",
         problemScores: [5, 5, 5],
         totalScore: null,
@@ -32,7 +32,7 @@ function SubmissionCheckPage(props) {
       {
         id: "lhjhjhj",
         name: "이재현",
-        studentCode: "2018101235",
+        studentCode: "201810123",
         submittedDate: "2021-09-01 21:00:00",
         problemScores: [5, 5, 5],
         totalScore: null,
@@ -43,7 +43,7 @@ function SubmissionCheckPage(props) {
 
   return (
     <div className="d-flex flex-row">
-      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
+      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍 및 실습" />
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="제출 확인" />
         <div className="container px-5">

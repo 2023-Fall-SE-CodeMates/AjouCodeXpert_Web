@@ -24,30 +24,30 @@ function ScoreByProblemPage(props) {
       id: assignmentId,
       title: "1주차 과제",
       content: "1주차 과제입니다.",
-      closedAt: "2021-09-08 23:59:59",
+      closedAt: "2021-09-01 23:59:59",
     });
     setProblemList([
       {
         index: 1,
         submittedDate: "2021-09-01",
-        score: "15/15",
+        score: "5/5",
       },
       {
         index: 2,
-        submittedDate: "2021-09-02",
-        score: "10/15",
+        submittedDate: "2021-09-01",
+        score: "5/5",
       },
       {
         index: 3,
-        submittedDate: "2021-09-03",
-        score: "-",
+        submittedDate: "2021-09-01",
+        score: "5/5",
       },
     ]);
   }, []);
 
   return (
     <div className="d-flex flex-row">
-      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
+      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍 및 실습" />
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="문제별 점수" />
         <div className="container px-5">
@@ -76,7 +76,7 @@ function ScoreByProblemPage(props) {
                 key={problemInfo.index}
                 classId={classId}
                 assignmentId={assignmentId}
-                problemNo={problemInfo.index}
+                problemIndex={problemInfo.index}
                 submittedDate={problemInfo.submittedDate}
                 score={problemInfo.score}
                 fromScoreByProblemPage={true}
