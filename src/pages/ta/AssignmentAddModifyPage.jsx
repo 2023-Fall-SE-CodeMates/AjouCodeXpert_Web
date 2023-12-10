@@ -11,10 +11,10 @@ function AssignmentAddModifyPage(props) {
   const { classId, assignmentId } = useParams();
 
   // 0이면 문제 추가/수정 페이지 보여줌, 1 이상이면 해당 번호의 문제 추가/수정 페이지 보여줌
-  const [problemNo, setProblemNo] = useState(0);
+  const [problemIndex, setProblemIndex] = useState(0);
 
   // 문제 내용을 담고 있는 리스트들
-  // 배열은 problemNo 기준으로 정렬되어야 함
+  // 배열은 problemIndex 기준으로 정렬되어야 함
   // {index, language: 언어, points: 배점, explanation: 문제설명, prompt: 프롬프트 tc: 테스트케이스}
   // 테스트케이스 배열 tc는 테스트케이스 index 기준으로 정렬되어야 함
   const [problemInfoList, setProblemInfoList] = useState([]);
@@ -85,7 +85,7 @@ function AssignmentAddModifyPage(props) {
     };
   }, []);
 
-  return problemNo === 0 ? (
+  return problemIndex === 0 ? (
     <div className="d-flex flex-row">
       <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
       <div className="flex-fill d-flex flex-column">
@@ -102,7 +102,7 @@ function AssignmentAddModifyPage(props) {
             <button
               className="btn btn-outline-secondary btn-lg mb-3"
               onClick={() => {
-                setProblemNo(problemInfoList.length + 1);
+                setProblemIndex(problemInfoList.length + 1);
               }}
             >
               문제 추가
@@ -112,9 +112,9 @@ function AssignmentAddModifyPage(props) {
                 key={problemInfo.index}
                 classId={classId}
                 assignmentId={assignmentId}
-                problemNo={problemInfo.index}
+                problemIndex={problemInfo.index}
                 fromScoreByProblemPage={false}
-                setProblemNo={setProblemNo}
+                setProblemIndex={setProblemIndex}
                 deletable={true}
                 onClickDelete={() => {
                   let newList = problemInfoList.filter(
@@ -134,9 +134,9 @@ function AssignmentAddModifyPage(props) {
     </div>
   ) : (
     <ProblemAddModifyPage
-      problemNo={problemNo}
+      problemIndex={problemIndex}
       problemInfo={
-        problemInfoList.length < problemNo
+        problemInfoList.length < problemIndex
           ? {
               language: "",
               points: 0,
@@ -144,11 +144,11 @@ function AssignmentAddModifyPage(props) {
               prompt: "",
               tc: [{ tcInput: "", tcOutput: "" }],
             }
-          : problemInfoList.filter((obj) => obj.index === problemNo)[0]
+          : problemInfoList.filter((obj) => obj.index === problemIndex)[0]
       }
       problemInfoList={problemInfoList}
       setProblemInfoList={setProblemInfoList}
-      setProblemNo={setProblemNo}
+      setProblemIndex={setProblemIndex}
     />
   );
 }

@@ -8,22 +8,22 @@ import * as Yup from "yup";
 import { useParams } from "react-router-dom";
 import ProblemListItem from "../../components/list/ProblemListItem";
 
-// 등록 시, 문제 리스트에 문제 내용 추가, setProblemNo 0으로 변경해서 과제 수정/추가 페이지 보여줌
+// 등록 시, 문제 리스트에 문제 내용 추가, setProblemIndex 0으로 변경해서 과제 수정/추가 페이지 보여줌
 ProblemAddModifyPage.propTypes = {
-  problemNo: PropTypes.number.isRequired, // 문제 번호
+  problemIndex: PropTypes.number.isRequired, // 문제 번호
   problemInfo: PropTypes.object.isRequired, // 문제 내용
   problemInfoList: PropTypes.arrayOf(PropTypes.object).isRequired, // 문제 내용들을 담고 있는 객체들
   setProblemInfoList: PropTypes.func.isRequired, // 문제 내용들을 담고 있는 객체들
-  setProblemNo: PropTypes.func.isRequired, // 등록 후 0으로 변경
+  setProblemIndex: PropTypes.func.isRequired, // 등록 후 0으로 변경
 };
 
 // TODO: 과제 이름을 어떻게 가져올 건지(prop로 넘기거나, assignmentId를 사용해 API호출?)
 function ProblemAddModifyPage({
-  problemNo,
+  problemIndex,
   problemInfo,
   problemInfoList,
   setProblemInfoList,
-  setProblemNo,
+  setProblemIndex,
 }) {
   return (
     <Formik
@@ -39,16 +39,16 @@ function ProblemAddModifyPage({
         console.log(data);
         setProblemInfoList(
           problemInfoList
-            .filter((obj) => obj.index !== problemNo)
+            .filter((obj) => obj.index !== problemIndex)
             .concat({
               ...data,
-              index: problemNo,
+              index: problemIndex,
             })
             .sort((a, b) => {
               return a.index - b.index;
             })
         );
-        setProblemNo(0);
+        setProblemIndex(0);
       }}
       validationSchema={Yup.object().shape({
         language: Yup.string()
@@ -66,12 +66,14 @@ function ProblemAddModifyPage({
           <div className="container px-1 d-flex flex-column vh-100">
             {/* 문제명, 버튼 */}
             <div className="d-flex flex-row mt-4 mb-2">
-              <h3 className="flex-grow-1">1주차 과제 &gt; 문제 {problemNo}</h3>
+              <h3 className="flex-grow-1">
+                1주차 과제 &gt; 문제 {problemIndex}
+              </h3>
               <button
                 type="button"
                 className="btn btn-outline-secondary me-2"
                 onClick={() => {
-                  setProblemNo(0);
+                  setProblemIndex(0);
                 }}
               >
                 과제 추가/수정 페이지로 돌아가기
