@@ -69,7 +69,7 @@ export const retrieveAssignmentListApi = (classId) =>
 
 export const deleteAssignmentApi = (classId, assignmentId) => {};
 
-// 성적 페이지: 과제 목록 불러오기
+// 성적 페이지: 과제 목록 불러오기(과제 페이지와 동일)
 
 // 학생 페이지
 // 제출 관리 페이지: 제출 목록 불러오기
@@ -79,7 +79,7 @@ export const retrieveSubmissionListApi = (classId, assignmentId) => {};
 export const retrieveAssignmentDetailApi = (classId, assignmentId) => {};
 export const retrieveSubmissionInfoApi = (classId, assignmentId, id) => {};
 
-// 문제별 점수 페이지: 과제 상세 정보 불러오기, 문제에 대한 점수 불러오기
+// 문제별 점수 페이지: 과제 상세 정보 불러오기, 문제에 대한 점수 불러오기 (과제 상세 페이지와 동일?)
 
 // 문제 페이지: 문제 정보 불러오기, 제출한 코드 불러오기, 코드 저장, 코드 실행, 코드 제출
 export const retrieveProblemApi = (classId, assignmentId, problemIndex) => {};
@@ -106,7 +106,7 @@ export const submitCodeApi = (
   code
 ) => {};
 
-// 리뷰 상세 페이지: 문제 정보, 제출한 코드, 리뷰 정보 불러오기
+// 리뷰 상세 페이지: 문제 정보 불러오기(문제 페이지와 동일), 제출한 코드, 리뷰 정보 불러오기
 export const retrieveReviewDetailApi = (
   classId,
   assignmentId,
@@ -151,7 +151,7 @@ export const updateAnnouncementApi = (
     content,
   });
 
-// 과제 추가/수정 페이지: 과제 상세 정보 불러오기(있으면), 과제 추가, 과제 수정
+// 과제 추가/수정 페이지: 과제 상세 정보 불러오기(있으면, 과제 상세 페이지와 동일), 과제 추가, 과제 수정
 const createAssignmentApi = (
   classId,
   title,
@@ -168,11 +168,20 @@ const updateAssignmentApi = (
   problemInfoList
 ) => {};
 
-// 제출 확인 페이지: 과제에 대한 학생의 제출 목록 불러오기, 감점된 점수 보내기
+// 제출 확인 페이지: 과제에 대한 학생의 제출 목록 불러오기(학생 id 리스트가 있으면, 과제 상세 페이지의 retrieveSubmissionInfoApi 호출?), 감점된 점수 보내기
+const updateDeductedScoreApi = (classId, assignmentId, deductedScores) => {};
 
-// 문제 추가/수정 페이지: 문제 상세 정보 불러오기(있으면)
+// 문제 추가/수정 페이지: 문제 상세 정보 불러오기(있으면, 문제 페이지와 동일)
 
-// 리뷰 확인/추가 페이지: 과제의 문제에 대한 제출 정보 불러오기, 점수와 TA리뷰 보내기
+// 리뷰 확인/추가 페이지: 과제의 문제에 대한 제출 정보 불러오기(리뷰 상세 페이지의 retrieveReviewDetailApi 호출?), 점수와 TA리뷰 보내기
+const updateReviewApi = (
+  classId,
+  assignmentId,
+  problemIndex,
+  id,
+  score,
+  taReview
+) => {};
 
 // 관리자
 

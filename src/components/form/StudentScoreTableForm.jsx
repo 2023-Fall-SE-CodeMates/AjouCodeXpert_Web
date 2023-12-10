@@ -22,7 +22,7 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
       initialValues={{
         deductedScores: rows.map((row) => ({
           id: row.id,
-          points: row.deductedScores ? row.deductedScores : 0,
+          deductedScores: row.deductedScores ? row.deductedScores : 0,
         })),
       }}
       enableReinitialize={true}
@@ -84,7 +84,7 @@ function StudentScoreTableForm({ rows, numberOfProblems }) {
                               "form-control",
                               style.deductedScoresField
                             )}
-                            name={`deductedScores[${index}].points`}
+                            name={`deductedScores[${index}].deductedScores`}
                             max="0"
                           />
                         </td>
