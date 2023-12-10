@@ -75,7 +75,7 @@ function AssignmentDetailPage(props) {
                 key={problemInfo.index}
                 classId={classId}
                 assignmentId={assignmentId}
-                problemNo={problemInfo.index}
+                problemIndex={problemInfo.index}
                 submittedDate={problemInfo.submittedDate}
                 fromScoreByProblemPage={false}
                 deletable={false}

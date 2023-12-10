@@ -36,7 +36,7 @@ function SubmissionListPage(props) {
 
   return (
     <div className="d-flex flex-row">
-      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
+      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍 및 실습" />
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="제출 관리" />
         <div className="container px-5">

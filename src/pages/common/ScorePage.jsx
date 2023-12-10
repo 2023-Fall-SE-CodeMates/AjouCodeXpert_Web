@@ -27,14 +27,13 @@ function ScorePage(props) {
         createdAt: "2021-09-15",
         closedAt: "2021-09-22",
         removable: false,
-        score: "-",
       },
     ]);
   }, []);
 
   return (
     <div className="d-flex flex-row">
-      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
+      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍 및 실습" />
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="성적" />
         <div className="container px-5">

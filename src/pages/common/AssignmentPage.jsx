@@ -21,7 +21,7 @@ function AssignmentPage(props) {
         title: "1주차 과제",
         createdAt: "2021-09-01",
         closedAt: "2021-09-08",
-        removable: false,
+        removable: true,
       },
       {
         id: 2,
@@ -42,7 +42,7 @@ function AssignmentPage(props) {
 
   return (
     <div className="d-flex flex-row">
-      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
+      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍 및 실습" />
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="과제 목록" />
         <div className="container px-5">

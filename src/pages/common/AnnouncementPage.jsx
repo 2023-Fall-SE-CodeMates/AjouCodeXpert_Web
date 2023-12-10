@@ -21,18 +21,17 @@ function AnnouncementPage(props) {
         title: "다음 주 과제는 없습니다.",
         content:
           "Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.",
-        createdAt: "2021-09-01",
+        createdAt: "2021-09-16",
         editable: true,
         removable: true,
       },
       {
         id: 2,
         title: "이의제기 관련입니다.",
-        content:
-          "Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm.",
-        createdAt: "2021-09-15",
-        editable: false,
-        removable: false,
+        content: "매주 실습 시간 시작 전에 이의 제기를 받겠습니다.",
+        createdAt: "2021-09-10",
+        editable: true,
+        removable: true,
       },
     ]);
   }, []);
@@ -46,7 +45,7 @@ function AnnouncementPage(props) {
 
   return (
     <div className="d-flex flex-row">
-      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍" />
+      <Sidebar classId={classId} subjectName="컴퓨터프로그래밍 및 실습" />
       <div className="flex-fill d-flex flex-column">
         <Titlebar title="공지사항" />
         <div className="container px-5">
