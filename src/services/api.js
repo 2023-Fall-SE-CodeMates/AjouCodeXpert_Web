@@ -186,9 +186,22 @@ const updateReviewApi = (
 // 관리자
 
 // 계정 권한 변경 페이지: 권한 변경 신청한 계정 불러오기, 승인, 거부
+const retrieveRoleChangeRequestListApi = () => {};
+const acceptRoleChangeRequestApi = (id) => {};
+const rejectRoleChangeRequestApi = (id) => {};
 
 // 반 개설 및 삭제 요청 관리 페이지: 반 개설 및 삭제 요청 불러오기, 승인, 거부
+const retrieveClassOpenRequestListApi = () => {};
+const retrieveClassDeleteRequestListApi = () => {};
+const acceptClassOpenRequestApi = () => {};
+const rejectClassOpenRequestApi = () => {};
+const acceptClassDeleteRequestApi = () => {};
+const rejectClassDeleteRequestApi = () => {};
 
 // 전체 사용자 조회 페이지: 전체 사용자 목록 불러오기, 계정 삭제, 패스워드 초기화
+const retrieveUserListApi = () => {};
+const deleteUserApi = (id) => {};
+const resetPasswordApi = (id) => {};
 
 // 전체 개설된 반 조회 페이지: 전체 개설된 반 목록 불러오기
+const retrieveOpenedClassListApi = () => {};
