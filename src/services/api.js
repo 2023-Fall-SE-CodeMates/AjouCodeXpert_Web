@@ -57,11 +57,11 @@ export const deleteNotificationApi = (alarmId) =>
   apiClient.patch(`/api/v1/alarm/${alarmId}?read=1`);
 
 // 공지 페이지: 공지 목록 불러오기, 공지 삭제(TA)
-export const retrieveNoticeListApi = (classId) =>
+export const retrieveAnnouncementListApi = (classId) =>
   apiClient.get(`/api/v1/class/${classId}/notice`);
 
-export const deleteNoticeApi = (classId, noticeId) =>
-  apiClient.delete(`/api/v1/class/${classId}/notice/${noticeId}`);
+export const deleteAnnouncementApi = (classId, announcementId) =>
+  apiClient.delete(`/api/v1/class/${classId}/notice/${announcementId}`);
 
 // 과제 페이지: 과제 목록 불러오기, 과제 삭제(TA)
 export const retrieveAssignmentListApi = (classId) =>
@@ -76,12 +76,43 @@ export const deleteAssignmentApi = (classId, assignmentId) => {};
 export const retrieveSubmissionListApi = (classId, assignmentId) => {};
 
 // 과제 상세 페이지: 과제 상세 정보 불러오기, 문제에 대해 제출된 날짜 불러오기
+export const retrieveAssignmentDetailApi = (classId, assignmentId) => {};
+export const retrieveSubmissionInfoApi = (classId, assignmentId, id) => {};
 
 // 문제별 점수 페이지: 과제 상세 정보 불러오기, 문제에 대한 점수 불러오기
 
 // 문제 페이지: 문제 정보 불러오기, 제출한 코드 불러오기, 코드 저장, 코드 실행, 코드 제출
+export const retrieveProblemApi = (classId, assignmentId, problemIndex) => {};
+export const retrieveCodeApi = (classId, assignmentId, problemIndex, id) => {};
+export const updateCodeApi = (
+  classId,
+  assignmentId,
+  problemIndex,
+  id,
+  code
+) => {};
+export const executeCodeApi = (
+  classId,
+  assignmentId,
+  problemIndex,
+  id,
+  code
+) => {};
+export const submitCodeApi = (
+  classId,
+  assignmentId,
+  problemIndex,
+  id,
+  code
+) => {};
 
 // 리뷰 상세 페이지: 문제 정보, 제출한 코드, 리뷰 정보 불러오기
+export const retrieveReviewDetailApi = (
+  classId,
+  assignmentId,
+  problemIndex,
+  id
+) => {};
 
 // TA 페이지
 // 반 개설 페이지: 반 개설 요청 보내기
@@ -101,23 +132,45 @@ export const acceptRequestApi = (id) =>
   apiClient.patch(`/api/v1/class/join/${id}&joined=1`);
 
 // 공지사항 추가/수정 페이지: 공지사항 추가, 공지사항 수정
-export const createNotificationApi = (classId, title, content) =>
+export const createAnnouncementApi = (classId, title, content) =>
   apiClient.post(`/api/v1/class/${classId}/notice`, {
     title,
     content,
   });
 
-export const updateNotificationApi = (classId, noticeId, title, content) =>
-  apiClient.put(`/api/v1/class/${classId}/notice/${noticeId}`, {
+export const retrieveAnnouncementApi = (classId, announcementId) => {};
+
+export const updateAnnouncementApi = (
+  classId,
+  announcementId,
+  title,
+  content
+) =>
+  apiClient.put(`/api/v1/class/${classId}/notice/${announcementId}`, {
     title,
     content,
   });
 
-// 과제 추가/수정 페이지: 과제 정보 불러오기(있으면), 과제 추가, 과제 수정
+// 과제 추가/수정 페이지: 과제 상세 정보 불러오기(있으면), 과제 추가, 과제 수정
+const createAssignmentApi = (
+  classId,
+  title,
+  dueDate,
+  description,
+  problemInfoList
+) => {};
+const updateAssignmentApi = (
+  classId,
+  assignmentId,
+  title,
+  dueDate,
+  description,
+  problemInfoList
+) => {};
 
 // 제출 확인 페이지: 과제에 대한 학생의 제출 목록 불러오기, 감점된 점수 보내기
 
-// 문제 추가/수정 페이지: 문제 정보 불러오기(있으면)
+// 문제 추가/수정 페이지: 문제 상세 정보 불러오기(있으면)
 
 // 리뷰 확인/추가 페이지: 과제의 문제에 대한 제출 정보 불러오기, 점수와 TA리뷰 보내기
 
