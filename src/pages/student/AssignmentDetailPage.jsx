@@ -1,11 +1,13 @@
 // 과제 상세 페이지
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import ProblemListItem from "components/list/ProblemListItem";
 import style from "styles/pages/student/AssignmentDetailPage.module.css";
 import cn from "classnames";
 import { Link, useParams } from "react-router-dom";
+import { retrieveAssignmentDetailApi } from "services/api";
 
 // TODO: 과제명 API 호출
 function AssignmentDetailPage(props) {
@@ -20,26 +22,48 @@ function AssignmentDetailPage(props) {
   const [assignmentInfo, setAssignmentInfo] = useState({});
 
   useEffect(() => {
-    setAssignmentInfo({
-      id: assignmentId,
-      title: "1주차 과제",
-      content: "1주차 과제입니다.",
-      closedAt: "2021-09-01 23:59:59",
+    retrieveAssignmentDetailApi(classId, assignmentId).then((res) => {
+      let date = res.data.endDate;
+      date[1] = date[1] - 1;
+      date = new moment(date);
+      console.log(date);
+
+      setAssignmentInfo({
+        id: res.data.homeworkIdx,
+        title: res.data.title,
+        content: res.data.content,
+        closedAt: date.format("YYYY-MM-DD HH:mm:ss"),
+      });
+      setProblemList(
+        res.data.problems.map((item) => {
+          return {
+            index: item.index,
+            // 제출 일자
+          };
+        })
+      );
     });
-    setProblemList([
-      {
-        index: 1,
-        submittedDate: "2021-09-01",
-      },
-      {
-        index: 2,
-        submittedDate: "2021-09-01",
-      },
-      {
-        index: 3,
-        submittedDate: "2021-09-01",
-      },
-    ]);
+
+    // setAssignmentInfo({
+    //   id: assignmentId,
+    //   title: "1주차 과제",
+    //   content: "1주차 과제입니다.",
+    //   closedAt: "2021-09-01 23:59:59",
+    // });
+    // setProblemList([
+    //   {
+    //     index: 1,
+    //     submittedDate: "2021-09-01",
+    //   },
+    //   {
+    //     index: 2,
+    //     submittedDate: "2021-09-01",
+    //   },
+    //   {
+    //     index: 3,
+    //     submittedDate: "2021-09-01",
+    //   },
+    // ]);
   }, []);
 
   return (

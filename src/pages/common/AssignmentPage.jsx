@@ -18,6 +18,7 @@ function AssignmentPage(props) {
   const [assignmentList, setAssignmentList] = useState([]);
   useEffect(() => {
     retrieveAssignmentListApi(classId).then((res) => {
+      console.log(res);
       setAssignmentList(
         res.data.map((item) => {
           let date = item.endDate;
