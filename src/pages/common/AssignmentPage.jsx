@@ -6,7 +6,7 @@ import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import AssignmentListItem from "components/list/AssignmentListItem";
 import { Link, useParams } from "react-router-dom";
-import { retrieveAssignmentListApi } from "services/api";
+import { deleteAssignmentApi, retrieveAssignmentListApi } from "services/api";
 
 function AssignmentPage(props) {
   const { classId } = useParams();
@@ -38,8 +38,11 @@ function AssignmentPage(props) {
   // 과제 삭제했을 때 호출되는 함수
   async function handleDeleteAssignment(assignmentId) {
     // 삭제 API 호출
-    // 삭제 후 과제 목록 가져오는 API 호출, assignmentList 업데이트
-    console.log("과제 삭제");
+    const res = await deleteAssignmentApi(classId, assignmentId);
+    console.log(res);
+    setAssignmentList((prev) =>
+      prev.filter((item) => item.id !== assignmentId)
+    );
   }
 
   return (

@@ -54,7 +54,8 @@ export const retrieveMyInfoApi = () => apiClient.get(`api/user/info`);
 export const retrieveAssignmentListApi = (classId) =>
   apiClient.get(`/api/course/${classId}/homework`);
 
-// export const deleteAssignmentApi = (classId, assignmentId) => {};
+export const deleteAssignmentApi = (classId, assignmentId) =>
+  apiClient.delete(`/api/course/${classId}/homework/${assignmentId}`);
 
 // // 성적 페이지: 과제 목록 불러오기(과제 페이지와 동일)
 
