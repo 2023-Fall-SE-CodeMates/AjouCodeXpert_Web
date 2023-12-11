@@ -19,6 +19,7 @@ function MemberManagementPage(props) {
   // {id: 학생 id, name: 학생 이름, major: 학과, studentCode: 학번, role: 역할}
   const [requesters, setRequesters] = useState([]);
 
+  // rowId를 학생 id로
   useEffect(() => {
     setMembers([
       {

@@ -5,33 +5,51 @@ import cn from "classnames";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import MemberTable from "components/table/MemberTable";
+import {
+  acceptRoleChangeRequestApi,
+  rejectRoleChangeRequestApi,
+  retrieveRoleChangeRequestListApi,
+} from "services/api";
 
 function RoleChangePage(props) {
   // 권한 변경 신청 목록
-  // [{name: 이름, studentCode: 학번, major: 전공, role: 신청할 권한}]
+  // [{name: 이름, studentCode: 학번, major: 전공, role: 신청할 권한, id: 아이디}]
   const [roleChangeRequests, setRoleChangeRequests] = useState([]);
 
   useEffect(() => {
-    setRoleChangeRequests([
-      {
-        name: "김태훈",
-        studentCode: "2018101234",
-        major: "컴퓨터공학과",
-        role: "학생",
-      },
-      {
-        name: "이재현",
-        studentCode: "2018101235",
-        major: "컴퓨터공학과",
-        role: "학생",
-      },
-      {
-        name: "조성빈",
-        studentCode: "2012101010",
-        major: "ICT융합학과",
-        role: "TA",
-      },
-    ]);
+    retrieveRoleChangeRequestListApi().then((res) => {
+      console.log(res);
+      setRoleChangeRequests(
+        res.data.map((item) => {
+          return {
+            name: item.name,
+            studentCode: item.studentId,
+            major: item.majorName,
+            role: "TA", // 학생 계정으로 가입해서 TA 권한을 요청한 상태
+            rowId: item.requestId,
+            id: item.loginId,
+            acceptFunc: () => {
+              console.log("accept");
+              acceptRoleChangeRequestApi(item.requestId).then((res) => {
+                console.log(res);
+                setRoleChangeRequests((prev) =>
+                  prev.filter((row) => row.rowId !== item.requestId)
+                );
+              });
+            },
+            rejectFunc: () => {
+              console.log("reject");
+              rejectRoleChangeRequestApi(item.requestId).then((res) => {
+                console.log(res);
+                setRoleChangeRequests((prev) =>
+                  prev.filter((row) => row.rowId !== item.requestId)
+                );
+              });
+            },
+          };
+        })
+      );
+    });
   }, []);
 
   return (

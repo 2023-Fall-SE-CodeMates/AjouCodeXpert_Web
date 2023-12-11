@@ -180,9 +180,12 @@ export const createClassApi = (subjectCode, subjectName) =>
 // // 관리자
 
 // // 계정 권한 변경 페이지: 권한 변경 신청한 계정 불러오기, 승인, 거부
-// const retrieveRoleChangeRequestListApi = () => {};
-// const acceptRoleChangeRequestApi = (id) => {};
-// const rejectRoleChangeRequestApi = (id) => {};
+export const retrieveRoleChangeRequestListApi = () =>
+  apiClient.get("api/request/role");
+export const acceptRoleChangeRequestApi = (requestId) =>
+  apiClient.post(`api/request/role?requestId=${requestId}&action=1`);
+export const rejectRoleChangeRequestApi = (requestId) =>
+  apiClient.post(`api/request/role?requestId=${requestId}&action=-1`);
 
 // 반 개설 및 삭제 요청 관리 페이지: 반 개설 및 삭제 요청 불러오기, 승인, 거부
 export const retrieveClassOpenRequestListApi = () =>

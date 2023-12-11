@@ -33,7 +33,7 @@ function SignUpForm({ majorList }) {
         };
 
         const res = await signUpApi(data);
-        if (res.status === 200) {
+        if (res.status === 204) {
           alert("회원가입이 완료되었습니다.");
           navigate("/");
         } else {

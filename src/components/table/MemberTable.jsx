@@ -13,7 +13,8 @@ MemberTable.propTypes = {
 };
 
 // TODO: 버튼에 대한 함수 추가
-// name, studentCode, major, role, id(key)
+// name, studentCode, major, role, id, rowId(key)
+// rowId는 계정 권한 변경 신청 페이지 제외하고는 사용자id, 계정 권한 변경 신청 페이지에서는 신청id
 function MemberTable({
   rows,
   showAdminButton,
@@ -25,6 +26,7 @@ function MemberTable({
       <thead>
         <tr>
           <th>이름</th>
+          <th>Id</th>
           <th>학번</th>
           <th>소속 학과</th>
           <th>권한</th>
@@ -35,8 +37,9 @@ function MemberTable({
       </thead>
       <tbody>
         {rows.map((row) => (
-          <tr key={row.id}>
+          <tr key={row.rowId}>
             <td>{row.name}</td>
+            <td>{row.id}</td>
             <td>{row.studentCode}</td>
             <td>{row.major}</td>
             <td>{row.role}</td>
@@ -52,20 +55,40 @@ function MemberTable({
             )}
             {showAcceptJoinButton && (
               <td>
-                <button className="btn btn-outline-secondary btn-sm me-2">
+                <button
+                  className="btn btn-outline-secondary btn-sm me-2"
+                  onClick={() => {
+                    row.acceptFunc();
+                  }}
+                >
                   승인
                 </button>
-                <button className="btn btn-outline-secondary btn-sm">
+                <button
+                  className="btn btn-outline-secondary btn-sm"
+                  onClick={() => {
+                    row.rejectFunc();
+                  }}
+                >
                   거부
                 </button>
               </td>
             )}
             {showAcceptRoleChangeButton && (
               <td>
-                <button className="btn btn-outline-secondary btn-sm me-2">
+                <button
+                  className="btn btn-outline-secondary btn-sm me-2"
+                  onClick={() => {
+                    row.acceptFunc();
+                  }}
+                >
                   승인
                 </button>
-                <button className="btn btn-outline-secondary btn-sm">
+                <button
+                  className="btn btn-outline-secondary btn-sm"
+                  onClick={() => {
+                    row.rejectFunc();
+                  }}
+                >
                   거부
                 </button>
               </td>
