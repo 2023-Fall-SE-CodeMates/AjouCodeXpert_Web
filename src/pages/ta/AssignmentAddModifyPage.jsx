@@ -10,7 +10,7 @@ import ProblemAddModifyPage from "./ProblemAddModifyPage";
 function AssignmentAddModifyPage(props) {
   const { classId, assignmentId } = useParams();
 
-  // 0이면 문제 추가/수정 페이지 보여줌, 1 이상이면 해당 번호의 문제 추가/수정 페이지 보여줌
+  // 0이면 문제 추가/수정 페이지 보여줌, 1 이상이면 해당 번호의 문제 수정 페이지 보여줌
   const [problemIndex, setProblemIndex] = useState(0);
 
   // 문제 내용을 담고 있는 리스트들
@@ -41,6 +41,7 @@ function AssignmentAddModifyPage(props) {
             description: "문제 설명",
             prompt: "문제",
             tc: [{ tcInput: "1", tcOutput: "2" }],
+            isNew: false,
           },
           {
             index: 2,
@@ -49,6 +50,7 @@ function AssignmentAddModifyPage(props) {
             description: "문제 설명",
             prompt: "문제",
             tc: [{ tcInput: "10", tcOutput: "20" }],
+            isNew: false,
           },
           {
             index: 3,
@@ -57,6 +59,7 @@ function AssignmentAddModifyPage(props) {
             description: "문제 설명",
             prompt: "문제",
             tc: [{ tcInput: "1", tcOutput: "3" }],
+            isNew: false,
           },
         ].sort((a, b) => {
           return a.index - b.index;
@@ -102,7 +105,12 @@ function AssignmentAddModifyPage(props) {
             <button
               className="btn btn-outline-secondary btn-lg mb-3"
               onClick={() => {
-                setProblemIndex(problemInfoList.length + 1);
+                let newIndex;
+                if (problemInfoList.length === 0) newIndex = 1;
+                else
+                  newIndex =
+                    problemInfoList[problemInfoList.length - 1].index + 1;
+                setProblemIndex(newIndex);
               }}
             >
               문제 추가
@@ -116,15 +124,13 @@ function AssignmentAddModifyPage(props) {
                 fromScoreByProblemPage={false}
                 setProblemIndex={setProblemIndex}
                 deletable={true}
+                isNew={problemInfo.isNew}
                 onClickDelete={() => {
-                  let newList = problemInfoList.filter(
-                    (obj) => obj.index !== problemInfo.index
+                  setProblemInfoList(
+                    problemInfoList.filter(
+                      (obj) => obj.index !== problemInfo.index
+                    )
                   );
-                  for (let i = 1; i < newList.length + 1; i++) {
-                    if (newList[i - 1].index === i + 1)
-                      newList[i - 1].index = i;
-                  }
-                  setProblemInfoList(newList);
                 }}
               />
             ))}
@@ -136,13 +142,15 @@ function AssignmentAddModifyPage(props) {
     <ProblemAddModifyPage
       problemIndex={problemIndex}
       problemInfo={
-        problemInfoList.length < problemIndex
+        problemInfoList.length === 0 ||
+        problemIndex > problemInfoList[problemInfoList.length - 1].index
           ? {
               language: "",
               points: 0,
               explanation: "",
               prompt: "",
               tc: [{ tcInput: "", tcOutput: "" }],
+              isNew: true,
             }
           : problemInfoList.filter((obj) => obj.index === problemIndex)[0]
       }

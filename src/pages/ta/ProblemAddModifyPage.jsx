@@ -43,6 +43,7 @@ function ProblemAddModifyPage({
             .concat({
               ...data,
               index: problemIndex,
+              isNew: problemInfo.isNew,
             })
             .sort((a, b) => {
               return a.index - b.index;
@@ -67,7 +68,9 @@ function ProblemAddModifyPage({
             {/* 문제명, 버튼 */}
             <div className="d-flex flex-row mt-4 mb-2">
               <h3 className="flex-grow-1">
-                1주차 과제 &gt; 문제 {problemIndex}
+                {problemInfo.isNew
+                  ? "새 문제"
+                  : `1주차 과제 &gt; 문제 ${problemIndex}`}
               </h3>
               <button
                 type="button"

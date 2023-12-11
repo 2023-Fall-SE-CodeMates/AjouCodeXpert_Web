@@ -14,6 +14,8 @@ ProblemListItem.propTypes = {
 
   setProblemIndex: PropTypes.func, // 문제 번호로 변경해서 문제 수정/추가 페이지 보여줌(TA)
 
+  isNew: PropTypes.bool, // 새로 추가된 문제인지 여부
+
   deletable: PropTypes.bool.isRequired, // 삭제 가능 여부
   onClickDelete: PropTypes.func, // 삭제 버튼 클릭 시 호출되는 함수
 };
@@ -26,6 +28,7 @@ function ProblemListItem({
   score,
   fromScoreByProblemPage,
   setProblemIndex,
+  isNew,
   deletable,
   onClickDelete,
 }) {
@@ -48,7 +51,7 @@ function ProblemListItem({
             );
         }}
       >
-        {problemIndex}
+        {isNew === true ? "새 문제" : `문제 ${problemIndex}`}
       </button>
       <div className="position-absolute top-50 end-0 translate-middle">
         {deletable && <DeleteListItem onClick={onClickDelete} />}

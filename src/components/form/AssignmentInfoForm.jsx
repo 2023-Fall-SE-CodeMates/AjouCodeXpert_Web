@@ -27,6 +27,9 @@ function AssignmentInfoForm({ assignmentInfo, problemInfoList }) {
           alert("문제를 하나 이상 등록해야 합니다.");
           return;
         }
+
+        // TODO: problemInfoList에서 isNew가 true면 index를 null로 바꿔서 보내기
+
         if (assignmentId === "create") {
           // POST
           console.log(data);
