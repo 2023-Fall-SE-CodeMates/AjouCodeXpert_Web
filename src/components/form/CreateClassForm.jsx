@@ -1,8 +1,12 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { createClassApi } from "services/api";
+import { useNavigate } from "react-router-dom";
 
 function CreateClassForm(props) {
+  const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{
@@ -10,7 +14,7 @@ function CreateClassForm(props) {
         subjectCode: "",
       }}
       enableReinitialize={true}
-      onSubmit={(data) => {
+      onSubmit={async (data) => {
         if (data.subjectName === "") {
           alert("과목명을 입력해 주세요.");
           return;
@@ -19,7 +23,15 @@ function CreateClassForm(props) {
           alert("과목 코드를 입력해 주세요.");
           return;
         }
+
         console.log(data);
+        const res = await createClassApi(data.subjectCode, data.subjectName);
+        if (res.status === 204) {
+          alert("과목 개설 요청이 완료되었습니다.");
+          navigate("/classes");
+        } else {
+          alert("과목 개설 요청에 실패했습니다.");
+        }
       }}
       validationSchema={Yup.object().shape({
         subjectName: Yup.string(),
