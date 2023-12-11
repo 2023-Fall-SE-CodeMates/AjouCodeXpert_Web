@@ -182,9 +182,8 @@ function MyInfoForm({ majorList }) {
                 name="roleCode"
                 value={props.values.roleCode}
               >
-                {props.values.roleCode == 1 && <option value="1">교수</option>}
-                {props.values.roleCode == 2 && <option value="2">TA</option>}
-                {props.values.roleCode == 3 && <option value="3">학생</option>}
+                {props.values.roleCode == 1 && <option value="2">TA</option>}
+                {props.values.roleCode == 2 && <option value="3">학생</option>}
               </Field>
             </fieldset>
           </div>

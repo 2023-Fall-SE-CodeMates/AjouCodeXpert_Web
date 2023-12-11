@@ -10,16 +10,8 @@ export const apiClient = axios.create({
 export const authenticateApi = (id, pw) =>
   apiClient.post("/api/auth/login", { loginId: id, pw: pw });
 
-// // 회원가입 페이지: 회원가입, 전공목록 불러오기
-// export const signUpApi = (id, pw, name, studentCode, majorCode, roleCode) =>
-//   apiClient.post("/api/v1/user/signUp", {
-//     id: id,
-//     pw: pw,
-//     name: name,
-//     studentId: studentCode,
-//     majorCode: majorCode,
-//     roleCode: roleCode,
-//   });
+// 회원가입 페이지: 회원가입, 전공목록 불러오기
+export const signUpApi = (data) => apiClient.post("/api/user/signup", data);
 
 // export const retrieveMajorListApi = () => apiClient.get("/api/v1/major");
 

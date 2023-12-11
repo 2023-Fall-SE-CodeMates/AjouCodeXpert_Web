@@ -3,14 +3,17 @@ import style from "styles/components/form/SignUpForm.module.css";
 import cn from "classnames";
 import { PropTypes } from "prop-types";
 import { Formik, Form, Field } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { signUpApi } from "services/api";
 
 SignUpForm.propTypes = {
   majorList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 function SignUpForm({ majorList }) {
+  const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{
@@ -18,17 +21,24 @@ function SignUpForm({ majorList }) {
         pw: "",
         name: "",
         studentCode: "",
-        majorCode: 0,
-        roleCode: 3,
+        majorCode: "001",
+        roleCode: 2,
       }}
       enableReinitialize={true}
-      onSubmit={(data) => {
+      onSubmit={async (data) => {
         data = {
           ...data,
-          majorCode: parseInt(data.majorCode, 10),
+          studentId: data.studentCode,
           roleCode: parseInt(data.roleCode, 10),
         };
-        console.log(data);
+
+        const res = await signUpApi(data);
+        if (res.status === 200) {
+          alert("회원가입이 완료되었습니다.");
+          navigate("/");
+        } else {
+          alert(res.data.detail);
+        }
       }}
       validationSchema={Yup.object().shape({
         id: Yup.string()
@@ -46,7 +56,7 @@ function SignUpForm({ majorList }) {
         studentCode: Yup.string()
           .matches(/^[0-9]+$/, "숫자만 입력 가능합니다.")
           .required("학번을 입력해 주세요."),
-        majorCode: Yup.number().required(),
+        majorCode: Yup.string().required(),
         roleCode: Yup.number().required(),
       })}
     >
@@ -167,7 +177,7 @@ function SignUpForm({ majorList }) {
                 }`}
                 name="roleCode"
               >
-                <option value={0}>학생</option>
+                <option value={2}>학생</option>
                 <option value={1}>TA</option>
               </Field>
             </fieldset>
