@@ -4,6 +4,7 @@ import cn from "classnames";
 import { PropTypes } from "prop-types";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { retrieveMyInfoApi } from "services/api";
 
 MyInfoForm.propTypes = {
   majorList: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -14,13 +15,16 @@ function MyInfoForm({ majorList }) {
   // {id, pw, name, studentCode, majorCode, majorName, roleCode, roleName}
   const [myInfo, setMyInfo] = useState({});
   useEffect(() => {
-    setMyInfo({
-      id: "james",
-      pw: "",
-      name: "김재민",
-      studentCode: "20151111",
-      majorCode: 2,
-      roleCode: 3,
+    retrieveMyInfoApi().then((res) => {
+      console.log(res);
+      setMyInfo({
+        id: res.data.id,
+        pw: res.data.pw,
+        name: res.data.name,
+        studentCode: res.data.studentCode,
+        majorCode: res.data.majorCode,
+        roleCode: res.data.roleCode,
+      });
     });
   }, []);
 

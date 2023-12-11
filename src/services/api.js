@@ -27,9 +27,8 @@ export const signUpApi = (data) => apiClient.post("/api/user/signup", data);
 
 // export const deleteClassApi = (classId) => {};
 
-// // 개인 페이지: 개인정보 불러오기, 개인정보 수정, 회원 탈퇴 요청, 알림 목록 불러오기, 알림 삭제
-// export const retrieveMyInfoApi = (id) =>
-//   apiClient.get(`/api/v1/user/info?id=${id}`);
+// 개인 페이지: 개인정보 불러오기, 개인정보 수정, 회원 탈퇴 요청, 알림 목록 불러오기, 알림 삭제
+export const retrieveMyInfoApi = () => apiClient.get(`api/user/info`);
 
 // export const updateMyInfoApi = (id, pw, name, studentCode, majorCode) =>
 //   apiClient.put(`/api/v1/user/info?id=${id}`, {
