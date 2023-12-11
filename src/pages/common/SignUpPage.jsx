@@ -10,7 +10,7 @@ function SignUpPage(props) {
 
   useEffect(() => {
     setMajorList([
-      { code: "001", name: "기계공학과" },
+      { code: "001", name: "소프트웨어학과" },
       { code: "002", name: "금융공학과" },
       { code: "003", name: "산업공학과" },
     ]);

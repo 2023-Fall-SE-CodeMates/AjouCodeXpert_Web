@@ -45,7 +45,7 @@ function AssignmentInfoForm({ assignmentInfo, problemInfoList }) {
             description: item.explanation,
             // TODO: 프롬프트, 테스트케이스
             // prompt: item.prompt,
-            // testcases: item.tc,
+            testcases: item.tc,
           };
         });
 

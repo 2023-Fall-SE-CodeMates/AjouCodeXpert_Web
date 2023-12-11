@@ -18,7 +18,7 @@ function ClassJoinRequestForm(props) {
 
         const res = await createClassJoinRequestApi(data.classCode);
         console.log(res);
-        if (res === 201) {
+        if (res.status === 201) {
           alert("반 참여 요청을 보냈습니다.");
         } else {
           alert(res.data.detail);
