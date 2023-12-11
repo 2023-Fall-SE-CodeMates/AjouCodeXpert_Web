@@ -57,14 +57,7 @@ function AssignmentAddModifyPage(props) {
                 points: item.points,
                 explanation: item.description,
                 prompt: "",
-                tc: item.testcases
-                  ? item.testcases.map((tc) => {
-                      return {
-                        tcInput: tc.input,
-                        tcOutput: tc.output,
-                      };
-                    })
-                  : [],
+                tc: item.testCases,
                 isNew: false,
               };
             })
@@ -88,7 +81,7 @@ function AssignmentAddModifyPage(props) {
       //       points: 10,
       //       description: "문제 설명",
       //       prompt: "문제",
-      //       tc: [{ tcInput: "1", tcOutput: "2" }],
+      //       tc: [{ input: "1", output: "2" }],
       //       isNew: false,
       //     },
       //   ].sort((a, b) => {
@@ -179,7 +172,7 @@ function AssignmentAddModifyPage(props) {
               points: 0,
               explanation: "",
               prompt: "",
-              tc: [{ tcInput: "", tcOutput: "" }],
+              tc: [{ index: 1, input: "", output: "" }],
               isNew: true,
             }
           : problemInfoList.filter((obj) => obj.index === problemIndex)[0]

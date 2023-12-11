@@ -165,9 +165,17 @@ function ProblemAddModifyPage({
                   props.values.tc.length < 5 ? "" : "disabled"
                 }`}
                 onClick={() => {
+                  const newIndex = props.values.tc
+                    ? props.values.tc.length + 1
+                    : 1;
                   props.setValues({
                     ...props.values,
-                    tc: [...props.values.tc, { tcInput: "", tcOutput: "" }],
+                    tc: [
+                      ...props.values.tc,
+                      { index: newIndex, input: "", output: "" },
+                    ].sort((a, b) => {
+                      return a.index - b.index;
+                    }),
                   });
                 }}
               >
@@ -198,26 +206,26 @@ function ProblemAddModifyPage({
                     return (
                       <div
                         className="d-flex flex-row my-1 justify-content-between"
-                        key={index}
+                        key={item.index}
                       >
                         <fieldset className="form-group w-50 me-2">
                           <label className="form-label">
-                            테스트케이스 {index + 1} 입력
+                            테스트케이스 {item.index} 입력
                           </label>
                           <Field
                             as="textarea"
                             className="form-control overflow-y-scroll"
-                            name={`tc[${index}].tcInput`}
+                            name={`tc[${index}].input`}
                           />
                         </fieldset>
                         <fieldset className="form-group w-50 ms-2">
                           <label className="form-label">
-                            테스트케이스 {index + 1} 출력
+                            테스트케이스 {item.index} 출력
                           </label>
                           <Field
                             as="textarea"
                             className="form-control overflow-y-scroll"
-                            name={`tc[${index}]tcOutput`}
+                            name={`tc[${index}]output`}
                           />
                         </fieldset>
                       </div>

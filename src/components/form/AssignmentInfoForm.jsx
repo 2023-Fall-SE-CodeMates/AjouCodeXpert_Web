@@ -43,11 +43,13 @@ function AssignmentInfoForm({ assignmentInfo, problemInfoList }) {
               item.language === "c" ? 0 : item.language === "java" ? 1 : 2,
             points: item.points,
             description: item.explanation,
-            // TODO: 프롬프트, 테스트케이스
+            // TODO: 프롬프트
             // prompt: item.prompt,
-            testcases: item.tc,
+            testCases: item.tc,
           };
         });
+
+        console.log({ title, endDate, content, problems });
 
         if (assignmentId === "create") {
           const res = await createAssignmentApi(

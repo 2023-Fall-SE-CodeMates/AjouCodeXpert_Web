@@ -12,7 +12,6 @@ MemberTable.propTypes = {
   showAcceptRoleChangeButton: PropTypes.bool.isRequired, // 계정 권한 변경 승인 버튼
 };
 
-// TODO: 버튼에 대한 함수 추가
 // name, studentCode, major, role, id, rowId(key)
 // rowId는 계정 권한 변경 신청 페이지, 반 참여 요청 테이블 제외하고는 사용자id, 계정 권한 변경 신청 페이지, 참여 요청 테이블에서는 신청id
 function MemberTable({
