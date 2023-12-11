@@ -64,7 +64,8 @@ export const deleteAssignmentApi = (classId, assignmentId) =>
 // export const retrieveSubmissionListApi = (classId, assignmentId) => {};
 
 // // 과제 상세 페이지: 과제 상세 정보 불러오기, 문제에 대해 제출된 날짜 불러오기
-// export const retrieveAssignmentDetailApi = (classId, assignmentId) => {};
+export const retrieveAssignmentDetailApi = (classId, assignmentId) =>
+  apiClient.get(`/api/course/${classId}/homework/${assignmentId}`);
 // export const retrieveSubmissionInfoApi = (classId, assignmentId, id) => {};
 
 // // 문제별 점수 페이지: 과제 상세 정보 불러오기, 문제에 대한 점수 불러오기 (과제 상세 페이지와 동일?)

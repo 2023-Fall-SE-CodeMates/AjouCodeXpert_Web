@@ -70,7 +70,7 @@ function ProblemAddModifyPage({
               <h3 className="flex-grow-1">
                 {problemInfo.isNew
                   ? "새 문제"
-                  : `1주차 과제 &gt; 문제 ${problemIndex}`}
+                  : `1주차 과제 > 문제 ${problemIndex}`}
               </h3>
               <button
                 type="button"

@@ -1,11 +1,13 @@
 // 과제 추가/수정 페이지
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import ProblemListItem from "components/list/ProblemListItem";
 import { Link, useParams } from "react-router-dom";
 import AssignmentInfoForm from "components/form/AssignmentInfoForm";
 import ProblemAddModifyPage from "./ProblemAddModifyPage";
+import { retrieveAssignmentDetailApi } from "services/api";
 
 function AssignmentAddModifyPage(props) {
   const { classId, assignmentId } = useParams();
@@ -26,45 +28,73 @@ function AssignmentAddModifyPage(props) {
   useEffect(() => {
     if (assignmentId !== "create") {
       // API 호출
-      setAssignmentInfo({
-        id: assignmentId,
-        title: "1주차 과제",
-        content: "1주차 과제입니다.",
-        closedAt: "2021-09-08 23:59:59",
+      retrieveAssignmentDetailApi(classId, assignmentId).then((res) => {
+        console.log(res);
+
+        let date = res.data.endDate;
+        date[1] = date[1] - 1;
+        date = new moment(date);
+        console.log(date);
+
+        setAssignmentInfo({
+          id: res.data.homeworkIdx,
+          title: res.data.title,
+          content: res.data.content,
+          closedAt: date.format("YYYY-MM-DD HH:mm:ss"),
+        });
+
+        setProblemInfoList(
+          res.data.problems
+            .map((item) => {
+              return {
+                index: item.index,
+                language:
+                  item.langCode === 0
+                    ? "c"
+                    : item.langCode === 1
+                    ? "java"
+                    : "python",
+                points: item.points,
+                explanation: item.description,
+                prompt: "",
+                tc: item.testcases
+                  ? item.testcases.map((tc) => {
+                      return {
+                        tcInput: tc.input,
+                        tcOutput: tc.output,
+                      };
+                    })
+                  : [],
+                isNew: false,
+              };
+            })
+            .sort((a, b) => {
+              return a.index - b.index;
+            })
+        );
       });
-      setProblemInfoList(
-        [
-          {
-            index: 1,
-            language: "c",
-            points: 10,
-            description: "문제 설명",
-            prompt: "문제",
-            tc: [{ tcInput: "1", tcOutput: "2" }],
-            isNew: false,
-          },
-          {
-            index: 2,
-            language: "java",
-            points: 20,
-            description: "문제 설명",
-            prompt: "문제",
-            tc: [{ tcInput: "10", tcOutput: "20" }],
-            isNew: false,
-          },
-          {
-            index: 3,
-            language: "python",
-            points: 30,
-            description: "문제 설명",
-            prompt: "문제",
-            tc: [{ tcInput: "1", tcOutput: "3" }],
-            isNew: false,
-          },
-        ].sort((a, b) => {
-          return a.index - b.index;
-        })
-      );
+
+      // setAssignmentInfo({
+      //   id: assignmentId,
+      //   title: "1주차 과제",
+      //   content: "1주차 과제입니다.",
+      //   closedAt: "2021-09-08 23:59:59",
+      // });
+      // setProblemInfoList(
+      //   [
+      //     {
+      //       index: 1,
+      //       language: "c",
+      //       points: 10,
+      //       description: "문제 설명",
+      //       prompt: "문제",
+      //       tc: [{ tcInput: "1", tcOutput: "2" }],
+      //       isNew: false,
+      //     },
+      //   ].sort((a, b) => {
+      //     return a.index - b.index;
+      //   })
+      // );
     } else {
       setAssignmentInfo({
         title: "",
