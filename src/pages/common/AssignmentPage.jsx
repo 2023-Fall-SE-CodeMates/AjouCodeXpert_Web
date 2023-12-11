@@ -5,6 +5,7 @@ import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import AssignmentListItem from "components/list/AssignmentListItem";
 import { Link, useParams } from "react-router-dom";
+import { retrieveAssignmentListApi } from "services/api";
 
 function AssignmentPage(props) {
   const { classId } = useParams();
@@ -15,22 +16,18 @@ function AssignmentPage(props) {
   // { id: 과제id, title: 과제 제목, createdAt: 생성시각, closedAt: 마감시간, removable: 삭제 가능 여부}
   const [assignmentList, setAssignmentList] = useState([]);
   useEffect(() => {
-    setAssignmentList([
-      {
-        id: 1,
-        title: "1주차 과제",
-        createdAt: "2021-09-01",
-        closedAt: "2021-09-08",
-        removable: true,
-      },
-      {
-        id: 2,
-        title: "2주차 과제",
-        createdAt: "2021-09-15",
-        closedAt: "2021-09-22",
-        removable: true,
-      },
-    ]);
+    retrieveAssignmentListApi(classId).then((res) => {
+      setAssignmentList(
+        res.data.map((item) => {
+          return {
+            id: item.homeworkIdx,
+            title: item.title,
+            closedAt: item.endDate,
+            removable: item.removable,
+          };
+        })
+      );
+    });
   }, []);
 
   // 과제 삭제했을 때 호출되는 함수
