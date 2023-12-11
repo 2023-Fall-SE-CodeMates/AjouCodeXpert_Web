@@ -71,6 +71,7 @@ export default function AuthProvider({ children }) {
     setIsAuthenticated(false);
     setId("");
     setToken("");
+    setRole("");
 
     window.sessionStorage.removeItem("id");
     window.sessionStorage.removeItem("role");

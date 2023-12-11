@@ -5,15 +5,50 @@ import cn from "classnames";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import ClassTable from "components/table/ClassTable";
+import {
+  acceptClassOpenRequestApi,
+  rejectClassOpenRequestApi,
+  retrieveClassOpenRequestListApi,
+} from "services/api";
 
 function ClassOpenReqListPage(props) {
   // 반 개설 신청 목록, 반 삭제 신청 목록
-  // [{subjectName: 과목명, subjectCode: 과목코드, id: 개설자 id, name: 개설자 이름}]
-  // TODO: classId를 별도로 지정해줘야 할 필요가 있을 수 있다.
+  // [{subjectName: 과목명, subjectCode: 과목코드, id: 개설자 id, name: 개설자 이름, classId: 요청 id, acceptFunc: 승인 함수, rejectFunc: 거부 함수}]
+  // table에서 classId를 key로 사용하기 때문에, 요청 id를 classId로 받는다
   const [classOpenRequests, setClassOpenRequests] = useState([]);
   const [classDeleteRequests, setClassDeleteRequests] = useState([]);
 
   useEffect(() => {
+    retrieveClassOpenRequestListApi().then((res) => {
+      console.log(res);
+      setClassOpenRequests(
+        res.data.map((item) => {
+          return {
+            subjectName: item.subjectName,
+            subjectCode: item.subjectCode,
+            name: item.requesterName,
+            classId: item.requestId,
+            acceptFunc: () => {
+              console.log("accept");
+              acceptClassOpenRequestApi(item.requestId).then((res) => {
+                setClassOpenRequests((prev) =>
+                  prev.filter((row) => row.classId !== item.requestId)
+                );
+              });
+            },
+            rejectFunc: () => {
+              console.log("reject");
+              rejectClassOpenRequestApi(item.requestId).then((res) => {
+                setClassOpenRequests((prev) =>
+                  prev.filter((row) => row.classId !== item.requestId)
+                );
+              });
+            },
+          };
+        })
+      );
+    });
+
     setClassOpenRequests([
       {
         subjectName: "컴퓨터프로그래밍 및 실습",
@@ -52,7 +87,7 @@ function ClassOpenReqListPage(props) {
           >
             <ClassTable
               rows={classOpenRequests}
-              showAcceptRequestButton={false}
+              showAcceptRequestButton={true}
             />
           </div>
           {/* 반 삭제 신청 */}

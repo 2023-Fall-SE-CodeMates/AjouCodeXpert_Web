@@ -108,8 +108,8 @@ export const retrieveMyInfoApi = () => apiClient.get(`api/user/info`);
 // 반 개설 페이지: 반 개설 요청 보내기
 export const createClassApi = (subjectCode, subjectName) =>
   apiClient.post("/api/course", {
-    courseCode: subjectCode,
-    courseName: subjectName,
+    subjectCode: subjectCode,
+    subjectName: subjectName,
   });
 
 // // 구성원 관리 페이지: 반 코드 불러오기, 구성원 목록 불러오기, 참여 요청 불러오기, 참여 요청 승인/거부
@@ -184,11 +184,14 @@ export const createClassApi = (subjectCode, subjectName) =>
 // const acceptRoleChangeRequestApi = (id) => {};
 // const rejectRoleChangeRequestApi = (id) => {};
 
-// // 반 개설 및 삭제 요청 관리 페이지: 반 개설 및 삭제 요청 불러오기, 승인, 거부
-// const retrieveClassOpenRequestListApi = () => {};
+// 반 개설 및 삭제 요청 관리 페이지: 반 개설 및 삭제 요청 불러오기, 승인, 거부
+export const retrieveClassOpenRequestListApi = () =>
+  apiClient.get("api/request/course/open");
 // const retrieveClassDeleteRequestListApi = () => {};
-// const acceptClassOpenRequestApi = () => {};
-// const rejectClassOpenRequestApi = () => {};
+export const acceptClassOpenRequestApi = (requestId) =>
+  apiClient.post(`api/request/course/open?requestId=${requestId}&action=1`);
+export const rejectClassOpenRequestApi = (requestId) =>
+  apiClient.post(`api/request/course/open?requestId=${requestId}&action=-1`);
 // const acceptClassDeleteRequestApi = () => {};
 // const rejectClassDeleteRequestApi = () => {};
 

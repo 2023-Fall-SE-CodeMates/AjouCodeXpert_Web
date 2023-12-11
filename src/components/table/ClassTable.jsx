@@ -7,11 +7,10 @@ import PropTypes from "prop-types";
 ClassTable.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
   showAcceptRequestButton: PropTypes.bool.isRequired,
-  deleteRequest: PropTypes.bool, // 반 개설 TA만 반 삭제 요청 가능
 };
 
 // subjectName, subjectCode, name, classId(key)
-function ClassTable({ rows, showAcceptRequestButton, deleteRequest }) {
+function ClassTable({ rows, showAcceptRequestButton }) {
   return (
     <table className="table">
       <thead>
@@ -30,10 +29,20 @@ function ClassTable({ rows, showAcceptRequestButton, deleteRequest }) {
             <td>{row.name}</td>
             {showAcceptRequestButton && (
               <td>
-                <button className="btn btn-outline-secondary btn-sm me-2">
+                <button
+                  className="btn btn-outline-secondary btn-sm me-2"
+                  onClick={() => {
+                    row.acceptFunc();
+                  }}
+                >
                   승인
                 </button>
-                <button className="btn btn-outline-secondary btn-sm">
+                <button
+                  className="btn btn-outline-secondary btn-sm"
+                  onClick={() => {
+                    row.rejectFunc();
+                  }}
+                >
                   거부
                 </button>
               </td>
