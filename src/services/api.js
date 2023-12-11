@@ -51,8 +51,8 @@ export const retrieveMyInfoApi = () => apiClient.get(`api/user/info`);
 //   apiClient.delete(`/api/v1/class/${classId}/notice/${announcementId}`);
 
 // // 과제 페이지: 과제 목록 불러오기, 과제 삭제(TA)
-// export const retrieveAssignmentListApi = (classId) =>
-//   apiClient.get(`/api/v1/class/${classId}/homework`);
+export const retrieveAssignmentListApi = (classId) =>
+  apiClient.get(`/api/course/${classId}/homework`);
 
 // export const deleteAssignmentApi = (classId, assignmentId) => {};
 

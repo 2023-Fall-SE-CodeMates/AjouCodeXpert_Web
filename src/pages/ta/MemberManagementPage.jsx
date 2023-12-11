@@ -56,9 +56,9 @@ function MemberManagementPage(props) {
           return {
             name: item.studentName,
             studentCode: item.studentId,
-            major: "",
+            major: item.majorName,
             role: item.roleName === "STUDENT" ? "학생" : "TA",
-            id: "",
+            id: item.loginId,
             rowId: item.id,
             acceptFunc: () => {
               console.log("accept");
