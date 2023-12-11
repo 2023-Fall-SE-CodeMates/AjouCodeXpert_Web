@@ -3,7 +3,7 @@ import style from "styles/components/form/AnnouncementForm.module.css";
 import cn from "classnames";
 import { PropTypes } from "prop-types";
 import { Formik, Form, Field } from "formik";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 AnnouncementForm.propTypes = {
@@ -12,6 +12,7 @@ AnnouncementForm.propTypes = {
 
 function AnnouncementForm({ announcement }) {
   const { classId, announcementId } = useParams();
+  const navigate = useNavigate();
 
   return (
     <Formik
@@ -28,6 +29,7 @@ function AnnouncementForm({ announcement }) {
           // PUT
           console.log(data);
         }
+        navigate(`/classes/${classId}/announcements`);
       }}
       validationSchema={Yup.object().shape({
         title: Yup.string(),

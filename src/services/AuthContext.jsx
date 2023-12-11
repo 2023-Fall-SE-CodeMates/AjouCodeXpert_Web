@@ -15,18 +15,18 @@ export default function AuthProvider({ children }) {
   const [id, setId] = useState(
     window.sessionStorage.getItem("id")
       ? window.sessionStorage.getItem("id")
-      : "james"
+      : ""
   );
   // ["student", "ta", "admin"]
   const [role, setRole] = useState(
     window.sessionStorage.getItem("role")
       ? window.sessionStorage.getItem("role")
-      : "admin"
+      : ""
   );
   const [token, setToken] = useState(
     window.sessionStorage.getItem("token")
       ? window.sessionStorage.getItem("token")
-      : "token"
+      : ""
   );
   const [isAuthenticated, setIsAuthenticated] = useState(
     id && role && token ? true : false
@@ -42,11 +42,14 @@ export default function AuthProvider({ children }) {
   async function login(id, pw) {
     const response = await authenticateApi(id, pw);
     if (response.status === 200) {
-      const jwtToken = `Bearer ${response.headers["Authorization"]}}`;
+      const jwtToken = `Bearer ${response.data.token}`;
       setIsAuthenticated(true);
       setId(id);
-      const role = "";
-      // response.data.role
+      let role = "";
+      if (response.data.role === 0) role = "admin";
+      else if (response.data.role === 1) role = "ta";
+      else if (response.data.role === 2) role = "student";
+      setRole(role);
       setToken(jwtToken);
 
       // sessionStorage에 로그인 정보 저장
@@ -66,6 +69,7 @@ export default function AuthProvider({ children }) {
 
   function logout() {
     setIsAuthenticated(false);
+    setId("");
     setToken("");
 
     window.sessionStorage.removeItem("id");
