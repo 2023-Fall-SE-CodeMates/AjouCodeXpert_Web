@@ -1,5 +1,6 @@
 // 과제 페이지
 import React, { useState, useEffect } from "react";
+import moment from "moment";
 import { useAuth } from "services/AuthContext";
 import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
@@ -19,10 +20,14 @@ function AssignmentPage(props) {
     retrieveAssignmentListApi(classId).then((res) => {
       setAssignmentList(
         res.data.map((item) => {
+          let date = item.endDate;
+          date[1] = date[1] - 1;
+          date = new moment(date);
+          console.log(date);
           return {
             id: item.homeworkIdx,
             title: item.title,
-            closedAt: item.endDate,
+            closedAt: date.format("YYYY-MM-DD HH:mm:ss"),
             removable: item.removable,
           };
         })
