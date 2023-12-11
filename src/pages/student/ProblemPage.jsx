@@ -8,6 +8,7 @@ import { java } from "@codemirror/lang-java";
 import { python } from "@codemirror/lang-python";
 import { Field, Form, Formik } from "formik";
 import { useParams, Link } from "react-router-dom";
+import { retrieveAssignmentDetailApi } from "services/api";
 
 // TODO: 학생이 작성중인 코드가 있다면 API로 받아와야 함
 function ProblemPage(props) {
@@ -19,15 +20,23 @@ function ProblemPage(props) {
 
   // 문제 정보 받아오기
   useEffect(() => {
-    setProblemInfo({
-      language: "c",
-      points: 5,
-      explanation:
-        "두 정수를 입력받아 더한 값을 출력하는 프로그램을 작성하시오.",
-      tc: [
-        { index: 1, input: "1 1", output: "2" },
-        { index: 2, input: "10 20", output: "30" },
-      ],
+    retrieveAssignmentDetailApi(classId, assignmentId).then((res) => {
+      for (const item of res.data.problems) {
+        // problemId는 string이다
+        if (item.index == problemId) {
+          setProblemInfo({
+            language:
+              item.langCode === 0
+                ? "c"
+                : item.langCode === 1
+                ? "java"
+                : "python",
+            points: item.points,
+            explanation: item.description,
+            tc: item.testCases,
+          });
+        }
+      }
     });
 
     // 페이지 이동 시 경고창 띄우기
