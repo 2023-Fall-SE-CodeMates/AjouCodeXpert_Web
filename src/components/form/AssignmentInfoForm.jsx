@@ -1,10 +1,12 @@
 import React from "react";
+import moment from "moment";
 import style from "styles/components/form/AssignmentInfoForm.module.css";
 import cn from "classnames";
 import PropTypes from "prop-types";
 import { Formik, Form, Field, FieldArray } from "formik";
 import * as Yup from "yup";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { createAssignmentApi, updateAssignmentApi } from "services/api";
 
 AssignmentInfoForm.propTypes = {
   assignmentInfo: PropTypes.object.isRequired, // 초기값
@@ -13,6 +15,9 @@ AssignmentInfoForm.propTypes = {
 
 function AssignmentInfoForm({ assignmentInfo, problemInfoList }) {
   const { classId, assignmentId } = useParams();
+
+  const navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{
@@ -22,20 +27,55 @@ function AssignmentInfoForm({ assignmentInfo, problemInfoList }) {
         problemInfoList: problemInfoList,
       }}
       enableReinitialize={true}
-      onSubmit={(data) => {
+      onSubmit={async (data) => {
         if (data.problemInfoList.length === 0) {
           alert("문제를 하나 이상 등록해야 합니다.");
           return;
         }
 
-        // TODO: problemInfoList에서 isNew가 true면 index를 null로 바꿔서 보내기
+        const title = data.title;
+        const endDate = new moment(data.dueDate).format("YYYY-MM-DDTHH:mm:ss");
+        const content = data.description;
+        const problems = data.problemInfoList.map((item) => {
+          return {
+            index: item.isNew ? null : item.index,
+            langCode:
+              item.language === "c" ? 0 : item.language === "java" ? 1 : 2,
+            points: item.points,
+            description: item.explanation,
+            // TODO: 프롬프트, 테스트케이스
+            // prompt: item.prompt,
+            // testcases: item.tc,
+          };
+        });
 
         if (assignmentId === "create") {
-          // POST
-          console.log(data);
+          const res = await createAssignmentApi(
+            classId,
+            title,
+            content,
+            endDate,
+            problems
+          );
+          console.log(res);
+          if (res.status === 201) {
+            alert("과제가 등록되었습니다.");
+            navigate(`/classes/${classId}/assignments`);
+          }
         } else {
-          // PUT
-          console.log(data);
+          const res = await updateAssignmentApi(
+            classId,
+            assignmentId,
+            title,
+            content,
+            endDate,
+            problems
+          );
+          console.log(res);
+          if (res.status === 204) {
+            alert("과제가 수정되었습니다.");
+            navigate(`/classes/${classId}/assignments`);
+          }
         }
       }}
       validationSchema={Yup.object().shape({

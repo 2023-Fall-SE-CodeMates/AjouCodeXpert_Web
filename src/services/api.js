@@ -147,22 +147,37 @@ export const rejectJoinRequestApi = (requestId) =>
 //     content,
 //   });
 
-// // 과제 추가/수정 페이지: 과제 상세 정보 불러오기(있으면, 과제 상세 페이지와 동일), 과제 추가, 과제 수정
-// const createAssignmentApi = (
-//   classId,
-//   title,
-//   dueDate,
-//   description,
-//   problemInfoList
-// ) => {};
-// const updateAssignmentApi = (
-//   classId,
-//   assignmentId,
-//   title,
-//   dueDate,
-//   description,
-//   problemInfoList
-// ) => {};
+// 과제 추가/수정 페이지: 과제 상세 정보 불러오기(있으면, 과제 상세 페이지와 동일), 과제 추가, 과제 수정
+export const createAssignmentApi = (
+  classId,
+  title,
+  content,
+  endDate,
+  problems
+) =>
+  apiClient.post(`/api/course/${classId}/homework`, {
+    homeworkIdx: null,
+    title: title,
+    content: content,
+    endDate: endDate,
+    problems: problems,
+  });
+
+export const updateAssignmentApi = (
+  classId,
+  assignmentId,
+  title,
+  content,
+  endDate,
+  problems
+) =>
+  apiClient.put(`/api/course/${classId}/homework/${assignmentId}`, {
+    homeworkIdx: assignmentId,
+    title: title,
+    content: content,
+    endDate: endDate,
+    problems: problems,
+  });
 
 // // 제출 확인 페이지: 과제에 대한 학생의 제출 목록 불러오기(학생 id 리스트가 있으면, 과제 상세 페이지의 retrieveSubmissionInfoApi 호출?), 감점된 점수 보내기
 // const updateDeductedScoreApi = (classId, assignmentId, deductedScores) => {};
