@@ -25,8 +25,8 @@ function ProblemPage(props) {
       explanation:
         "두 정수를 입력받아 더한 값을 출력하는 프로그램을 작성하시오.",
       tc: [
-        { tcInput: "1 1", tcOutput: "2" },
-        { tcInput: "10 20", tcOutput: "30" },
+        { index: 1, input: "1 1", output: "2" },
+        { index: 2, input: "10 20", output: "30" },
       ],
     });
 
@@ -117,22 +117,22 @@ function ProblemPage(props) {
         </fieldset>
         {/* TC 목록*/}
         <div>
-          {problemInfo.tc.map((item, index) => (
+          {problemInfo.tc.map((item) => (
             <div
               className="d-flex flex-row my-1 justify-content-between"
-              key={index}
+              key={item.index}
             >
               <fieldset className="form-group w-50 me-2">
                 <label className="form-label">
-                  테스트케이스 {index + 1} 입력
+                  테스트케이스 {item.index} 입력
                 </label>
-                <div className="form-control">{item.tcInput}</div>
+                <div className="form-control">{item.input}</div>
               </fieldset>
               <fieldset className="form-group w-50 ms-2">
                 <label className="form-label">
-                  테스트케이스 {index + 1} 출력
+                  테스트케이스 {item.index} 출력
                 </label>
-                <div className="form-control">{item.tcOutput} </div>
+                <div className="form-control">{item.output} </div>
               </fieldset>
             </div>
           ))}
