@@ -32,12 +32,12 @@ export default function AuthProvider({ children }) {
     id && role && token ? true : false
   );
 
-  if (isAuthenticated) {
-    apiClient.interceptors.request.use((config) => {
-      config.headers.Authorization = token;
-      return config;
-    });
-  }
+  apiClient.interceptors.request.use((config) => {
+    config.headers.Authorization = window.sessionStorage.getItem("token")
+      ? window.sessionStorage.getItem("token")
+      : "";
+    return config;
+  });
 
   async function login(id, pw) {
     const response = await authenticateApi(id, pw);
@@ -57,10 +57,6 @@ export default function AuthProvider({ children }) {
       window.sessionStorage.setItem("role", role);
       window.sessionStorage.setItem("token", jwtToken);
 
-      apiClient.interceptors.request.use((config) => {
-        config.headers.Authorization = jwtToken;
-        return config;
-      });
       return true;
     } else {
       return false;
@@ -76,16 +72,7 @@ export default function AuthProvider({ children }) {
     window.sessionStorage.removeItem("id");
     window.sessionStorage.removeItem("role");
     window.sessionStorage.removeItem("token");
-
-    apiClient.interceptors.request.use((config) => {
-      delete config.headers.Authorization;
-      return config;
-    });
   }
-
-  // const isAuthenticated = true;
-  // const role = "admin";
-  // const id = "james001";
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, role, id, login, logout }}>
