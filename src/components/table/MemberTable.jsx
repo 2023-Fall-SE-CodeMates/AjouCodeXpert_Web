@@ -8,13 +8,13 @@ import PropTypes from "prop-types";
 MemberTable.propTypes = {
   rows: PropTypes.arrayOf(PropTypes.object).isRequired,
   showAdminButton: PropTypes.bool.isRequired, // 계정 삭제, 패스워드 초기화 버튼
-  showAcceptRequestButton: PropTypes.bool.isRequired, // 참여 요청 승인 버튼
+  showAcceptJoinButton: PropTypes.bool.isRequired, // 참여 요청 승인 버튼
   showAcceptRoleChangeButton: PropTypes.bool.isRequired, // 계정 권한 변경 승인 버튼
 };
 
 // TODO: 버튼에 대한 함수 추가
 // name, studentCode, major, role, id, rowId(key)
-// rowId는 계정 권한 변경 신청 페이지 제외하고는 사용자id, 계정 권한 변경 신청 페이지에서는 신청id
+// rowId는 계정 권한 변경 신청 페이지, 반 참여 요청 테이블 제외하고는 사용자id, 계정 권한 변경 신청 페이지, 참여 요청 테이블에서는 신청id
 function MemberTable({
   rows,
   showAdminButton,

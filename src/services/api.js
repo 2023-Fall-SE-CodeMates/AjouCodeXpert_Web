@@ -15,12 +15,9 @@ export const signUpApi = (data) => apiClient.post("/api/user/signup", data);
 
 // export const retrieveMajorListApi = () => apiClient.get("/api/v1/major");
 
-// // 반 목록 페이지: 반 가입요청, 반 목록 불러오기, 반 삭제(TA)
-// export const createClassJoinRequestApi = (id, role, classCode) => {
-//   apiClient.post(`/api/v1/class/join?classCode=${classCode}&type=${role}`, {
-//     id,
-//   });
-// };
+// // 반 목록 페이지: 반 참가 요청, 반 목록 불러오기, 반 삭제(TA)
+export const createClassJoinRequestApi = (classCode) =>
+  apiClient.post(`api/request/course/join/new?joinCode=${classCode}`);
 
 export const retrieveClassListApi = () => apiClient.get(`api/course`);
 
@@ -112,18 +109,21 @@ export const createClassApi = (subjectCode, subjectName) =>
     subjectName: subjectName,
   });
 
-// // 구성원 관리 페이지: 반 코드 불러오기, 구성원 목록 불러오기, 참여 요청 불러오기, 참여 요청 승인/거부
+// // 구성원 관리 페이지: 반 코드 불러오기, 구성원 목록 불러오기, 참가 요청 불러오기, 참가 요청 승인/거부
 // export const retrieveClassCodeApi = (classId) =>
 //   apiClient.get(`/api/v1/class/${classId}/code`);
 
 // export const retrieveMembersApi = (classCode) =>
 //   apiClient.get(`/api/v1/class/join?classCode=${classCode}&joined=1`);
 
-// export const retrieveRequestersApi = (classCode) =>
-//   apiClient.get(`/api/v1/class/join?classCode=${classCode}&joined=0`);
+export const retrieveRequestersApi = (classId) =>
+  apiClient.get(`/api/request/course/join?courseId=${classId}`);
 
-// export const acceptRequestApi = (id) =>
-//   apiClient.patch(`/api/v1/class/join/${id}&joined=1`);
+export const acceptJoinRequestApi = (requestId) =>
+  apiClient.post(`/api/request/course/join?requestId=${requestId}&action=1`);
+
+export const rejectJoinRequestApi = (requestId) =>
+  apiClient.post(`/api/request/course/join?requestId=${requestId}&action=-1`);
 
 // // 공지사항 추가/수정 페이지: 공지사항 추가, 공지사항 수정
 // export const createAnnouncementApi = (classId, title, content) =>

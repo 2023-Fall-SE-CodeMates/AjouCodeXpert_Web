@@ -6,6 +6,11 @@ import Sidebar from "components/Sidebar";
 import Titlebar from "components/Titlebar";
 import MemberTable from "components/table/MemberTable";
 import { useParams } from "react-router-dom";
+import {
+  acceptJoinRequestApi,
+  rejectJoinRequestApi,
+  retrieveRequestersApi,
+} from "services/api";
 
 // TODO: 학과 리스트 API로 받아와야 할 듯
 function MemberManagementPage(props) {
@@ -22,37 +27,61 @@ function MemberManagementPage(props) {
   // rowId를 학생 id로
   useEffect(() => {
     setMembers([
-      {
-        id: "thkim123",
-        name: "김태훈",
-        studentCode: "2018101234",
-        major: "소프트웨어학과",
-        role: "학생",
-      },
-      {
-        id: "sbinpark",
-        name: "박승빈",
-        studentCode: "2018101235",
-        major: "소프트웨어학과",
-        role: "학생",
-      },
-      {
-        id: "lhjhjhj",
-        name: "이재현",
-        studentCode: "2018101236",
-        major: "소프트웨어학과",
-        role: "학생",
-      },
+      // {
+      //   id: "thkim123",
+      //   name: "김태훈",
+      //   studentCode: "2018101234",
+      //   major: "소프트웨어학과",
+      //   role: "학생",
+      // },
+      // {
+      //   id: "sbinpark",
+      //   name: "박승빈",
+      //   studentCode: "2018101235",
+      //   major: "소프트웨어학과",
+      //   role: "학생",
+      // },
+      // {
+      //   id: "lhjhjhj",
+      //   name: "이재현",
+      //   studentCode: "2018101236",
+      //   major: "소프트웨어학과",
+      //   role: "학생",
+      // },
     ]);
-    setRequesters([
-      {
-        id: "asannn",
-        name: "정아산",
-        studentCode: "2018101111",
-        major: "소프트웨어학과",
-        role: "학생",
-      },
-    ]);
+    retrieveRequestersApi(classId).then((res) => {
+      console.log(res);
+      setRequesters(
+        res.data.map((item) => {
+          return {
+            name: item.studentName,
+            studentCode: item.studentId,
+            major: "",
+            role: item.roleName === "STUDENT" ? "학생" : "TA",
+            id: "",
+            rowId: item.id,
+            acceptFunc: () => {
+              console.log("accept");
+              acceptJoinRequestApi(item.id).then((res) => {
+                console.log(res);
+                setRequesters((prev) =>
+                  prev.filter((row) => row.rowId !== item.id)
+                );
+              });
+            },
+            rejectFunc: () => {
+              console.log("reject");
+              rejectJoinRequestApi(item.id).then((res) => {
+                console.log(res);
+                setRequesters((prev) =>
+                  prev.filter((row) => row.rowId !== item.id)
+                );
+              });
+            },
+          };
+        })
+      );
+    });
   }, []);
 
   return (
@@ -76,7 +105,7 @@ function MemberManagementPage(props) {
             <MemberTable
               rows={members}
               showAdminButton={false}
-              showAcceptRequestButton={false}
+              showAcceptJoinButton={false}
               showAcceptRoleChangeButton={false}
             />
           </div>

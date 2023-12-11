@@ -13,7 +13,7 @@ import {
 
 function RoleChangePage(props) {
   // 권한 변경 신청 목록
-  // [{name: 이름, studentCode: 학번, major: 전공, role: 신청할 권한, id: 아이디}]
+  // [{name: 이름, studentCode: 학번, major: 전공, role: 신청할 권한, id: 사용자 아이디}]
   const [roleChangeRequests, setRoleChangeRequests] = useState([]);
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function RoleChangePage(props) {
               <MemberTable
                 rows={roleChangeRequests}
                 showAdminButton={false}
-                showAcceptRequestButton={false}
+                showAcceptJoinButton={false}
                 showAcceptRoleChangeButton={true}
               />
             </div>
