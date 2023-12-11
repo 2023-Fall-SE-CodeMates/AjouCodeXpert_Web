@@ -22,8 +22,7 @@ export const signUpApi = (data) => apiClient.post("/api/user/signup", data);
 //   });
 // };
 
-// export const retrieveClassListApi = (id) =>
-//   apiClient.get(`/api/v1/class?joinedBy=${id}`);
+export const retrieveClassListApi = () => apiClient.get(`api/course`);
 
 // export const deleteClassApi = (classId) => {};
 

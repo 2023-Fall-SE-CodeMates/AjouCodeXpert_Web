@@ -6,6 +6,7 @@ import Titlebar from "components/Titlebar";
 import ClassListItem from "components/list/ClassListItem";
 import { Link } from "react-router-dom";
 import ClassJoinRequestForm from "components/form/ClassJoinRequestForm";
+import { retrieveClassListApi } from "services/api";
 
 function ClassListPage(props) {
   const authContext = useAuth();
@@ -16,20 +17,19 @@ function ClassListPage(props) {
   // TODO: API 명세에는 과목 코드에 대한 내용이 없음, removable의 경우 개설 TA id와 현재 id 비교해서 확인하도록 수정
   const [classList, setClassList] = useState([]);
   useEffect(() => {
-    setClassList([
-      {
-        id: 11,
-        name: "컴퓨터 프로그래밍 및 실습",
-        code: "F081-1",
-        removable: true,
-      },
-      {
-        id: 12,
-        name: "객체지향 프로그래밍 및 실습",
-        code: "F082-1",
-        removable: true,
-      },
-    ]);
+    retrieveClassListApi().then((res) => {
+      console.log(res);
+      setClassList(
+        res.data.map((item) => {
+          return {
+            id: item.courseId,
+            name: item.subjectName,
+            code: item.subjectCode,
+            removable: item.deletable,
+          };
+        })
+      );
+    });
   }, []);
 
   // 반 삭제했을 때 호출되는 함수
