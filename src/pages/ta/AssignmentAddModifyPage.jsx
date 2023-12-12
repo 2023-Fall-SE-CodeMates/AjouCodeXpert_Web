@@ -34,7 +34,6 @@ function AssignmentAddModifyPage(props) {
         let date = res.data.endDate;
         date[1] = date[1] - 1;
         date = new moment(date);
-        console.log(date);
 
         setAssignmentInfo({
           id: res.data.homeworkIdx,

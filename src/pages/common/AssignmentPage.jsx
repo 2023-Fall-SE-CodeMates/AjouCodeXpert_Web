@@ -24,7 +24,6 @@ function AssignmentPage(props) {
           let date = item.endDate;
           date[1] = date[1] - 1;
           date = new moment(date);
-          console.log(date);
           return {
             id: item.homeworkIdx,
             title: item.title,

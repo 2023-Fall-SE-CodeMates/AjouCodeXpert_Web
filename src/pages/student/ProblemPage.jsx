@@ -9,6 +9,11 @@ import { python } from "@codemirror/lang-python";
 import { Field, Form, Formik } from "formik";
 import { useParams, Link } from "react-router-dom";
 import { retrieveAssignmentDetailApi } from "services/api";
+import {
+  judgeClangCodeApi,
+  judgeJavaCodeApi,
+  judgePythonCodeApi,
+} from "services/judgeApi";
 
 // TODO: 학생이 작성중인 코드가 있다면 API로 받아와야 함
 function ProblemPage(props) {
@@ -157,16 +162,40 @@ function ProblemPage(props) {
           }}
           enableReinitialize={true}
           onSubmit={async (data) => {
+            const answer = "";
+            setResult(answer);
+
+            // 채점
+            let judgeApi;
+            if (problemInfo.language === "c") {
+              judgeApi = judgeClangCodeApi;
+            } else if (problemInfo.language === "java") {
+              judgeApi = judgeJavaCodeApi;
+            } else if (problemInfo.language === "python") {
+              judgeApi = judgePythonCodeApi;
+            }
+            let result = "정답입니다!";
+            for (const tc of problemInfo.tc) {
+              const res = await judgeApi(data.code, tc.input);
+              console.log(res);
+              if (
+                typeof res.data.status === "undefined" ||
+                res.data.status.description !== "Accepted"
+              ) {
+                result = "Error";
+                break;
+              }
+              if (res.data.stdout.trim() !== tc.output.trim()) {
+                result = `틀렸습니다. 테스트케이스 입력: ${tc.input}에 대해 \n정답: ${tc.output}\n출력: ${res.data.stdout}`;
+                break;
+              }
+            }
+            console.log(result);
+            setResult(result);
+
             // 제출 시
             if (isSubmit) {
-              await new Promise((resolve) => setTimeout(resolve, 2000));
-              setResult("제출 완료!");
               alert("제출되었습니다.");
-              console.log(data);
-            } else {
-              await new Promise((resolve) => setTimeout(resolve, 2000));
-              setResult("실행 완료!");
-              console.log(data);
             }
           }}
         >

@@ -34,7 +34,9 @@ function SignUpForm({ majorList }) {
 
         const res = await signUpApi(data);
         if (res.status === 204) {
-          alert("회원가입이 완료되었습니다.");
+          alert(
+            "회원가입이 완료되었습니다. TA 계정의 경우, 관리자의 승인이 필요합니다."
+          );
           navigate("/");
         } else {
           alert(res.data.detail);
