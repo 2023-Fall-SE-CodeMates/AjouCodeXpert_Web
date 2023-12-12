@@ -121,6 +121,7 @@ function AssignmentAddModifyPage(props) {
           <AssignmentInfoForm
             assignmentInfo={assignmentInfo}
             problemInfoList={problemInfoList}
+            setAssignmentInfo={setAssignmentInfo}
           />
 
           {/* 문제 목록 */}
